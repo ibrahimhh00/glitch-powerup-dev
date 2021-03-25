@@ -15,41 +15,53 @@ window.TrelloPowerUp.initialize({
   'card-buttons': function(t, options){
     return [{
       icon: 'https://cdn.glitch.com/1b42d7fe-bda8-4af8-a6c8-eff0cea9e08a%2Frocket-ship.png?1494946700421',
-      text: 'Backend Estimate Size',
+      text: 'Estimate Size',
       callback: function(t){
         return t.popup({
-          title: "Backend Estimation",
+          title: "Estimation",
           url: 'estimate.html'
         });
       }
     }];
   },
   
-  
-  'card-buttons': function(t, options){
-    return [{
-      icon: 'https://cdn.glitch.com/1b42d7fe-bda8-4af8-a6c8-eff0cea9e08a%2Frocket-ship.png?1494946700421',
-      text: 'Backend Estimate Size',
-      callback: function(t){
-        return t.popup({
-          title: "Backend Estimation",
-          url: 'estimate.html'
-        });
-      }
-    }];
-  },
+
   
   'card-badges': function(t, options) {
-    return t.get('card', 'shared', 'backend_estimate')
-    .then(function(backend_estimate) {
+    // return t.get('card', 'shared', 'backend_estimate')
+    return t.getAll()
+    .then(function(estimate) {
     return [{
       // icon: 'https://cdn.glitch.com/c69415fd-f70e-4e03-b43b-98b8960cd616%2Frocket-ship-grey.png?1496162964717',
       icon: backend_estimate ? GREY_ROCKET_ICON : null,
       text: backend_estimate ? "Backend: "+ backend_estimate : null,
       color: backend_estimate ? "blue" : null,
+    },
+    {
+      // icon: 'https://cdn.glitch.com/c69415fd-f70e-4e03-b43b-98b8960cd616%2Frocket-ship-grey.png?1496162964717',
+      icon: frontend_estimate ? GREY_ROCKET_ICON : null,
+      text: frontend_estimate ? "Backend: "+ frontend_estimate : null,
+      color: frontend_estimate ? "blue" : null,
+    }
+           
+           
+           ];
+});
+  },
+  
+    'card-badges': function(t, options) {
+    return t.get('card', 'shared', 'frontend_estimate')
+    .then(function(frontend_estimate) {
+    return [{
+      // icon: 'https://cdn.glitch.com/c69415fd-f70e-4e03-b43b-98b8960cd616%2Frocket-ship-grey.png?1496162964717',
+      icon: frontend_estimate ? GREY_ROCKET_ICON : null,
+      text: frontend_estimate ? "Backend: "+ frontend_estimate : null,
+      color: frontend_estimate ? "blue" : null,
     }];
 });
   },
+  
+  
   
   'card-detail-badges': function(t, options) {
     return t.get('card', 'shared', 'backend_estimate')

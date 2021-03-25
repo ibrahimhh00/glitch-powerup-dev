@@ -1,16 +1,18 @@
 var t = TrelloPowerUp.iframe();
-let object_estimateSize = {
+
+
+window.backend_estimate.addEventListener('submit', function(event){
+  let object_estimateSize = {
   backend_estimate: window.backend_estimateSize.value,
   frontend_estimate: window.frontend_estimateSize.value,
 }
 
-
-window.backend_estimate.addEventListener('submit', function(event){
   // Stop the browser trying to submit the form itself.
   event.preventDefault();
   return t.set('card', 'shared', object_estimateSize)
-  .then(function(thevalues){
-    console.log("object_estimateSize:", thevalues)
+  
+  .then(function(){
+
     t.closePopup();
   });
 });
