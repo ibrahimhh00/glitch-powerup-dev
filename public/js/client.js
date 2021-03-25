@@ -87,6 +87,23 @@ window.TrelloPowerUp.initialize({
     }];
 });
   },
+  
+  'card-detail-badges': function(t, options) {
+    return t.get('card', 'shared', 'estimate')
+    .then(function(estimate) {
+    return [{
+      title: 'Estimate',
+      color: estimate ? "blue" : null,
+      text: estimate,
+      callback: function(t) {
+        return t.popup({
+          title: "Estimation",
+          url: 'estimate.html',
+             });
+      }
+    }]
+  });
+  }
 
 });
 
