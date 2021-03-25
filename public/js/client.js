@@ -37,15 +37,15 @@ window.TrelloPowerUp.initialize({
       return [{
      
       // icon: 'https://cdn.glitch.com/c69415fd-f70e-4e03-b43b-98b8960cd616%2Frocket-ship-grey.png?1496162964717',
-      icon: backend_estimate ? GREY_ROCKET_ICON : null,
-      text: backend_estimate ? "Backend: "+ backend_estimate : null,
-      color: backend_estimate ? "blue" : null,
+      icon: backend_estimate == null || backend_estimate == 0 ?  null : GREY_ROCKET_ICON,
+      text: backend_estimate == null || backend_estimate == 0 ?  null : "Backend: "+ backend_estimate,
+      color: backend_estimate == null || backend_estimate == 0 ? null : "blue",
     },
     {
       // icon: 'https://cdn.glitch.com/c69415fd-f70e-4e03-b43b-98b8960cd616%2Frocket-ship-grey.png?1496162964717',
-      icon: frontend_estimate ? BLACK_ROCKET_ICON : null,
-      text: frontend_estimate ? "Frontend: "+ frontend_estimate : null,
-      color: frontend_estimate ? "orange" : null,
+      icon: frontend_estimate == null || frontend_estimate == 0 ? null : BLACK_ROCKET_ICON,
+      text: frontend_estimate == null || frontend_estimate == 0 ? null : "Frontend: "+ frontend_estimate,
+      color: frontend_estimate == null || frontend_estimate == 0 ? null : "orange",
     }
            
            
@@ -65,8 +65,8 @@ window.TrelloPowerUp.initialize({
     return [
       {
       title: 'Backend Estimate',
-      color: backend_estimate ? "blue" : null,
-      text: backend_estimate,
+      color: backend_estimate == null || backend_estimate == 0 ? null: "blue" ,
+      text: backend_estimate == null || backend_estimate == 0 ? null : backend_estimate,
       callback: function(t) {
         return t.popup({
           title: "Backend Estimation",
@@ -76,8 +76,8 @@ window.TrelloPowerUp.initialize({
     },
           {
       title: 'Frontend Estimate',
-      color: frontend_estimate ? "orange" : null || frontend_estimate != 0 ? "orange" : null ,
-      text: frontend_estimate ? frontend_estimate : null || frontend_estimate != 0) 
+      color: frontend_estimate == null || frontend_estimate == 0 ? null : "orange" ,
+      text: frontend_estimate == null ||  frontend_estimate == 0 ?  null : frontend_estimate,
       callback: function(t) {
         return t.popup({
           title: "Frontend Estimation",
