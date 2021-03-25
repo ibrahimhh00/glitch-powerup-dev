@@ -9,6 +9,8 @@ window.backend_estimate.addEventListener('submit', function(event){
   });
 });
 
+
+// t.render is called when there is an update, here it i used 
 t.render(function(){
   
     return t.get('card', 'shared', 'backend_estimate')
