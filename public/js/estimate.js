@@ -46,7 +46,7 @@ t.render(function(){
   return t.getAll()
     // return t.get('card', 'shared', 'backend_estimate')
   .then(function(backend_estimate){
-      console.log(Object.keys(backend_estimate));
+      console.log(Object.keys(backend_estimate["card"]));
       console.log(JSON.stringify(backend_estimate, null, 2));
     window.backend_estimateSize.value = backend_estimate;
   })
