@@ -1,11 +1,15 @@
 var t = TrelloPowerUp.iframe();
-
+let object_estimateSize = {
+  backend_estimate: window.backend_estimateSize.value,
+  frontend_estimate: window.frontend_estimateSize.value,
+  enabled: true
+}
 
 
 window.backend_estimate.addEventListener('submit', function(event){
   // Stop the browser trying to submit the form itself.
   event.preventDefault();
-  return t.set('card', 'shared', 'backend_estimate', window.backend_estimateSize.value)
+  return t.set('card', 'shared', 'backend_estimate', object_estimateSize)
   .then(function(){
     t.closePopup();
   });
@@ -40,10 +44,13 @@ t.render(function(){
       console.log(Object.keys(estimates["card"]["shared"]));
       console.log(JSON.stringify(estimates, null, 2));
     
-    var object_estimate = Object.keys(estimates["card"]["shared"])
-    console.log("object_estimate: ", object_estimate[1])
-    console.log("object_estimat type: ", typeof object_estimate)
+    // var object_estimate = Object.keys(estimates["card"]["shared"])
+    // console.log("object_estimate: ", object_estimate[1])
+    // console.log("object_estimat type: ", typeof object_estimate)
+    
+    
     window.backend_estimateSize.value = Object.values(estimates["card"]["shared"]["backend_estimate"]);
+    window.frontend_estimateSize. value = Object.values(estimates["card"]["shared"]["frontend_estimate"]);
   })
   
   .then(function(){
