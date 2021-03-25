@@ -76,8 +76,8 @@ window.TrelloPowerUp.initialize({
     },
           {
       title: 'Frontend Estimate',
-      color: frontend_estimate ? "orange" : null,
-      text: frontend_estimate,
+      color: frontend_estimate ? "orange" : null || frontend_estimate != 0 ? "orange" : null ,
+      text: frontend_estimate ? frontend_estimate : null || frontend_estimate != 0) 
       callback: function(t) {
         return t.popup({
           title: "Frontend Estimation",
