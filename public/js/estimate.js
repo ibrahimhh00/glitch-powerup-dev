@@ -42,8 +42,8 @@ t.render(function(){
     
     var object_estimate = Object.keys(estimates["card"]["shared"])
     console.log("object_estimate: ", object_estimate[1])
-    console.log("object_estimat type: ", typeof object_estimate[1])
-    window.backend_estimateSize.value = Object.value(object_estimate[1]);
+    console.log("object_estimat type: ", typeof object_estimate)
+    window.backend_estimateSize.value = Object.values(estimates["card"]["shared"]["backend_estimate"]);
   })
   
   .then(function(){
