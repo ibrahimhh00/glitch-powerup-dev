@@ -20,15 +20,6 @@ window.backend_estimate.addEventListener('submit', function(event){
 // and if so pre-select it for our list. Adding this leaves our 
 t.render(function(){
   
-    // return t.get('board', 'shared')
-//   return t.getAll()
-// .then(function (data) {
-//   console.log("board return");
-//   console.log(data[shared]);
-//   console.log(JSON.stringify(data, null, 2));
-// });
-  
-  
   
 //     return t.get('card', 'shared', 'backend_estimate')
 //   .then(function(backend_estimate){
@@ -45,10 +36,14 @@ t.render(function(){
 
   return t.getAll()
     // return t.get('card', 'shared', 'backend_estimate')
-  .then(function(backend_estimate){
-      console.log(Object.keys(backend_estimate["card"]));
-      console.log(JSON.stringify(backend_estimate, null, 2));
-    window.backend_estimateSize.value = backend_estimate;
+  .then(function(estimates){
+      console.log(Object.keys(estimates["card"]["shared"]));
+      console.log(JSON.stringify(estimates, null, 2));
+    
+    var object_estimate = Object.keys(estimates["card"]["shared"])
+    console.log("object_estimate: ", object_estimate[1])
+    console.log("object_estimat type: ", typeof object_estimate[1])
+    window.backend_estimateSize.value = Object.value(object_estimate[1]);
   })
   
   .then(function(){
