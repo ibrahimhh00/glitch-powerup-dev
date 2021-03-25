@@ -3,7 +3,7 @@ var t = TrelloPowerUp.iframe();
 window.estimate.addEventListener('submit', function(event){
   // Stop the browser trying to submit the form itself.
   event.preventDefault();
-  return t.set('card', 'shared', 'estimate', window.estimateSize.value)
+  return t.set('card', 'shared', 'backend_estimate', window.estimateSize.value)
   .then(function(){
     t.closePopup();
   });
@@ -11,11 +11,11 @@ window.estimate.addEventListener('submit', function(event){
 
 t.render(function(){
   
-    return t.get('card', 'shared', 'estimate')
-  .then(function(estimate){
-    window.estimateSize.value = estimate;
+    return t.get('card', 'shared', 'backend_estimate')
+  .then(function(backend_estimate){
+    window.estimateSize.value = backend_estimate;
   })
   .then(function(){
-  t.sizeTo('#estimate').done();
+  t.sizeTo('#backend_estimate').done();
     });
 });
