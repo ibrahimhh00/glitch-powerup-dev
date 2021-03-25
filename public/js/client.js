@@ -30,8 +30,12 @@ window.TrelloPowerUp.initialize({
   'card-badges': function(t, options) {
     // return t.get('card', 'shared', 'backend_estimate')
     return t.getAll()
-    .then(function(estimate) {
-    return [{
+    .then(function(estimates) {
+      var backend_estimate = estimates["card"]["shared"]["backend_estimate"];
+      var frontend_estimate = estimates["card"]["shared"]["frontend_estimate"];
+    
+      return [{
+     
       // icon: 'https://cdn.glitch.com/c69415fd-f70e-4e03-b43b-98b8960cd616%2Frocket-ship-grey.png?1496162964717',
       icon: backend_estimate ? GREY_ROCKET_ICON : null,
       text: backend_estimate ? "Backend: "+ backend_estimate : null,
@@ -39,9 +43,9 @@ window.TrelloPowerUp.initialize({
     },
     {
       // icon: 'https://cdn.glitch.com/c69415fd-f70e-4e03-b43b-98b8960cd616%2Frocket-ship-grey.png?1496162964717',
-      icon: frontend_estimate ? GREY_ROCKET_ICON : null,
-      text: frontend_estimate ? "Backend: "+ frontend_estimate : null,
-      color: frontend_estimate ? "blue" : null,
+      icon: frontend_estimate ? BLACK_ROCKET_ICON : null,
+      text: frontend_estimate ? "Frontend: "+ frontend_estimate : null,
+      color: frontend_estimate ? "orange" : null,
     }
            
            
@@ -49,24 +53,17 @@ window.TrelloPowerUp.initialize({
 });
   },
   
-    'card-badges': function(t, options) {
-    return t.get('card', 'shared', 'frontend_estimate')
-    .then(function(frontend_estimate) {
-    return [{
-      // icon: 'https://cdn.glitch.com/c69415fd-f70e-4e03-b43b-98b8960cd616%2Frocket-ship-grey.png?1496162964717',
-      icon: frontend_estimate ? GREY_ROCKET_ICON : null,
-      text: frontend_estimate ? "Backend: "+ frontend_estimate : null,
-      color: frontend_estimate ? "blue" : null,
-    }];
-});
-  },
   
   
   
   'card-detail-badges': function(t, options) {
-    return t.get('card', 'shared', 'backend_estimate')
-    .then(function(backend_estimate) {
-    return [{
+    // return t.get('card', 'shared', 'backend_estimate')
+    return t.getAll()
+    .then(function(estimates) {
+      var backend_estimate = estimates["card"]["shared"]["backend_estimate"];
+      var frontend_estimate = estimates["card"]["shared"]["frontend_estimate"];
+    return [
+      {
       title: 'Backend Estimate',
       color: backend_estimate ? "blue" : null,
       text: backend_estimate,
@@ -76,7 +73,21 @@ window.TrelloPowerUp.initialize({
           url: 'estimate.html',
              });
       }
-    }]
+    },
+          {
+      title: 'Frontend Estimate',
+      color: frontend_estimate ? "orange" : null,
+      text: frontend_estimate,
+      callback: function(t) {
+        return t.popup({
+          title: "Frontend Estimation",
+          url: 'estimate.html',
+             });
+      }
+    },
+      
+    
+    ]
   });
   }
 
