@@ -4,7 +4,7 @@ var GREY_ROCKET_ICON = 'https://cdn.glitch.com/c69415fd-f70e-4e03-b43b-98b8960cd
 var WHITE_ROCKET_ICON = 'https://cdn.glitch.com/c69415fd-f70e-4e03-b43b-98b8960cd616%2Fwhite-rocket-ship.png?1495811896182';
 var BLACK_ROCKET_ICON = 'https://cdn.glitch.com/1b42d7fe-bda8-4af8-a6c8-eff0cea9e08a%2Frocket-ship.png?1494946700421';
 
-var BACKEND_ICON = 'https://cdn.glitch.com/aef55bcb-cec2-438b-98c0-959249969810%2Fimages.png?v=1616730135136';
+var BACKEND_ICON = 'https://cdn.glitch.com/aef55bcb-cec2-438b-98c0-959249969810%2Fletter-b-icon-png-8895%20(1).png?v=1616730831003';
 // var FRONTEND_ICON 
 var ROCKET_ICON = 'https://cdn.glitch.com/aef55bcb-cec2-438b-98c0-959249969810%2Fc69415fd-f70e-4e03-b43b-98b8960cd616_white-rocket-ship.png?v=1616729876518';
 
@@ -40,7 +40,7 @@ window.TrelloPowerUp.initialize({
      
       // icon: 'https://cdn.glitch.com/c69415fd-f70e-4e03-b43b-98b8960cd616%2Frocket-ship-grey.png?1496162964717',
       icon: backend_estimate == null || backend_estimate == 0 ?  null : BACKEND_ICON,
-      text: backend_estimate == null || backend_estimate == 0 ?  null : "Backend: "+ backend_estimate,
+      text: backend_estimate == null || backend_estimate == 0 ?  null : backend_estimate,
       color: backend_estimate == null || backend_estimate == 0 ? null : "blue",
     },
     {
