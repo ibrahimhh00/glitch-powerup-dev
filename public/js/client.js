@@ -39,14 +39,14 @@ window.TrelloPowerUp.initialize({
       return [{
      
       // icon: 'https://cdn.glitch.com/c69415fd-f70e-4e03-b43b-98b8960cd616%2Frocket-ship-grey.png?1496162964717',
-      icon: backend_estimate == null || backend_estimate == 0 ?  null : BACKEND_ICON,
-      text: backend_estimate == null || backend_estimate == 0 ?  null : backend_estimate,
-      color: backend_estimate == null || backend_estimate == 0 ? null : "orange",
+      icon: backend_estimate == null || backend_estimate == 0 ?  null : BLACK_ROCKET_ICON,
+      text: backend_estimate == null || backend_estimate == 0 ?  null : "B: "+ backend_estimate,
+      color: backend_estimate == null || backend_estimate == 0 ? null : "blue",
     },
     {
       // icon: 'https://cdn.glitch.com/c69415fd-f70e-4e03-b43b-98b8960cd616%2Frocket-ship-grey.png?1496162964717',
       icon: frontend_estimate == null || frontend_estimate == 0 ? null : BLACK_ROCKET_ICON,
-      text: frontend_estimate == null || frontend_estimate == 0 ? null : "Frontend: "+ frontend_estimate,
+      text: frontend_estimate == null || frontend_estimate == 0 ? null : "F: "+ frontend_estimate,
       color: frontend_estimate == null || frontend_estimate == 0 ? null : "orange",
     }
            
