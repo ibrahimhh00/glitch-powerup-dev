@@ -28,8 +28,12 @@ var onBtnClick = function (t, opts) {
 //             });
 //     });
 
-                return t.lists("cards").then(function (ids) {
-      console.log("ids are:", ids);
+                return t.lists("cards").then(function (lists) {
+                
+                  
+                  
+                console.log(JSON.stringify(lists[5].get("attachments"), null, 2))
+                console.log("ids are:", lists);
             
                 });
        
