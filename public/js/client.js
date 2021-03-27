@@ -56,8 +56,8 @@ var onBtnClick = function (t, opts) {
     //   console.log(JSON.stringify(board, null, 2));
     // });
       
-    }
-  });
+  //   }
+  // });
 };
 
 window.TrelloPowerUp.initialize({
