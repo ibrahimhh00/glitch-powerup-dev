@@ -15,16 +15,12 @@ var onBtnClick = function (t, opts) {
   // console.log('Someone clicked the button');
   return t.popup({
     title: 'Snooze Card',
-    items: [{
-      text: 'Choose Time',
-      callback: function (t, opts) {  }
-    }, {
-      text: 'In 1 hour',
-      callback: function (t, opts) {  }
-    }, {
-      text: 'In 2 hours',
-      callback: function (t, opts) {  }
-    }]
+    items: function(t, options) {
+      
+          return t.lists("all").then(function (lists) {
+      console.log(JSON.stringify(lists, null, 2));
+    });
+    }
   });
 };
 
