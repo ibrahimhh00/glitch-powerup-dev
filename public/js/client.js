@@ -17,9 +17,13 @@ var onBtnClick = function (t, opts) {
     title: 'Snooze Card',
     items: function(t, options) {
       
-          return t.lists("all").then(function (lists) {
-      console.log(JSON.stringify(lists, null, 2));
-    });
+    //       return t.lists("all").then(function (lists) {
+    //   console.log(JSON.stringify(lists, null, 2));
+    // });
+      
+        return t.get("card", "shared","backend_estimate").then(function (estimate) {
+          console.log("estimate is:", estimate)
+        });
       
     //    return t.cards("idList","name","badges","customFieldItems","coordinates","pos").then(function (cards) {
     //   console.log(JSON.stringify(cards, null, 2));
