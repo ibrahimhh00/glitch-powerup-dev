@@ -75,9 +75,12 @@ var onBtnClick = function (t, opts) {
                 // console.log(JSON.stringify(cards, null, 2))
                 var tempArray = Object.values(cards)
                 console.log("Cards values :", tempArray)
-                tempArray.forEach((key, value) => console.log(value))
+                var cardEstimateArr =  new Map();
+                tempArray.forEach((key, value) => 
+                                  // console.log(key["id"]), 
+                                  cardEstimateArr.set(key["id"],""))
                 
-                  
+                console.log("cardEstimateArr: ", cardEstimateArr)  
                 console.log("card type is:", typeof cards);
                 
                
