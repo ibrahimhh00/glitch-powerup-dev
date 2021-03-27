@@ -28,8 +28,14 @@ var onBtnClick = function (t, opts) {
 //             });
 //     });
 
-                return t.lists("cards").then(function (lists) {
-                
+                return t.cards('id', 'name', 'desc', 'shortLink', 'idShort').then(function (cards) {
+                const searchText = options.search;
+                const matchedCards = cards.filter(function(card){
+                // We need to shrink our list of possible matches to those cards that contain what the
+                // user has input. We'll use a naive approach here and just see if the string entered
+                // is in any of the fields we care about.
+                const textToSearch = card.id + card.name + card.desc + card.shortLink + card.idShort;
+                return textToSearch.toLowerCase().includes(searchText.toLowerCase());
                 
                 console.log(JSON.stringify(lists[5], null, 2))
                 console.log("ids are:", lists);
