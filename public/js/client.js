@@ -27,18 +27,21 @@ window.TrelloPowerUp.initialize({
       text: 'Callback',
       callback: onBtnClick,
       condition: 'always'
-    }, {
-      // or we can also have a button that is just a simple url
-      // clicking it will open a new tab at the provided url
-      icon: {
-        dark: WHITE_ROCKET_ICON,
-        light: BLACK_ROCKET_ICON
-      },
-      text: 'URL',
-      condition: 'always',
-      url: 'https://trello.com/inspiration',
-      target: 'Inspiring Boards' // optional target for above url
-    }];
+    }, 
+    //         {
+    //   // or we can also have a button that is just a simple url
+    //   // clicking it will open a new tab at the provided url
+    //   icon: {
+    //     dark: WHITE_ROCKET_ICON,
+    //     light: BLACK_ROCKET_ICON
+    //   },
+    //   text: 'URL',
+    //   condition: 'always',
+    //   url: 'https://trello.com/inspiration',
+    //   target: 'Inspiring Boards' // optional target for above url
+    // }
+           
+           ];
   },
  
   'card-buttons': function(t, options){
