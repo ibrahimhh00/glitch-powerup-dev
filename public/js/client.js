@@ -26,7 +26,7 @@ window.TrelloPowerUp.initialize({
       },
       text: 'Callback',
       callback: onBtnClick,
-      condition: 'edit'
+      condition: 'always'
     }, {
       // or we can also have a button that is just a simple url
       // clicking it will open a new tab at the provided url
