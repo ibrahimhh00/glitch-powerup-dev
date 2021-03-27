@@ -73,8 +73,13 @@ var onBtnClick = function (t, opts) {
           
                 
                 // console.log(JSON.stringify(cards, null, 2))
+                var tempArray = Object.values(cards)
+                console.log("Cards values :", tempArray)
+                tempArray.forEach((key, value) => console.log(value))
+                
+                  
                 console.log("card type is:", typeof cards);
-                console.log("Cards keys:", Object.value(cards))
+                
                
                 
             
