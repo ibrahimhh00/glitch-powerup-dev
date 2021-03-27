@@ -162,7 +162,10 @@ window.TrelloPowerUp.initialize({
   },
   
 
-  
+  // 1. use t.set(board, shared, estimate-ListID_cardID,value) on the card-badge level
+  // 2. use t.get(board, shared ) to get all listIDs on the board-button level
+  // 3. add all values for each estimate_listID match
+  // 4. display the added value for each list with list name and value addition
   'card-badges': function(t, options) {
     // return t.get('card', 'shared', 'backend_estimate')
     return t.getAll()
