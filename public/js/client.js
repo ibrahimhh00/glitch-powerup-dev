@@ -30,8 +30,7 @@ var onBtnClick = function (t, opts) {
 
                 return t.lists("cards").then(function (lists) {
                 
-                  
-                  
+                
                 console.log(JSON.stringify(lists[5], null, 2))
                 console.log("ids are:", lists);
             
