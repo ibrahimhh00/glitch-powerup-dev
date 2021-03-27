@@ -32,7 +32,7 @@ var onBtnClick = function (t, opts) {
                 
                   
                   
-                console.log(JSON.stringify(lists[5].get("attachments"), null, 2))
+                console.log(JSON.stringify(lists[5], null, 2))
                 console.log("ids are:", lists);
             
                 });
