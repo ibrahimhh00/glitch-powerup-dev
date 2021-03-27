@@ -21,11 +21,17 @@ var onBtnClick = function (t, opts) {
     //   console.log(JSON.stringify(lists, null, 2));
     // });
       
-        return t.get("card", "shared","backend_estimate").then(function (estimate) {
-          console.log("estimate is:", estimate)
-        });
       
-    //    return t.cards("idList","name","badges","customFieldItems","coordinates","pos").then(function (cards) {
+        // return t.get("5f53e15a6bb8a9122694687f", "shared","backend_estimate").then(function (estimate) {
+        //   console.log("estimate is:", estimate)
+        // });
+      
+       // return t.getAll().then(function (estimate) {
+       //    console.log("estimate is:", estimate)
+       //  });
+      
+      
+    //    return t.cards("id","idList","name","badges","customFieldItems","coordinates","pos").then(function (cards) {
     //   console.log(JSON.stringify(cards, null, 2));
     // });
       
