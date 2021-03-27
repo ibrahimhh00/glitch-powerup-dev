@@ -17,17 +17,18 @@ var onBtnClick = function (t, opts) {
     title: 'Snooze Card',
     items: function(t, options) {
       
-    //       return t.lists("all").then(function (lists) {
-    //   console.log(JSON.stringify(lists, null, 2));
-    // });
+          return t.lists("all").then(function (lists) {
+      console.log(JSON.stringify(lists, null, 2));
+    });
       
     //    return t.cards("idList","name","badges","customFieldItems","coordinates","pos").then(function (cards) {
     //   console.log(JSON.stringify(cards, null, 2));
     // });
       
-     return t.board("id", "name","customFields").then(function (board) {
-      console.log(JSON.stringify(board, null, 2));
-    });
+    //  return t.board("id", "name","customFields").then(function (board) {
+    //   console.log(JSON.stringify(board, null, 2));
+    // });
+      
     }
   });
 };
