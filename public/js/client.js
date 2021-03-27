@@ -27,26 +27,43 @@ var onBtnClick = function (t, opts) {
 //             });
 //     });
 
-                return t.cards('id','idList', 'name').then(function (cards) {
-                
+        return t.cards('id','idList', 'name').then(function (cards) {
           const searchText = "apility"
           const matchedCards = cards.filter(function(card){
           // We need to shrink our list of possible matches to those cards that contain what the
           // user has input. We'll use a naive approach here and just see if the string entered
           // is in any of the fields we care about.
-          const textToSearch = card.id + card.name + card.desc + card.shortLink + card.idShort;
-          return textToSearch.toLowerCase().includes(searchText.toLowerCase());
+          const textToSearch = card.id + card.idList + card.name;
+          var tempT = textToSearch.toLowerCase().includes(searchText.toLowerCase());
+          console.log("tempT is:", tempT)
+          return tempT
         })
-                          
+          let items = matchedCards.map(function(card){
+          const cardUrl = `https://trello.com/c/${card.id}`
+          return {
+            text: card.name,
+            url: cardUrl,
+            callback: function(t){
+              // When the user selects one of the cards we've returned in the search, we want
+              // to attach that card via it's URL.
+              return t.attach({ url: cardUrl, name: card.name })
+              .then(function(){
+                // Once we've attached the card's URL to the current card, we can close
+                // our search popup.
+                return t.closePopup();
+              });
+            }
+          }
+        })                  
                   
                 
-                console.log(JSON.stringify(cards, null, 2))
-                console.log("ids are:", cards);
+                // console.log(JSON.stringify(cards, null, 2))
+                // console.log("ids are:", cards);
             
                 });
     }
   });
-}
+};
   
 
 // var onBtnClick = function (t, opts) {
