@@ -27,8 +27,10 @@ var onBtnClick = function (t, opts) {
 //             });
 //     });
 
+         // We want to retrieve all of the cards we currently have and all of the fields
+      // on those cards that we will want to use for searching through.
         return t.cards('id','idList', 'name').then(function (cards) {
-          const searchText = "apility"
+          const searchText = "apility";  // The text the user has input.
           const matchedCards = cards.filter(function(card){
           // We need to shrink our list of possible matches to those cards that contain what the
           // user has input. We'll use a naive approach here and just see if the string entered
@@ -36,8 +38,10 @@ var onBtnClick = function (t, opts) {
           const textToSearch = card.id + card.idList + card.name;
           var tempT = textToSearch.toLowerCase().includes(searchText.toLowerCase());
           console.log("tempT is:", tempT)
-          return tempT
+          return textToSearch.toLowerCase().includes(searchText.toLowerCase());
         })
+        // Once we have all of the cards that match our search criteria, we need to put them into
+        // the array of objects that the t.popup method expects.
           let items = matchedCards.map(function(card){
           const cardUrl = `https://trello.com/c/${card.id}`
           return {
@@ -55,12 +59,17 @@ var onBtnClick = function (t, opts) {
             }
           }
         })                  
-                  
+        return items;          //don't forget to return items
                 
                 // console.log(JSON.stringify(cards, null, 2))
                 // console.log("ids are:", cards);
             
                 });
+    },
+    search: {
+      placeholder: 'Card name, description, or ID',
+      empty: 'Huh, nothing there 🤔',
+      searching: 'Searching your cards...'
     }
   });
 };
