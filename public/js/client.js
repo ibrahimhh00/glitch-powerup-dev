@@ -20,7 +20,7 @@ var onBtnClick = function (t, opts) {
     //       return t.lists("all").then(function (lists) {
     //   console.log(JSON.stringify(lists, null, 2));
     // });
-       return t.cards("badges").then(function (cards) {
+       return t.cards("name","badges","customFieldItems","coordinates").then(function (cards) {
       console.log(JSON.stringify(cards, null, 2));
     });
     }
