@@ -88,7 +88,7 @@ var onBtnClick = function (t, opts) {
                 var tempArray = Object.values(cards)
                 console.log("Cards values :", tempArray)
                 var cardEstimateArr =  []
-            
+                var listEstimateArr =  []
                 
                 
                 tempArray.map((key) => 
@@ -96,10 +96,11 @@ var onBtnClick = function (t, opts) {
                                   // console.log('backend_esitmate: ',t.get("5f53e15a6bb8a9122694687f", 'shared', 'backend_estimate','no value')))
                                   
                 //retrieve value of backend_estimate for each card and then assign it to cardEstimateArr value                
-                t.get(key['id'], 'shared', 'backend_estimate','')
+                t.get(key.id, 'shared', 'backend_estimate','')
                 .then(function (data) {
                                        cardEstimateArr.push({'id':key.id,idList:key.idList,'backendEstimate':data});
                                        // cardEstimateArr.push([key['id'],key['idList'],data]);
+                                       listEstimateArr.push({'idList':key.idList,'backendEstimate':data})
                                        
                 })
                              )
@@ -111,9 +112,11 @@ var onBtnClick = function (t, opts) {
                 // var cardEstimateArrTemp = Array.from(cardEstimateArr)
                 // console.log("cardEstimateArrTemp: ",cardEstimateArrTemp)
                 
-                // var listEstimateArr =  new Array();
-              
-                var listEstimateArr = cardEstimateArr.map(value => value.map(value2 => value2))
+//                 var listEstimateArr =  []
+                
+//                 cardEstimateArr.map((key) => 
+//                                    listEstimateArr.push({'id':key.id,'backendEstimate':key.backendEstimate})
+//                                    )
                                         
                                         // listEstimateArr.set(key,value))
                 
