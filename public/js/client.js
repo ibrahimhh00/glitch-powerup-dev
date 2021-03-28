@@ -87,7 +87,7 @@ var onBtnClick = function (t, opts) {
                 //cardID array created with all IDs in on the board
                 var tempArray = Object.values(cards)
                 console.log("Cards values :", tempArray)
-                var cardEstimateArr =  new Array();
+                var cardEstimateArr =  new Map();
             
                 tempArray.map((key, value) => 
                                   // console.log(key["id"]), 
@@ -96,8 +96,8 @@ var onBtnClick = function (t, opts) {
                 //retrieve value of backend_estimate for each card and then assign it to cardEstimateArr value                
                 t.get(key['id'], 'shared', 'backend_estimate','')
                 .then(function (data) {
-                                       // cardEstimateArr.set(key['id'],[key['idList'],data]);
-                                       cardEstimateArr.push([key['id'],key['idList'],data]);
+                                       cardEstimateArr.set({'id':key['id'],idList:key['idList'],'backendEstimate':data});
+                                       // cardEstimateArr.push([key['id'],key['idList'],data]);
                                        
                 })
                              )
