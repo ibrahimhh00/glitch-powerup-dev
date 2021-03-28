@@ -102,9 +102,9 @@ var onBtnClick = function (t, opts) {
                   
                 
                 var listEstimateArr =  new Map();
-                cardEstimateArr.map((key, value) => value.map((value1,value2) => listEstimateArr.set(value1,value2)))
+                cardEstimateArr.forEach((key, value) => listEstimateArr.set(key,value))
                 
-                cardEstimateArr.map((key, value) => value.map((value1,value2) => listEstimateArr.set(value1,value2)))
+                // cardEstimateArr.map((key, value) => value.map((value1,value2) => listEstimateArr.set(value1,value2)))
                 console.log("listEstimateArr: ", listEstimateArr);
                                       
                 })
