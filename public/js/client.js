@@ -100,7 +100,8 @@ var onBtnClick = function (t, opts) {
                              )
                 console.log("cardEstimateArr: ", cardEstimateArr);
                   
-                var cardEstimateArrTemp = Object.values(cardEstimateArr.entries())
+                console.log("array.From: ",Array.from(cardEstimateArr.keys))
+                var cardEstimateArrTemp = Array.from(cardEstimateArr)
                 console.log("cardEstimateArrTemp: ",cardEstimateArrTemp)
                 
                 var listEstimateArr =  new Map();
