@@ -78,14 +78,13 @@ var onBtnClick = function (t, opts) {
                 //values are in object of nested array, 
                 //values of outer array assign to tempArray 
                 //then values of inner array assigned to an array of card IDs as keys
-
-           
+      
                 return t.cards('id','idList', 'name').then(function (cards) {
      
                 // console.log(JSON.stringify(cards, null, 2))
                 // console.log('backend_esitmate: ',t.get("5f53e15a6bb8a9122694687f", 'shared', 'backend_estimate'))
                   
-                  
+                //cardID array created with all IDs in on the board
                 var tempArray = Object.values(cards)
                 console.log("Cards values :", tempArray)
                 var cardEstimateArr =  new Map();
@@ -93,12 +92,12 @@ var onBtnClick = function (t, opts) {
                                   // console.log(key["id"]), 
                                   // console.log('backend_esitmate: ',t.get("5f53e15a6bb8a9122694687f", 'shared', 'backend_estimate','no value')))
                                   
-                                  
+                //retrieve value of backend_estimate for each card and then assign it to cardEstimateArr value                
                 t.get(key['id'], 'shared', 'backend_estimate','')
                 .then(function (data) {
                                        cardEstimateArr.set(key['id'],data);
-                                       console.log("cardEstimateArr: ", cardEstimateArr);
                 }))
+                console.log("cardEstimateArr: ", cardEstimateArr);
                 })
                 
                                   
