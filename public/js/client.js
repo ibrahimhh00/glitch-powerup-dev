@@ -101,13 +101,17 @@ var onBtnClick = function (t, opts) {
                                        cardEstimateArr.push({'id':key.id,idList:key.idList,'backendEstimate':data});
                                        // cardEstimateArr.push([key['id'],key['idList'],data]);
                                        listEstimateArr.push({'idList':key.idList,'backendEstimate':data})
+                  
                                        
                 })
                              )
+                  
+
                 console.log("cardEstimateArr: ", cardEstimateArr);
+                console.log("listEstimateArr: ", listEstimateArr);
 
-
-                
+                                  var temp = listEstimateArr.filter(key => key.idList.length > 3)
+                  console.log("temp:",temp)
                 // console.log("map to array: ",Object.fromEntries(cardEstimateArr))
                 // var cardEstimateArrTemp = Array.from(cardEstimateArr)
                 // console.log("cardEstimateArrTemp: ",cardEstimateArrTemp)
@@ -121,7 +125,7 @@ var onBtnClick = function (t, opts) {
                                         // listEstimateArr.set(key,value))
                 
                 // cardEstimateArr.map((key, value) => value.map((value1,value2) => listEstimateArr.set(value1,value2)))
-                console.log("listEstimateArr: ", listEstimateArr);
+
                                       
                 })
                 
