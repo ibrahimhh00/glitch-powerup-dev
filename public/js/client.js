@@ -88,7 +88,7 @@ var onBtnClick = function (t, opts) {
                 var tempArray = Object.values(cards)
                 console.log("Cards values :", tempArray)
                 var cardEstimateArr =  new Map();
-                tempArray.forEach((key, value) => 
+                tempArray.map((key, value) => 
                                   // console.log(key["id"]), 
                                   // console.log('backend_esitmate: ',t.get("5f53e15a6bb8a9122694687f", 'shared', 'backend_estimate','no value')))
                                   
