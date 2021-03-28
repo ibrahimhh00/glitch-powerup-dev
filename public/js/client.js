@@ -87,7 +87,7 @@ var onBtnClick = function (t, opts) {
                 //cardID array created with all IDs in on the board
                 var tempArray = Object.values(cards)
                 console.log("Cards values :", tempArray)
-                var cardEstimateArr =  new Map();
+                const cardEstimateArr =  new Map();
                 tempArray.map((key, value) => 
                                   // console.log(key["id"]), 
                                   // console.log('backend_esitmate: ',t.get("5f53e15a6bb8a9122694687f", 'shared', 'backend_estimate','no value')))
@@ -100,7 +100,15 @@ var onBtnClick = function (t, opts) {
                              )
                 console.log("cardEstimateArr: ", cardEstimateArr);
                   
-                console.log("array.From: ",Array.from(cardEstimateArr.keys))
+                  
+                const entries = new Map([
+  ['foo', 'bar'],
+  ['baz', 42]
+]);
+
+console.log(entries);
+                
+                console.log("map to array: ",Object.fromEntries(cardEstimateArr))
                 var cardEstimateArrTemp = Array.from(cardEstimateArr)
                 console.log("cardEstimateArrTemp: ",cardEstimateArrTemp)
                 
