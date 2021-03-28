@@ -71,13 +71,11 @@ var onBtnClick = function (t, opts) {
                 // t.cards return a set of values, 
                 //values are in object of nested array, 
                 //values of outer array assign to tempArray 
-                //then values of inner array assign to an array of card IDs
-                
+                //then values of inner array assigned to an array of card IDs as keys
                 return t.cards('id','idList', 'name').then(function (cards) {
      
                 // console.log(JSON.stringify(cards, null, 2))
-                  
-                // Nested Array object, Assign object values of the outer array to an array            
+                            
                 var tempArray = Object.values(cards)
                 console.log("Cards values :", tempArray)
                 var cardEstimateArr =  new Map();
