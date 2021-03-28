@@ -93,11 +93,21 @@ var onBtnClick = function (t, opts) {
                                   // console.log(key["id"]), 
                                   // console.log('backend_esitmate: ',t.get("5f53e15a6bb8a9122694687f", 'shared', 'backend_estimate','no value')))
                                   
-                                  cardEstimateArr.set(key['id'],t.get(key['id'], 'shared', "backend_estimate")))
+                                  
+                t.get(key['id'], 'shared', 'backend_estimate','')
+                .then(function (data) {
+                                       cardEstimateArr.set(key['id'],data);
+                                       console.log("cardEstimateArr: ", cardEstimateArr);
+                }))
+                })
                 
-                console.log("cardEstimateArr: ", cardEstimateArr)  
-                console.log("card type is:", typeof cards);
-                });
+                                  
+                                  
+                                  // cardEstimateArr.set(key['id'],t.get(key['id'], 'shared', "backend_estimate")))
+                
+                // console.log("cardEstimateArr: ", cardEstimateArr)  
+                // console.log("card type is:", typeof cards);
+                // });
       
     }
   });
