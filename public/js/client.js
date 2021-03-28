@@ -68,30 +68,34 @@ var onBtnClick = function (t, opts) {
     items: function(t, options) {
                 
       
+      
+                return t.get('605bf359db96f5278b7392cf', 'shared', 'backend_estimate')
+                .then(function (data) {
+                  console.log(JSON.stringify(data, null, 2));
+                });
+      
                 // t.cards return a set of values, 
                 //values are in object of nested array, 
                 //values of outer array assign to tempArray 
                 //then values of inner array assigned to an array of card IDs as keys
-                return t.cards('id','idList', 'name').then(function (cards) {
+
+           
+//                 return t.cards('id','idList', 'name').then(function (cards) {
      
-                // console.log(JSON.stringify(cards, null, 2))
-                console.log('backend_esitmate: ',t.get("605bf359db96f5278b7392cf", 'shared', 'backend_estimate','no value'))
+//                 // console.log(JSON.stringify(cards, null, 2))
+//                 console.log('backend_esitmate: ',t.get("605bf359db96f5278b7392cf", 'shared', 'backend_estimate'))
                   
-                var tempArray = Object.values(cards)
-                console.log("Cards values :", tempArray)
-                var cardEstimateArr =  new Map();
-                tempArray.forEach((key, value) => 
-                                  // console.log(key["id"]), 
-                                  console.log('backend_esitmate: ',t.get("605bf359db96f5278b7392cf", 'shared', 'backend_estimate','no value')))
-                                  // cardEstimateArr.set(key['id'],t.get(key['id'], 'shared', "backend_estimate")))
+//                 var tempArray = Object.values(cards)
+//                 console.log("Cards values :", tempArray)
+//                 var cardEstimateArr =  new Map();
+//                 tempArray.forEach((key, value) => 
+//                                   // console.log(key["id"]), 
+//                                   console.log('backend_esitmate: ',t.get("605bf359db96f5278b7392cf", 'shared', 'backend_estimate','no value')))
+//                                   // cardEstimateArr.set(key['id'],t.get(key['id'], 'shared', "backend_estimate")))
                 
-                console.log("cardEstimateArr: ", cardEstimateArr)  
-                console.log("card type is:", typeof cards);
-                
-               
-                
-            
-                });
+//                 console.log("cardEstimateArr: ", cardEstimateArr)  
+//                 console.log("card type is:", typeof cards);
+//                 });
       
     }
   });
