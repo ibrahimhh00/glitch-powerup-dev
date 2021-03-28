@@ -110,7 +110,7 @@ var onBtnClick = function (t, opts) {
                 console.log("cardEstimateArr: ", cardEstimateArr);
                 console.log("listEstimateArr: ", listEstimateArr);
 
-                                  var temp = listEstimateArr.filter(key => key.idList.length > 3)
+                                  var temp = listEstimateArr.filter(key => key.length > 0)
                   console.log("temp:",temp)
                 // console.log("map to array: ",Object.fromEntries(cardEstimateArr))
                 // var cardEstimateArrTemp = Array.from(cardEstimateArr)
