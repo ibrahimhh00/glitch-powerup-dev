@@ -81,7 +81,7 @@ var onBtnClick = function (t, opts) {
                 var cardEstimateArr =  new Map();
                 tempArray.forEach((key, value) => 
                                   // console.log(key["id"]), 
-                                  cardEstimateArr.set(key["id"],""))
+                                  cardEstimateArr.set(key['id'],t.get(key['id'], 'shared', "backend_estimate")))
                 
                 console.log("cardEstimateArr: ", cardEstimateArr)  
                 console.log("card type is:", typeof cards);
