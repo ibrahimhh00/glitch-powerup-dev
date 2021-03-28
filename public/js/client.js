@@ -75,13 +75,14 @@ var onBtnClick = function (t, opts) {
                 return t.cards('id','idList', 'name').then(function (cards) {
      
                 // console.log(JSON.stringify(cards, null, 2))
-                            
+                console.log('backend_esitmate: ',t.get("605bf359db96f5278b7392cf", 'shared', 'backend_estimate','no value'))
+                  
                 var tempArray = Object.values(cards)
                 console.log("Cards values :", tempArray)
                 var cardEstimateArr =  new Map();
                 tempArray.forEach((key, value) => 
                                   // console.log(key["id"]), 
-                                  console.log('backend_esitmate: ',t.get(key['id'], 'shared', 'backend_estimate','no value')))
+                                  console.log('backend_esitmate: ',t.get("605bf359db96f5278b7392cf", 'shared', 'backend_estimate','no value')))
                                   // cardEstimateArr.set(key['id'],t.get(key['id'], 'shared', "backend_estimate")))
                 
                 console.log("cardEstimateArr: ", cardEstimateArr)  
