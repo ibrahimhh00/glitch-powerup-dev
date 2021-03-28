@@ -109,9 +109,10 @@ var onBtnClick = function (t, opts) {
                 // var cardEstimateArrTemp = Array.from(cardEstimateArr)
                 // console.log("cardEstimateArrTemp: ",cardEstimateArrTemp)
                 
-                var listEstimateArr =  new Array();
-                cardEstimateArr.map((value1, value2,value3) => 
-                                        console.log("key is:",value1," ",value2," ",value3))
+                // var listEstimateArr =  new Array();
+              
+                var listEstimateArr = cardEstimateArr.map(value => value.map(value2 => value2))
+                                        
                                         // listEstimateArr.set(key,value))
                 
                 // cardEstimateArr.map((key, value) => value.map((value1,value2) => listEstimateArr.set(value1,value2)))
