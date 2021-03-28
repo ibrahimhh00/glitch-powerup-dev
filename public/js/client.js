@@ -87,37 +87,31 @@ var onBtnClick = function (t, opts) {
                 //cardID array created with all IDs in on the board
                 var tempArray = Object.values(cards)
                 console.log("Cards values :", tempArray)
-                let cardEstimateArr =  new Map();
-                let cardEstimateArr2 =  new Map();
+                var cardEstimateArr =  new Array();
+            
                 tempArray.map((key, value) => 
                                   // console.log(key["id"]), 
                                   // console.log('backend_esitmate: ',t.get("5f53e15a6bb8a9122694687f", 'shared', 'backend_estimate','no value')))
                                   
                 //retrieve value of backend_estimate for each card and then assign it to cardEstimateArr value                
-                
-                cardEstimateArr2.set("test",["pet","cat"])          
-                // t.get(key['id'], 'shared', 'backend_estimate','')
-//                 .then(function (data) {
-//                                        cardEstimateArr.set(key['id'],[key['idList'],data]);
+                t.get(key['id'], 'shared', 'backend_estimate','')
+                .then(function (data) {
+                                       // cardEstimateArr.set(key['id'],[key['idList'],data]);
+                                       cardEstimateArr.push([key['id'],key['idList'],data]);
                                        
-                                       
-//                 })
+                })
                              )
                 console.log("cardEstimateArr: ", cardEstimateArr);
-                console.log("cardEstimateArr:2 ", cardEstimateArr2);
-                  
-                let entries = new Map();
-                  entries.set("test",["pet","cat"])
 
-console.log("entries:", entries);
+
                 
-                console.log("map to array: ",Object.fromEntries(cardEstimateArr))
-                var cardEstimateArrTemp = Array.from(cardEstimateArr)
-                console.log("cardEstimateArrTemp: ",cardEstimateArrTemp)
+                // console.log("map to array: ",Object.fromEntries(cardEstimateArr))
+                // var cardEstimateArrTemp = Array.from(cardEstimateArr)
+                // console.log("cardEstimateArrTemp: ",cardEstimateArrTemp)
                 
-                var listEstimateArr =  new Map();
-                cardEstimateArrTemp.map((key, value) => 
-                                        console.log("key is:",key))
+                var listEstimateArr =  new Array();
+                cardEstimateArr.map((value1, value2,value3) => 
+                                        console.log("key is:",value1," ",value2," ",value3))
                                         // listEstimateArr.set(key,value))
                 
                 // cardEstimateArr.map((key, value) => value.map((value1,value2) => listEstimateArr.set(value1,value2)))
