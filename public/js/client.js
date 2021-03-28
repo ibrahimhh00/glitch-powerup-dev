@@ -95,9 +95,9 @@ var onBtnClick = function (t, opts) {
                 //retrieve value of backend_estimate for each card and then assign it to cardEstimateArr value                
                 t.get(key['id'], 'shared', 'backend_estimate','')
                 .then(function (data) {
-                                       cardEstimateArr.set(key['id'],data).map;
+                                       cardEstimateArr.set(key['id'],{idlist:key['idList'],backendEstimate:data});
                 }))
-                console.log("cardEstimateArr: ", cardEstimateArr);
+                console.log("cardEstimateArr: ", cardEstimateArr['idList']);
                 })
                 
                                   
