@@ -177,7 +177,8 @@ var onBtnClick = function (t, opts) {
               // }, {}))
               // )       
                 )
-              Promise.all(promise1).then((data) => console.log(data)
+              Promise.all(promise1).then((data) => console.log(data))
+              .catch(err => console.log(err))
                   
                                          
                 
