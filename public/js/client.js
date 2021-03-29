@@ -185,7 +185,7 @@ var onBtnClick = function (t, opts) {
                 // cArr = Object.values(c)
                 // console.log("cArr:",cArr)
                 // console.log("cArr.backendEstimate",cArr.reduce((a,b) => a+b,0))
-                // c[idList].backendEstimate = c[idList].backendEstimate.reduce((a,b) => b+=b,0);
+                // c[idList].backendEstimate = c[idList].backendEstimate.reduce((a,b) => a+b,0);
                 // console.log("C is:",c)
                 // console.log("cardEstimateArr: ", cardEstimateArr);
                 // console.log("listEstimateArr: ", listEstimateArr);
@@ -199,7 +199,7 @@ var onBtnClick = function (t, opts) {
               ).then((c) => {  
                      
                      console.log("C is:",c)
-                     console.log("c.reduce",c.backendEstimate.reduce((a,b) => a+b))
+                     // console.log("c.reduce",c['idList'].backendEstimate.reduce((a,b) => a+b))
 
               })
                   
