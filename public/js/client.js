@@ -177,10 +177,15 @@ var onBtnClick = function (t, opts) {
               Promise.all(promises).then(() => 
                                          
                 result = Object.values(listEstimateArr.reduce((c, {idList,backendEstimate}) => {
+                console.log("c[idList]:",c[idList])
+                console.log("idList:",idList)
+                
                 c[idList] = c[idList] || {idList,backendEstimate: []};
+                console.log("c[idList].backendEstimate:",c[idList].backendEstimate)
+                // c[idList].backendEstimate = c[idList].backendEstimate.reduce((total,obj) => parseInt(obj) + total,0)
                 c[idList].backendEstimate = c[idList].backendEstimate.concat(parseInt(backendEstimate)?parseInt(backendEstimate):0); 
                 
-                console.log("c[idList]:",c[idList])
+                
                 // c[idList] = c[idList].backendEstimate.reduce((total,obj) => parseInt(obj.backendEstimate) + total,0)
                 // console.log("c.backendEstimate: ",c[idList].backendEstimate.reduce((a,b) => a+b))
                 
