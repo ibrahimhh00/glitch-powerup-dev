@@ -91,20 +91,26 @@ var onBtnClick = function (t, opts) {
                 var listEstimateArr =  []
                 
                 
-                tempArray.map((key) => 
-                                  // console.log(key["id"]), 
-                                  // console.log('backend_esitmate: ',t.get("5f53e15a6bb8a9122694687f", 'shared', 'backend_estimate','no value')))
+ t.get(key.id, 'shared', 'backend_estimate','')
+//                 .then(function (data) {
+                
+                
+                
+//                 tempArray.map((key) => 
+//                                   // console.log(key["id"]), 
+//                                   // console.log('backend_esitmate: ',t.get("5f53e15a6bb8a9122694687f", 'shared', 'backend_estimate','no value')))
                                   
-                //retrieve value of backend_estimate for each card and then assign it to cardEstimateArr value                
-                t.get(key.id, 'shared', 'backend_estimate','')
-                .then(function (data) {
-                                       cardEstimateArr.push({'id':key.id,idList:key.idList,'backendEstimate':data});
-                                       // cardEstimateArr.push([key['id'],key['idList'],data]);
-                                       listEstimateArr.push({'idList':key.idList,'backendEstimate':data})
+//                 //retrieve value of backend_estimate for each card and then assign it to cardEstimateArr value                
+                
+//                 t.get(key.id, 'shared', 'backend_estimate','')
+//                 .then(function (data) {
+//                                        cardEstimateArr.push({'id':key.id,idList:key.idList,'backendEstimate':data});
+//                                        // cardEstimateArr.push([key['id'],key['idList'],data]);
+//                                        listEstimateArr.push({'idList':key.idList,'backendEstimate':data})
                   
                                        
-                })
-                             )
+//                 })
+//                              )
                   
 
                 console.log("cardEstimateArr: ", cardEstimateArr);
