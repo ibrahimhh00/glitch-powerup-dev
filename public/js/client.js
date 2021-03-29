@@ -198,8 +198,9 @@ var onBtnClick = function (t, opts) {
 
               ).then((c) => {  
                      
+                    
                      console.log("C is:",c)
-                     // console.log("c.reduce",c['idList'].backendEstimate.reduce((a,b) => a+b))
+                     console.log("c.reduce",c.reduce((total,obj) => obj.backendEstimate + total,0))
 
               })
                   
