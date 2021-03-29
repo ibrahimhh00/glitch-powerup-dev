@@ -104,7 +104,12 @@ window.TrelloPowerUp.initialize({
         light: BLACK_ROCKET_ICON
       },
       text: 'Callback',
-      callback: onBtnClick,
+      callback: function(t){
+        return t.popup({
+          title: "Estimation",
+          url: 'results.html'
+        });
+      },
       condition: 'always'
     }, 
     //         {
