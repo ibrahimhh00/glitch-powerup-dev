@@ -150,6 +150,7 @@ var onBtnClick = function (t, opts) {
 
 
                 var promises = [];
+                var cArr = [];
                 tempArray.map((key) => 
                                   // console.log('test')
                                   // console.log(key["id"]), 
@@ -172,13 +173,14 @@ var onBtnClick = function (t, opts) {
                   
 //               Promise.all(promises).then(() => console.log("outside promise",listEstimateArr))
 //               .catch(err => console.log(err))
-                  
+                
               Promise.all(promises).then(() => 
                                          
                 result = Object.values(listEstimateArr.reduce((c, {idList,backendEstimate}) => {
                 c[idList] = c[idList] || {idList,backendEstimate: []};
-                // c[idList].backendEstimate = c[idList].backendEstimate.concat(parseInt(backendEstimate)?parseInt(backendEstimate):null); 
-                c[idList].backendEstimate = c[idList].backendEstimate.reduce((a,b) => b+=b,0);
+                c[idList].backendEstimate = c[idList].backendEstimate.reduce((a,b) => a+b); 
+                
+                // c[idList].backendEstimate = c[idList].backendEstimate.reduce((a,b) => b+=b,0);
                 console.log("C is:",c)
                 console.log("cardEstimateArr: ", cardEstimateArr);
                 console.log("listEstimateArr: ", listEstimateArr);
