@@ -64,12 +64,7 @@ var cardEstimateArr =  new Array;
                 // .then(() =>console.log("listEstimateArr: ", listEstimateArr))
                   
                 )
-             
-                  
-//               Promise.all(promises).then(() => console.log("outside promise",listEstimateArr))
-//               .catch(err => console.log(err))
-                
-             
+
                   
                   
 //Pass listEstimateArr to promise caller, merge idList that are equal and sum the their backendEstimate values                     
@@ -89,95 +84,9 @@ for (var prop in holder) {
 }
 
 console.log(obj2);             
- }
-                                        
-)
-                  
-                  
-//               Promise.all(promises).then(() => 
-                                         
-//                 result = Object.values(listEstimateArr.reduce((c, {idList,backendEstimate}) => {
-//                 console.log("c[idList]:",c[idList])
-//                 console.log("idList:",idList)
+ })
+ })
                 
-//                 c[idList] = c[idList] || {idList,backendEstimate: []};
-//                 console.log("c[idList].backendEstimate:",c[idList].backendEstimate)
-//                 // c[idList].backendEstimate = c[idList].backendEstimate.reduce((total,obj) => parseInt(obj) + total,0)
-//                 c[idList].backendEstimate = c[idList].backendEstimate.concat(parseInt(backendEstimate)?parseInt(backendEstimate):0); 
-                
-                
-//                 // c[idList] = c[idList].backendEstimate.reduce((total,obj) => parseInt(obj.backendEstimate) + total,0)
-//                 // console.log("c.backendEstimate: ",c[idList].backendEstimate.reduce((a,b) => a+b))
-                
-//                 // cArr = Object.values(c)
-//                 // console.log("cArr:",cArr)
-//                 // console.log("cArr.backendEstimate",cArr.reduce((a,b) => a+b,0))
-//                 // c[idList].backendEstimate = c[idList].backendEstimate.reduce((a,b) => a+b,0);
-//                 // console.log("C is:",c)
-//                 // console.log("cardEstimateArr: ", cardEstimateArr);
-//                 console.log("listEstimateArr: ", listEstimateArr);
-//                 // console.log("testt")
-//                 return c;
-//               }
-                                                              
-                                                              
-//              , {}))
-
-//               ).then((c) => {  
-                     
-                    
-//                      console.log("C is:",c)
-//                      console.log("c.reduce",c.reduce((total,obj) => parseInt(obj.backendEstimate) + total,0))
-
-//               })
-                  
-                                        
-                  
-                  
-//               .catch(err => console.log(err))
-                            
-
-                  
-                                         
-                
-                // .then(() => console.log("listEstimateArr: ", listEstimateArr))
-          
-                
-                
-                // var tempArray2 = [];
-                // tempArray.map((key) => tempArray2.push({'idList':key.idList}));
-                // console.log("tempArray2:",tempArray2)
-                              
-
-  
-
-                  //                 var temp = listEstimateArr.filter(key => key.length > 0)
-                  // console.log("temp:",temp)
-                // console.log("map to array: ",Object.fromEntries(cardEstimateArr))
-                // var cardEstimateArrTemp = Array.from(cardEstimateArr)
-                // console.log("cardEstimateArrTemp: ",cardEstimateArrTemp)
-                
-//                 var listEstimateArr =  []
-                
-//                 cardEstimateArr.map((key) => 
-//                                    listEstimateArr.push({'id':key.id,'backendEstimate':key.backendEstimate})
-//                                    )
-                                        
-                                        // listEstimateArr.set(key,value))
-                
-                // cardEstimateArr.map((key, value) => value.map((value1,value2) => listEstimateArr.set(value1,value2)))
-
-                                      
-                })
-                
-                                  
-                                  
-                                  // cardEstimateArr.set(key['id'],t.get(key['id'], 'shared', "backend_estimate")))
-                
-                // console.log("cardEstimateArr: ", cardEstimateArr)  
-                // console.log("card type is:", typeof cards);
-                // });
-      
     }
   });
 };
@@ -227,7 +136,7 @@ window.TrelloPowerUp.initialize({
     }];
   },
   
-
+  //   didn't need it
   // 1. use t.set(board, shared, estimate-ListID_cardID,value) instead of t.set(card,shared,key)
   // 2. use t.get(board, shared ) to get all listIDs on the board-button level
   // 3. add all values for each estimate-listID_ match
@@ -354,6 +263,10 @@ window.TrelloPowerUp.initialize({
 
 
 
+
+
+
+
 //inside button var function  
   // t.cards('id','idList', 'name')
 
@@ -419,3 +332,89 @@ window.TrelloPowerUp.initialize({
 //                 }
                
 //                              )})
+
+
+
+
+
+
+
+
+
+
+                  
+//Didn't work                 
+//               Promise.all(promises).then(() => 
+                                         
+//                 result = Object.values(listEstimateArr.reduce((c, {idList,backendEstimate}) => {
+//                 console.log("c[idList]:",c[idList])
+//                 console.log("idList:",idList)
+                
+//                 c[idList] = c[idList] || {idList,backendEstimate: []};
+//                 console.log("c[idList].backendEstimate:",c[idList].backendEstimate)
+//                 // c[idList].backendEstimate = c[idList].backendEstimate.reduce((total,obj) => parseInt(obj) + total,0)
+//                 c[idList].backendEstimate = c[idList].backendEstimate.concat(parseInt(backendEstimate)?parseInt(backendEstimate):0); 
+                
+                
+//                 // c[idList] = c[idList].backendEstimate.reduce((total,obj) => parseInt(obj.backendEstimate) + total,0)
+//                 // console.log("c.backendEstimate: ",c[idList].backendEstimate.reduce((a,b) => a+b))
+                
+//                 // cArr = Object.values(c)
+//                 // console.log("cArr:",cArr)
+//                 // console.log("cArr.backendEstimate",cArr.reduce((a,b) => a+b,0))
+//                 // c[idList].backendEstimate = c[idList].backendEstimate.reduce((a,b) => a+b,0);
+//                 // console.log("C is:",c)
+//                 // console.log("cardEstimateArr: ", cardEstimateArr);
+//                 console.log("listEstimateArr: ", listEstimateArr);
+//                 // console.log("testt")
+//                 return c;
+//               }
+                                                              
+                                                              
+//              , {}))
+
+//               ).then((c) => {  
+                     
+                    
+//                      console.log("C is:",c)
+//                      console.log("c.reduce",c.reduce((total,obj) => parseInt(obj.backendEstimate) + total,0))
+
+//               })
+                  
+                                        
+                  
+                  
+//               .catch(err => console.log(err))
+                            
+
+                  
+                                         
+                
+                // .then(() => console.log("listEstimateArr: ", listEstimateArr))
+          
+                
+                
+                // var tempArray2 = [];
+                // tempArray.map((key) => tempArray2.push({'idList':key.idList}));
+                // console.log("tempArray2:",tempArray2)
+                              
+
+  
+
+                  //                 var temp = listEstimateArr.filter(key => key.length > 0)
+                  // console.log("temp:",temp)
+                // console.log("map to array: ",Object.fromEntries(cardEstimateArr))
+                // var cardEstimateArrTemp = Array.from(cardEstimateArr)
+                // console.log("cardEstimateArrTemp: ",cardEstimateArrTemp)
+                
+//                 var listEstimateArr =  []
+                
+//                 cardEstimateArr.map((key) => 
+//                                    listEstimateArr.push({'id':key.id,'backendEstimate':key.backendEstimate})
+//                                    )
+                                        
+                                        // listEstimateArr.set(key,value))
+                
+                // cardEstimateArr.map((key, value) => value.map((value1,value2) => listEstimateArr.set(value1,value2)))
+
+ 
