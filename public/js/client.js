@@ -164,19 +164,22 @@ var onBtnClick = function (t, opts) {
                                        listEstimateArr.push({'idList':key.idList,'backendEstimate':data})
                   
                                        
-                }))
-                
-                .then(() =>
+                })
+                .then(() =>console.log("listEstimateArr: ", listEstimateArr))
 
-                result = Object.values(listEstimateArr.reduce((c, {idList,backendEstimate}) => {
-                c[idList] = c[idList] || {idList,backendEstimate: []};
-                c[idList].backendEstimate = c[idList].backendEstimate.concat(Array.isArray(backendEstimate) ? backendEstimate : [backendEstimate]); 
-                console.log("C is:",c)
-                console.log("cardEstimateArr: ", cardEstimateArr);
-                console.log("listEstimateArr: ", listEstimateArr);
-                return c;
-              }, {}))
-              )
+              //   result = Object.values(listEstimateArr.reduce((c, {idList,backendEstimate}) => {
+              //   c[idList] = c[idList] || {idList,backendEstimate: []};
+              //   c[idList].backendEstimate = c[idList].backendEstimate.concat(Array.isArray(backendEstimate) ? backendEstimate : [backendEstimate]); 
+              //   console.log("C is:",c)
+              //   console.log("cardEstimateArr: ", cardEstimateArr);
+              //   console.log("listEstimateArr: ", listEstimateArr);
+              //   return c;
+              // }, {}))
+              // )       
+                )
+                
+                // .then(() => console.log("listEstimateArr: ", listEstimateArr))
+          
                 
                 
                 // var tempArray2 = [];
