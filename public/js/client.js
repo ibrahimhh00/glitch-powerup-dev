@@ -17,7 +17,7 @@ var cardEstimateArr =  new Array;
 
 
   return t.popup({
-    title: 'Snooze Card',
+    title: 'Calculated Points',
     url: './results.html',
     args: { myArgs: 'You can access these with t.arg()' },
     items: function(t, options) {
