@@ -10,114 +10,17 @@ var ROCKET_ICON = 'https://cdn.glitch.com/aef55bcb-cec2-438b-98c0-959249969810%2
 
 var Promise = TrelloPowerUp.Promise;
 
-// var onBtnClick = function (t, opts) {
-
-//   return t.popup({
-//     title: 'Snooze Card',
-//     items: function(t, options) {
-   
-//          // We want to retrieve all of the cards we currently have and all of the fields
-//       // on those cards that we will want to use for searching through.
-//         return t.cards('id','idList', 'name').then(function (cards) {
-//           const searchText = "apility";  // The text the user has input.
-//           const matchedCards = cards.filter(function(card){
-//           // We need to shrink our list of possible matches to those cards that contain what the
-//           // user has input. We'll use a naive approach here and just see if the string entered
-//           // is in any of the fields we care about.
-//           const textToSearch = card.id + card.idList + card.name;
-//           var tempT = textToSearch.toLowerCase().includes(searchText.toLowerCase());
-//           console.log("tempT is:", tempT)
-//           return textToSearch.toLowerCase().includes(searchText.toLowerCase());
-//         })
-//         // Once we have all of the cards that match our search criteria, we need to put them into
-//         // the array of objects that the t.popup method expects.
-//           let items = matchedCards.map(function(card){
-//           const cardUrl = `https://trello.com/c/${card.id}`
-//           return {
-//             text: card.name,
-//             url: cardUrl,
-//             callback: function(t){
-//               // When the user selects one of the cards we've returned in the search, we want
-//               // to attach that card via it's URL.
-//               return t.attach({ url: cardUrl, name: card.name })
-//               .then(function(){
-//                 // Once we've attached the card's URL to the current card, we can close
-//                 // our search popup.
-//                 return t.closePopup();
-//               });
-//             }
-//           }
-//         })                  
-//         return items;          //don't forget to return items
-             
-//                 });
-//     },
-//     search: {
-//       placeholder: 'Card name, description, or ID',
-//       empty: 'Huh, nothing there 🤔',
-//       searching: 'Searching your cards...'
-//     }
-//   });
-// };
-  
 
 var onBtnClick = function (t, opts) {
   // console.log('Someone clicked the button');
-    
-  var cardEstimateArr =  new Array;
-  
-  // t.cards('id','idList', 'name')
+var cardEstimateArr =  new Array;
 
-//   t.get('5f53e15a6bb8a9122694687f', 'shared', 'backend_estimate','')
-//   .then(function (data) {
-    
-//     cardEstimateArr.push({'id':"test",'key':"t2",'value':"t3"})
-//     cardEstimateArr.push({'id':"test",'key':"t2",'value':"t3"})
-//     console.log("CardEss:", cardEstimateArr)
-//                   })
-
-    
-//   .then(() => console.log("CardEss2:", cardEstimateArr))
-// }
-    
-//   return t.cards('id','idList', 'name').then(function (cards) {
-
-//   // console.log(JSON.stringify(cards, null, 2))
-//   // console.log('backend_esitmate: ',t.get("5f53e15a6bb8a9122694687f", 'shared', 'backend_estimate'))
-
-//   //cardID array created with all IDs in on the board
-//   var tempArray = Object.values(cards)
-//   console.log("Cards values :", tempArray)
-
-//   var listEstimateArr =  []
-//   var backendEstimate = 0    
-//   tempArray.map((key) => 
-//                     // console.log('test')
-//                     // console.log(key["id"]), 
-//                     // console.log('backend_esitmate: ',t.get("5f53e15a6bb8a9122694687f", 'shared', 'backend_estimate','no value')))
-
-//   //retrieve value of backend_estimate for each card and then assign it to cardEstimateArr value                
-
-//   t.get(key.id, 'shared', 'backend_estimate','')
-//   .then(function (data) {
-//                          cardEstimateArr.push({'id':key.id,idList:key.idList,'backendEstimate':data});
-//                          // cardEstimateArr.push([key['id'],key['idList'],data]);
-//                          listEstimateArr.push({'idList':key.idList,'backendEstimate':data})
-//   }))
-//   console.log("cardEstimateArr: ", cardEstimateArr)
-//   console.log("listEstimateArr: ", listEstimateArr)
-//   })}
 
   return t.popup({
     title: 'Snooze Card',
     items: function(t, options) {
                 
-      
-      
-//                 return t.get("5f53e15a6bb8a9122694687f", 'shared', 'backend_estimate','no value')
-//                 .then(function (data) {
-//                   console.log(JSON.stringify(data, null, 2));
-//                 });
+  
       
                 // t.cards return a set of values, 
                 //values are in object of nested array, 
@@ -137,15 +40,7 @@ var onBtnClick = function (t, opts) {
                 var backendEstimate = 0
                 var result = []       
         
-//                 tempArray.map(function(key){ 
-//                               // cardEstimateArr.push({'id':"test",'key':"t2",'value':"t3"})
-//                               return t.get(key.id, 'shared', 'backend_estimate','')
-//                               .then(function (data) {
-//                               // backendEstimate = data
-//                                 cardEstimateArr.push({'id':"test",'key':"t2",'value':"t3"})
-//                 }
-               
-//                              )})
+
                 
 
 
@@ -156,7 +51,7 @@ var onBtnClick = function (t, opts) {
                                   // console.log(key["id"]), 
                                   // console.log('backend_esitmate: ',t.get("5f53e15a6bb8a9122694687f", 'shared', 'backend_estimate','no value')))
                                   
-                //retrieve value of backend_estimate for each card and then assign it to cardEstimateArr value                
+                //retrieve value of backend_estimate for each card and then assign it to cardEstimateArr values and listEstimateArr             
                 promises.push(
                 t.get(key.id, 'shared', 'backend_estimate','')
                 .then(function (data) {
@@ -174,47 +69,72 @@ var onBtnClick = function (t, opts) {
 //               Promise.all(promises).then(() => console.log("outside promise",listEstimateArr))
 //               .catch(err => console.log(err))
                 
-              Promise.all(promises).then(() => 
-                                         
-                result = Object.values(listEstimateArr.reduce((c, {idList,backendEstimate}) => {
-                console.log("c[idList]:",c[idList])
-                console.log("idList:",idList)
-                
-                c[idList] = c[idList] || {idList,backendEstimate: []};
-                console.log("c[idList].backendEstimate:",c[idList].backendEstimate)
-                // c[idList].backendEstimate = c[idList].backendEstimate.reduce((total,obj) => parseInt(obj) + total,0)
-                c[idList].backendEstimate = c[idList].backendEstimate.concat(parseInt(backendEstimate)?parseInt(backendEstimate):0); 
-                
-                
-                // c[idList] = c[idList].backendEstimate.reduce((total,obj) => parseInt(obj.backendEstimate) + total,0)
-                // console.log("c.backendEstimate: ",c[idList].backendEstimate.reduce((a,b) => a+b))
-                
-                // cArr = Object.values(c)
-                // console.log("cArr:",cArr)
-                // console.log("cArr.backendEstimate",cArr.reduce((a,b) => a+b,0))
-                // c[idList].backendEstimate = c[idList].backendEstimate.reduce((a,b) => a+b,0);
-                // console.log("C is:",c)
-                // console.log("cardEstimateArr: ", cardEstimateArr);
-                console.log("listEstimateArr: ", listEstimateArr);
-                // console.log("testt")
-                return c;
-              }
-                                                              
-                                                              
-             , {}))
+             
+                  
+                  
+//Pass listEstimateArr to promise caller, merge idList that are equal and sum the their backendEstimate values                     
+Promise.all(promises).then(() => {
+var holder = {};
+listEstimateArr.forEach(function(d) {
+  if (holder.hasOwnProperty(d.idList)) {
+    holder[d.idList] = holder[d.idList] + (parseInt(d.backendEstimate)? parseInt(d.backendEstimate): 0);
+  } else {
+    holder[d.idList] = (parseInt(d.backendEstimate)? parseInt(d.backendEstimate): 0);
+  }
+});
 
-              ).then((c) => {  
+var obj2 = [];
+for (var prop in holder) {
+  obj2.push({ idList: prop, value: holder[prop] });
+}
+
+console.log(obj2);             
+ }
+                                        
+)
+                  
+                  
+//               Promise.all(promises).then(() => 
+                                         
+//                 result = Object.values(listEstimateArr.reduce((c, {idList,backendEstimate}) => {
+//                 console.log("c[idList]:",c[idList])
+//                 console.log("idList:",idList)
+                
+//                 c[idList] = c[idList] || {idList,backendEstimate: []};
+//                 console.log("c[idList].backendEstimate:",c[idList].backendEstimate)
+//                 // c[idList].backendEstimate = c[idList].backendEstimate.reduce((total,obj) => parseInt(obj) + total,0)
+//                 c[idList].backendEstimate = c[idList].backendEstimate.concat(parseInt(backendEstimate)?parseInt(backendEstimate):0); 
+                
+                
+//                 // c[idList] = c[idList].backendEstimate.reduce((total,obj) => parseInt(obj.backendEstimate) + total,0)
+//                 // console.log("c.backendEstimate: ",c[idList].backendEstimate.reduce((a,b) => a+b))
+                
+//                 // cArr = Object.values(c)
+//                 // console.log("cArr:",cArr)
+//                 // console.log("cArr.backendEstimate",cArr.reduce((a,b) => a+b,0))
+//                 // c[idList].backendEstimate = c[idList].backendEstimate.reduce((a,b) => a+b,0);
+//                 // console.log("C is:",c)
+//                 // console.log("cardEstimateArr: ", cardEstimateArr);
+//                 console.log("listEstimateArr: ", listEstimateArr);
+//                 // console.log("testt")
+//                 return c;
+//               }
+                                                              
+                                                              
+//              , {}))
+
+//               ).then((c) => {  
                      
                     
-                     console.log("C is:",c)
-                     console.log("c.reduce",c.reduce((total,obj) => parseInt(obj.backendEstimate) + total,0))
+//                      console.log("C is:",c)
+//                      console.log("c.reduce",c.reduce((total,obj) => parseInt(obj.backendEstimate) + total,0))
 
-              })
+//               })
                   
                                         
                   
                   
-              .catch(err => console.log(err))
+//               .catch(err => console.log(err))
                             
 
                   
@@ -378,3 +298,124 @@ window.TrelloPowerUp.initialize({
 
 });
 
+
+
+
+// var onBtnClick = function (t, opts) {
+
+//   return t.popup({
+//     title: 'Snooze Card',
+//     items: function(t, options) {
+   
+//          // We want to retrieve all of the cards we currently have and all of the fields
+//       // on those cards that we will want to use for searching through.
+//         return t.cards('id','idList', 'name').then(function (cards) {
+//           const searchText = "apility";  // The text the user has input.
+//           const matchedCards = cards.filter(function(card){
+//           // We need to shrink our list of possible matches to those cards that contain what the
+//           // user has input. We'll use a naive approach here and just see if the string entered
+//           // is in any of the fields we care about.
+//           const textToSearch = card.id + card.idList + card.name;
+//           var tempT = textToSearch.toLowerCase().includes(searchText.toLowerCase());
+//           console.log("tempT is:", tempT)
+//           return textToSearch.toLowerCase().includes(searchText.toLowerCase());
+//         })
+//         // Once we have all of the cards that match our search criteria, we need to put them into
+//         // the array of objects that the t.popup method expects.
+//           let items = matchedCards.map(function(card){
+//           const cardUrl = `https://trello.com/c/${card.id}`
+//           return {
+//             text: card.name,
+//             url: cardUrl,
+//             callback: function(t){
+//               // When the user selects one of the cards we've returned in the search, we want
+//               // to attach that card via it's URL.
+//               return t.attach({ url: cardUrl, name: card.name })
+//               .then(function(){
+//                 // Once we've attached the card's URL to the current card, we can close
+//                 // our search popup.
+//                 return t.closePopup();
+//               });
+//             }
+//           }
+//         })                  
+//         return items;          //don't forget to return items
+             
+//                 });
+//     },
+//     search: {
+//       placeholder: 'Card name, description, or ID',
+//       empty: 'Huh, nothing there 🤔',
+//       searching: 'Searching your cards...'
+//     }
+//   });
+// };
+  
+
+
+
+//inside button var function  
+  // t.cards('id','idList', 'name')
+
+//   t.get('5f53e15a6bb8a9122694687f', 'shared', 'backend_estimate','')
+//   .then(function (data) {
+    
+//     cardEstimateArr.push({'id':"test",'key':"t2",'value':"t3"})
+//     cardEstimateArr.push({'id':"test",'key':"t2",'value':"t3"})
+//     console.log("CardEss:", cardEstimateArr)
+//                   })
+
+    
+//   .then(() => console.log("CardEss2:", cardEstimateArr))
+// }
+    
+//   return t.cards('id','idList', 'name').then(function (cards) {
+
+//   // console.log(JSON.stringify(cards, null, 2))
+//   // console.log('backend_esitmate: ',t.get("5f53e15a6bb8a9122694687f", 'shared', 'backend_estimate'))
+
+//   //cardID array created with all IDs in on the board
+//   var tempArray = Object.values(cards)
+//   console.log("Cards values :", tempArray)
+
+//   var listEstimateArr =  []
+//   var backendEstimate = 0    
+//   tempArray.map((key) => 
+//                     // console.log('test')
+//                     // console.log(key["id"]), 
+//                     // console.log('backend_esitmate: ',t.get("5f53e15a6bb8a9122694687f", 'shared', 'backend_estimate','no value')))
+
+//   //retrieve value of backend_estimate for each card and then assign it to cardEstimateArr value                
+
+//   t.get(key.id, 'shared', 'backend_estimate','')
+//   .then(function (data) {
+//                          cardEstimateArr.push({'id':key.id,idList:key.idList,'backendEstimate':data});
+//                          // cardEstimateArr.push([key['id'],key['idList'],data]);
+//                          listEstimateArr.push({'idList':key.idList,'backendEstimate':data})
+//   }))
+//   console.log("cardEstimateArr: ", cardEstimateArr)
+//   console.log("listEstimateArr: ", listEstimateArr)
+//   })}
+
+
+
+
+      
+//                 return t.get("5f53e15a6bb8a9122694687f", 'shared', 'backend_estimate','no value')
+//                 .then(function (data) {
+//                   console.log(JSON.stringify(data, null, 2));
+//                 });
+
+
+
+
+
+//                 tempArray.map(function(key){ 
+//                               // cardEstimateArr.push({'id':"test",'key':"t2",'value':"t3"})
+//                               return t.get(key.id, 'shared', 'backend_estimate','')
+//                               .then(function (data) {
+//                               // backendEstimate = data
+//                                 cardEstimateArr.push({'id':"test",'key':"t2",'value':"t3"})
+//                 }
+               
+//                              )})
