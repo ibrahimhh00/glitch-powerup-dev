@@ -18,11 +18,11 @@ var Promise = TrelloPowerUp.Promise;
 var onBtnClick = function(t, opts) {
   // console.log('Someone clicked the button');
   var cardEstimateArr = new Array();
-
+  const mm = "how are you"
   return t.popup({
     title: "Calculated Points",
     url: './results.html',
-    args: { message: 'You can access these with t.arg()' },
+    args: { message: mm },
     items: function(t, options) {
       // t.cards return a set of values,
       //values are in object of nested array,
