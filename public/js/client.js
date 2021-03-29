@@ -156,6 +156,13 @@ var onBtnClick = function (t, opts) {
                                        
                 }))
                   
+                let result = Object.values(listEstimateArr.reduce((c, {idList,backendEstimate}) => {
+  c[idList] = c[idList] || {idList,backendEstimate: []};
+  c[idList].backendEstimate = c[idList].backendEstimate.concat(Array.isArray(backendEstimate) ? backendEstimate : [backendEstimate]); 
+  console.log("C is:",c)
+  return c;
+}, {}));
+                  
 
                 console.log("cardEstimateArr: ", cardEstimateArr);
                 console.log("listEstimateArr: ", listEstimateArr);
