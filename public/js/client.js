@@ -90,15 +90,26 @@ var onBtnClick = function (t, opts) {
                 var cardEstimateArr =  []
                 var listEstimateArr =  []
                 var backendEstimate = 0
-                tempArray.map(function(key){ 
-                              // cardEstimateArr.push({'id':"test",'key':"t2",'value':"t3"})
-                              return t.get(key.id, 'shared', 'backend_estimate','')
-                              .then(function (data) {
-                              // backendEstimate = data
-                                cardEstimateArr.push({'id':"test",'key':"t2",'value':"t3"})
-                }
-               
-                             )})
+                
+        
+                let items = tempArray.map(function(key){ 
+                            
+                  // cardEstimateArr.push({'id':"test",'key':"t2",'value':"t3"})
+                          
+                  return {
+
+            callback: function(t){
+                    
+            t.get(key.id, 'shared', 'backend_estimate','')
+          .then(function (data) {
+          // backendEstimate = data
+            cardEstimateArr.push({'id':"test",'key':"t2",'value':"t3"})
+          }
+
+           )
+                  }
+                  
+}})
                 
 
                              
