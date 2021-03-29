@@ -166,19 +166,30 @@ var onBtnClick = function (t, opts) {
                                        
                 }))
                 // .then(() =>console.log("listEstimateArr: ", listEstimateArr))
-              
-              //   result = Object.values(listEstimateArr.reduce((c, {idList,backendEstimate}) => {
-              //   c[idList] = c[idList] || {idList,backendEstimate: []};
-              //   c[idList].backendEstimate = c[idList].backendEstimate.concat(Array.isArray(backendEstimate) ? backendEstimate : [backendEstimate]); 
-              //   console.log("C is:",c)
-              //   console.log("cardEstimateArr: ", cardEstimateArr);
-              //   console.log("listEstimateArr: ", listEstimateArr);
-              //   return c;
-              // }, {}))
-              // )       
+                  
                 )
-              Promise.all(promises).then(() => console.log(listEstimateArr))
+             
+                  
+//               Promise.all(promises).then(() => console.log("outside promise",listEstimateArr))
+//               .catch(err => console.log(err))
+                  
+              Promise.all(promises).then(() => 
+                                         
+                result = Object.values(listEstimateArr.reduce((c, {idList,backendEstimate}) => {
+                c[idList] = c[idList] || {idList,backendEstimate: []};
+                c[idList].backendEstimate = c[idList].backendEstimate.concat(Array.isArray(backendEstimate) ? backendEstimate : [backendEstimate]); 
+                console.log("C is:",c)
+                console.log("cardEstimateArr: ", cardEstimateArr);
+                console.log("listEstimateArr: ", listEstimateArr);
+                return c;
+              }, {}))
+              )                
+                                        
+                  
+                  
               .catch(err => console.log(err))
+                            
+
                   
                                          
                 
