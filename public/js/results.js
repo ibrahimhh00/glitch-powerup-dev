@@ -1,5 +1,8 @@
 var t = TrelloPowerUp.iframe();
 
+var onBtnClick = function (t, opts) {
+  // console.log('Someone clicked the button');
+var cardEstimateArr =  new Array;
 
 
 
@@ -12,6 +15,9 @@ t.render(function(){
   
 console.log("results.js tester")
 
+  
+
+})
 
 //   return t.getAll()
 //     // return t.get('card', 'shared', 'backend_estimate')
@@ -29,7 +35,7 @@ console.log("results.js tester")
 //     });
 
 
-});
+// });
 
 
 
