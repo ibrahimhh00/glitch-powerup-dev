@@ -21,8 +21,8 @@ var onBtnClick = function(t, opts) {
 
   return t.popup({
     title: "Calculated Points",
-    // url: './results.html',
-    // args: { myArgs: 'You can access these with t.arg()' },
+    url: './results.html',
+    args: { message: 'You can access these with t.arg()' },
     items: function(t, options) {
       // t.cards return a set of values,
       //values are in object of nested array,

@@ -1,10 +1,10 @@
 var t = TrelloPowerUp.iframe();
 
-var onBtnClick = function (t, opts) {
-  // console.log('Someone clicked the button');
-var cardEstimateArr =  new Array;
+const message = t.arg('message');
 
-
+if (message) {
+  document.getElementById("message").innerText = message;
+};
 
 // t.render is called when there is an update, here it i used 
 // If you open the popup via the card button, select a size, 
@@ -15,9 +15,9 @@ t.render(function(){
   
 console.log("results.js tester")
 
-  
 
-})
+
+});
 
 //   return t.getAll()
 //     // return t.get('card', 'shared', 'backend_estimate')
