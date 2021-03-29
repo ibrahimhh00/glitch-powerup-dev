@@ -6,9 +6,16 @@
   <body>
     <h1>Hey there! 👋</h1>
 
-    <p>This is the HTML connector for the Power-Up. It will be loaded into a hidden iframe when your Power-Up is enabled.</p>
-
+    <p>
+      my arg is ${myArgs}
+    </p>
     
+    <script>
+      
+      var myArgs = t.arg('myArgs'); 
+      
+    
+    </script>
     <script src="https://p.trellocdn.com/power-up.min.js"></script>
     <script src="./js/client.js"></script>
     <script style="text/javascript">
