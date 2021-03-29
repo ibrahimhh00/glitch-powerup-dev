@@ -195,7 +195,7 @@ var onBtnClick = function (t, opts) {
                 // c[idList].backendEstimate = c[idList].backendEstimate.reduce((a,b) => a+b,0);
                 // console.log("C is:",c)
                 // console.log("cardEstimateArr: ", cardEstimateArr);
-                // console.log("listEstimateArr: ", listEstimateArr);
+                console.log("listEstimateArr: ", listEstimateArr);
                 // console.log("testt")
                 return c;
               }
