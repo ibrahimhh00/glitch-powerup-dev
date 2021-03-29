@@ -89,14 +89,14 @@ var onBtnClick = function (t, opts) {
                 console.log("Cards values :", tempArray)
                 var cardEstimateArr =  []
                 var listEstimateArr =  []
-                
+                var backendEstimate = 0
                 tempArray.map((key) => 
                               // cardEstimateArr.push({'id':"test",'key':"t2",'value':"t3"})
                               t.get(key.id, 'shared', 'backend_estimate','')
                               .then(function (data) {
-                  cardEstimateArr.push({'id':"test",'key':"t2",'value':"t3"})
+                              backendEstimate = data
                 }
-                             
+               
                              ))
                 
 
