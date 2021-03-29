@@ -186,15 +186,23 @@ var onBtnClick = function (t, opts) {
                 // console.log("cArr:",cArr)
                 // console.log("cArr.backendEstimate",cArr.reduce((a,b) => a+b,0))
                 // c[idList].backendEstimate = c[idList].backendEstimate.reduce((a,b) => b+=b,0);
-                console.log("C is:",c)
-                console.log("cardEstimateArr: ", cardEstimateArr);
-                console.log("listEstimateArr: ", listEstimateArr);
+                // console.log("C is:",c)
+                // console.log("cardEstimateArr: ", cardEstimateArr);
+                // console.log("listEstimateArr: ", listEstimateArr);
+                // console.log("testt")
                 return c;
               }
                                                               
                                                               
-                                                              , {}))
-              )                
+             , {}))
+
+              ).then((c) => {  
+                     
+                     console.log("C is:",c)
+                     console.log("c.reduce",c.backendEstimate.reduce((a,b) => a+b))
+
+              })
+                  
                                         
                   
                   
