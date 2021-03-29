@@ -90,13 +90,19 @@ var onBtnClick = function (t, opts) {
                 var cardEstimateArr =  []
                 var listEstimateArr =  []
                 
+                tempArray.map((key) => 
+                              // cardEstimateArr.push({'id':"test",'key':"t2",'value':"t3"})
+                              t.get(key.id, 'shared', 'backend_estimate','')
+                              .then(function (data) {
+                  cardEstimateArr.push({'id':"test",'key':"t2",'value':"t3"})
+                }
+                             
+                             ))
                 
- t.get(key.id, 'shared', 'backend_estimate','')
-//                 .then(function (data) {
-                
-                
-                
+
+                             
 //                 tempArray.map((key) => 
+//                                   // console.log('test')
 //                                   // console.log(key["id"]), 
 //                                   // console.log('backend_esitmate: ',t.get("5f53e15a6bb8a9122694687f", 'shared', 'backend_estimate','no value')))
                                   
@@ -109,8 +115,7 @@ var onBtnClick = function (t, opts) {
 //                                        listEstimateArr.push({'idList':key.idList,'backendEstimate':data})
                   
                                        
-//                 })
-//                              )
+//                 }))
                   
 
                 console.log("cardEstimateArr: ", cardEstimateArr);
