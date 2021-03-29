@@ -149,7 +149,7 @@ var onBtnClick = function (t, opts) {
                 
 
 
-                             
+                var promise1
                 tempArray.map((key) => 
                                   // console.log('test')
                                   // console.log(key["id"]), 
@@ -157,7 +157,7 @@ var onBtnClick = function (t, opts) {
                                   
                 //retrieve value of backend_estimate for each card and then assign it to cardEstimateArr value                
                 
-                t.get(key.id, 'shared', 'backend_estimate','')
+                promise1 = t.get(key.id, 'shared', 'backend_estimate','')
                 .then(function (data) {
                                        cardEstimateArr.push({'id':key.id,idList:key.idList,'backendEstimate':data});
                                        // cardEstimateArr.push([key['id'],key['idList'],data]);
@@ -165,8 +165,8 @@ var onBtnClick = function (t, opts) {
                   
                                        
                 })
-                .then(() =>console.log("listEstimateArr: ", listEstimateArr))
-
+                // .then(() =>console.log("listEstimateArr: ", listEstimateArr))
+              
               //   result = Object.values(listEstimateArr.reduce((c, {idList,backendEstimate}) => {
               //   c[idList] = c[idList] || {idList,backendEstimate: []};
               //   c[idList].backendEstimate = c[idList].backendEstimate.concat(Array.isArray(backendEstimate) ? backendEstimate : [backendEstimate]); 
@@ -177,6 +177,9 @@ var onBtnClick = function (t, opts) {
               // }, {}))
               // )       
                 )
+              Promise.all(promise1).then((data) => console.log(data)
+                  
+                                         
                 
                 // .then(() => console.log("listEstimateArr: ", listEstimateArr))
           
