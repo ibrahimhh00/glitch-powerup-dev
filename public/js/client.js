@@ -63,14 +63,15 @@ var Promise = TrelloPowerUp.Promise;
 
 var onBtnClick = function (t, opts) {
   // console.log('Someone clicked the button');
-    var cardEstimateArr =  []
-
+    var cardEstimateArr =  new Array;
+  
   t.get('5f53e15a6bb8a9122694687f', 'shared', 'backend_estimate','')
   .then(function (data) {
                     cardEstimateArr.push({'id':"test",'key':"t2",'value':"t3"})
     cardEstimateArr.push({'id':"test",'key':"t2",'value':"t3"})
                   })
   console.log("CardEss:", cardEstimateArr)
+}
     
 //   return t.cards('id','idList', 'name').then(function (cards) {
 
