@@ -65,11 +65,13 @@ var onBtnClick = function (t, opts) {
   // console.log('Someone clicked the button');
     var cardEstimateArr =  []
 
-  // t.get('5f53e15a6bb8a9122694687f', 'shared', 'backend_estimate','')
-  // .then(function (data) {
-  //                   cardEstimateArr.push({'id':"test",'key':"t2",'value':"t3"})
-  //   cardEstimateArr.push({'id':"test",'key':"t2",'value':"t3"})
-  //                 })
+  t.get('5f53e15a6bb8a9122694687f', 'shared', 'backend_estimate','')
+  .then(function (data) {
+                    cardEstimateArr.push({'id':"test",'key':"t2",'value':"t3"})
+    cardEstimateArr.push({'id':"test",'key':"t2",'value':"t3"})
+                  })
+  console.log("CardEss:", cardEstimateArr)
+    
 //   return t.cards('id','idList', 'name').then(function (cards) {
 
 //   // console.log(JSON.stringify(cards, null, 2))
@@ -98,105 +100,108 @@ var onBtnClick = function (t, opts) {
 //   console.log("listEstimateArr: ", listEstimateArr)
 //   })}
 
-  return t.popup({
-    title: 'Snooze Card',
-    items: function(t, options) {
+//   return t.popup({
+//     title: 'Snooze Card',
+//     items: function(t, options) {
                 
       
       
-//                 return t.get("5f53e15a6bb8a9122694687f", 'shared', 'backend_estimate','no value')
-//                 .then(function (data) {
-//                   console.log(JSON.stringify(data, null, 2));
-//                 });
+// //                 return t.get("5f53e15a6bb8a9122694687f", 'shared', 'backend_estimate','no value')
+// //                 .then(function (data) {
+// //                   console.log(JSON.stringify(data, null, 2));
+// //                 });
       
-                // t.cards return a set of values, 
-                //values are in object of nested array, 
-                //values of outer array assign to tempArray 
-                //then values of inner array assigned to an array of card IDs as keys
+//                 // t.cards return a set of values, 
+//                 //values are in object of nested array, 
+//                 //values of outer array assign to tempArray 
+//                 //then values of inner array assigned to an array of card IDs as keys
 
-                return t.cards('id','idList', 'name').then(function (cards) {
+//                 return t.cards('id','idList', 'name').then(function (cards) {
      
-                // console.log(JSON.stringify(cards, null, 2))
-                // console.log('backend_esitmate: ',t.get("5f53e15a6bb8a9122694687f", 'shared', 'backend_estimate'))
+//                 // console.log(JSON.stringify(cards, null, 2))
+//                 // console.log('backend_esitmate: ',t.get("5f53e15a6bb8a9122694687f", 'shared', 'backend_estimate'))
                   
-                //cardID array created with all IDs in on the board
-                var tempArray = Object.values(cards)
-                console.log("Cards values :", tempArray)
+//                 //cardID array created with all IDs in on the board
+//                 var tempArray = Object.values(cards)
+//                 console.log("Cards values :", tempArray)
                 
-                var listEstimateArr =  []
-                var backendEstimate = 0
+//                 var listEstimateArr =  []
+//                 var backendEstimate = 0
                 
         
-//                 tempArray.map(function(key){ 
-//                               // cardEstimateArr.push({'id':"test",'key':"t2",'value':"t3"})
-//                               return t.get(key.id, 'shared', 'backend_estimate','')
-//                               .then(function (data) {
-//                               // backendEstimate = data
-//                                 cardEstimateArr.push({'id':"test",'key':"t2",'value':"t3"})
-//                 }
+// //                 tempArray.map(function(key){ 
+// //                               // cardEstimateArr.push({'id':"test",'key':"t2",'value':"t3"})
+// //                               return t.get(key.id, 'shared', 'backend_estimate','')
+// //                               .then(function (data) {
+// //                               // backendEstimate = data
+// //                                 cardEstimateArr.push({'id':"test",'key':"t2",'value':"t3"})
+// //                 }
                
-//                              )})
+// //                              )})
                 
 
 
                              
-                tempArray.map((key) => 
-                                  // console.log('test')
-                                  // console.log(key["id"]), 
-                                  // console.log('backend_esitmate: ',t.get("5f53e15a6bb8a9122694687f", 'shared', 'backend_estimate','no value')))
+//                 tempArray.map((key) => 
+//                                   // console.log('test')
+//                                   // console.log(key["id"]), 
+//                                   // console.log('backend_esitmate: ',t.get("5f53e15a6bb8a9122694687f", 'shared', 'backend_estimate','no value')))
                                   
-                //retrieve value of backend_estimate for each card and then assign it to cardEstimateArr value                
+//                 //retrieve value of backend_estimate for each card and then assign it to cardEstimateArr value                
                 
-                t.get(key.id, 'shared', 'backend_estimate','')
-                .then(function (data) {
-                                       cardEstimateArr.push({'id':key.id,idList:key.idList,'backendEstimate':data});
-                                       // cardEstimateArr.push([key['id'],key['idList'],data]);
-                                       listEstimateArr.push({'idList':key.idList,'backendEstimate':data})
+//                 t.get(key.id, 'shared', 'backend_estimate','')
+//                 .then(function (data) {
+//                                        cardEstimateArr.push({'id':key.id,idList:key.idList,'backendEstimate':data});
+//                                        // cardEstimateArr.push([key['id'],key['idList'],data]);
+//                                        listEstimateArr.push({'idList':key.idList,'backendEstimate':data})
                   
                                        
-                }))
+//                 }))
                   
-                let result = Object.values(listEstimateArr.reduce((c, {idList,backendEstimate}) => {
-  c[idList] = c[idList] || {idList,backendEstimate: []};
-  c[idList].backendEstimate = c[idList].backendEstimate.concat(Array.isArray(backendEstimate) ? backendEstimate : [backendEstimate]); 
-  console.log("C is:",c)
-  return c;
-}, {}));
-                  
+// //                 let result = Object.values(listEstimateArr.reduce((c, {idList,backendEstimate}) => {
+// //   c[idList] = c[idList] || {idList,backendEstimate: []};
+// //   c[idList].backendEstimate = c[idList].backendEstimate.concat(Array.isArray(backendEstimate) ? backendEstimate : [backendEstimate]); 
+// //   console.log("C is:",c)
+// //   return c;
+// // }, {}));
+//                 // var tempArray2 = [];
+//                 // tempArray.map((key) => tempArray2.push({'idList':key.idList}));
+//                 // console.log("tempArray2:",tempArray2)
+                              
 
-                console.log("cardEstimateArr: ", cardEstimateArr);
-                console.log("listEstimateArr: ", listEstimateArr);
+//                 console.log("cardEstimateArr: ", cardEstimateArr);
+//                 console.log("listEstimateArr: ", listEstimateArr);
 
-                                  var temp = listEstimateArr.filter(key => key.length > 0)
-                  console.log("temp:",temp)
-                // console.log("map to array: ",Object.fromEntries(cardEstimateArr))
-                // var cardEstimateArrTemp = Array.from(cardEstimateArr)
-                // console.log("cardEstimateArrTemp: ",cardEstimateArrTemp)
+//                                   var temp = listEstimateArr.filter(key => key.length > 0)
+//                   console.log("temp:",temp)
+//                 // console.log("map to array: ",Object.fromEntries(cardEstimateArr))
+//                 // var cardEstimateArrTemp = Array.from(cardEstimateArr)
+//                 // console.log("cardEstimateArrTemp: ",cardEstimateArrTemp)
                 
-//                 var listEstimateArr =  []
+// //                 var listEstimateArr =  []
                 
-//                 cardEstimateArr.map((key) => 
-//                                    listEstimateArr.push({'id':key.id,'backendEstimate':key.backendEstimate})
-//                                    )
+// //                 cardEstimateArr.map((key) => 
+// //                                    listEstimateArr.push({'id':key.id,'backendEstimate':key.backendEstimate})
+// //                                    )
                                         
-                                        // listEstimateArr.set(key,value))
+//                                         // listEstimateArr.set(key,value))
                 
-                // cardEstimateArr.map((key, value) => value.map((value1,value2) => listEstimateArr.set(value1,value2)))
+//                 // cardEstimateArr.map((key, value) => value.map((value1,value2) => listEstimateArr.set(value1,value2)))
 
                                       
-                })
+//                 })
                 
                                   
                                   
-                                  // cardEstimateArr.set(key['id'],t.get(key['id'], 'shared', "backend_estimate")))
+//                                   // cardEstimateArr.set(key['id'],t.get(key['id'], 'shared', "backend_estimate")))
                 
-                // console.log("cardEstimateArr: ", cardEstimateArr)  
-                // console.log("card type is:", typeof cards);
-                // });
+//                 // console.log("cardEstimateArr: ", cardEstimateArr)  
+//                 // console.log("card type is:", typeof cards);
+//                 // });
       
-    }
-  });
-};
+//     }
+//   });
+// };
 
 
 
