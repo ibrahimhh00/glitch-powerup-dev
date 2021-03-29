@@ -52,7 +52,7 @@ t.render(function(){
     
     
     window.backend_estimateSize.value = Object.values(estimates["card"]["shared"]["backend_estimate"]);
-    window.frontend_estimateSize. value = Object.values(estimates["card"]["shared"]["frontend_estimate"]);
+    window.frontend_estimateSize.value = Object.values(estimates["card"]["shared"]["frontend_estimate"]);
   })
   
   .then(function(){

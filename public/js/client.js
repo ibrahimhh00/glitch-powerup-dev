@@ -18,6 +18,8 @@ var cardEstimateArr =  new Array;
 
   return t.popup({
     title: 'Snooze Card',
+    url: './results.html',
+    args: { myArgs: 'You can access these with t.arg()' },
     items: function(t, options) {
                 
   
@@ -64,9 +66,7 @@ var cardEstimateArr =  new Array;
                 // .then(() =>console.log("listEstimateArr: ", listEstimateArr))
                   
                 )
-
-                  
-                  
+               
 //Pass listEstimateArr to promise caller, merge idList that are equal and sum the their backendEstimate values                     
 Promise.all(promises).then(() => {
 var holder = {};
