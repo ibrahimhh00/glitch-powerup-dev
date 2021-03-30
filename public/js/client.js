@@ -14,14 +14,16 @@ var ROCKET_ICON =
   "https://cdn.glitch.com/aef55bcb-cec2-438b-98c0-959249969810%2Fc69415fd-f70e-4e03-b43b-98b8960cd616_white-rocket-ship.png?v=1616729876518";
 
 var Promise = TrelloPowerUp.Promise;
+var obj2 = [];
+
 
 var onBtnClick = function(t, opts) {
   // console.log('Someone clicked the button');
   var cardEstimateArr = new Array();
   const mm = "how are you"
   return t.popup({
-    title: "Calculated Points",
-    url: './results.html',
+    // title: "Calculated Points",
+    // url: './results.html',
     args: { message: mm },
     items: function(t, options) {
       // t.cards return a set of values,
@@ -84,15 +86,16 @@ var onBtnClick = function(t, opts) {
             }
           });
 
-          var obj2 = [];
+          
           for (var prop in holder) {
             
-            .get()
+            
             obj2.push({ idList: prop, value: holder[prop] });
           }
 
           console.log(obj2);
         });
+        console.log(obj2);
       });
     }
   });
