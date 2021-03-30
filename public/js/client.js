@@ -94,12 +94,19 @@ var onBtnClick = function(t, opts) {
           }
           console.log(obj2);
           
-          return {obj2:"obj2"}
+          return t.pop({
+           title: 'Change Time',
+             url: "./results.html",
+            args: { obj2: "You can access these with t.arg()" },
+            height: 278 // initial height, can be changed later  
+            
+          })
           
         });
         // console.log(obj2);
       });
     }
+  
   });
 };
 
