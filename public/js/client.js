@@ -86,6 +86,8 @@ var onBtnClick = function(t, opts) {
 
           var obj2 = [];
           for (var prop in holder) {
+            
+            .get()
             obj2.push({ idList: prop, value: holder[prop] });
           }
 
