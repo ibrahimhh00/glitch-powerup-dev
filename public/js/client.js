@@ -94,7 +94,7 @@ var onBtnClick = function(t, opts) {
           }
           console.log(obj2);
           
-          return [{obj2: obj2}]
+          return 
           
         });
         // console.log(obj2);
