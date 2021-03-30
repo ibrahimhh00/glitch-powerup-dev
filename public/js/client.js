@@ -93,14 +93,14 @@ var onBtnClick = function(t, opts) {
             obj2.push({ idList: prop, value: holder[prop] });
           }
           console.log(obj2);
-          
-          return t.pop({
-           title: 'Change Time',
-             url: "./results.html",
-            args: { obj2: "You can access these with t.arg()" },
-            height: 278 // initial height, can be changed later  
+          return obj2;
+//           return t.popup({
+//            title: 'Change Time',
+//              url: "./results.html",
+//             args: { obj2: "You can access these with t.arg()" },
+//             height: 278 // initial height, can be changed later  
             
-          })
+//           })
           
         });
         // console.log(obj2);
