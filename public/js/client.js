@@ -15,8 +15,92 @@ var ROCKET_ICON =
 
 var Promise = TrelloPowerUp.Promise;
 
+var onBtnClick = function(t, opts) {
+  // console.log('Someone clicked the button');
+  var cardEstimateArr = new Array();
+  var obj2 = [];
+  var obj3 = [3, 3, 3];
 
+  // t.cards return a set of values,
+  //values are in object of nested array,
+  //values of outer array assign to tempArray
+  //then values of inner array assigned to an array of card IDs as keys
 
+  return t.cards("id", "idList", "name").then(function(cards) {
+    // console.log(JSON.stringify(cards, null, 2))
+    // console.log('backend_esitmate: ',t.get("5f53e15a6bb8a9122694687f", 'shared', 'backend_estimate'))
+
+    //cardID array created with all IDs in on the board
+    var tempArray = Object.values(cards);
+    console.log("Cards values :", tempArray);
+
+    var listEstimateArr = [];
+    var backendEstimate = 0;
+    var result = [];
+
+    var promises = [];
+    var cArr = [];
+    tempArray.map(
+      key =>
+        // console.log('test')
+        // console.log(key["id"]),
+        // console.log('backend_esitmate: ',t.get("5f53e15a6bb8a9122694687f", 'shared', 'backend_estimate','no value')))
+
+        //retrieve value of backend_estimate for each card and then assign it to cardEstimateArr values and listEstimateArr
+        promises.push(
+          t.get(key.id, "shared", "backend_estimate", "").then(function(data) {
+            cardEstimateArr.push({
+              id: key.id,
+              idList: key.idList,
+              backendEstimate: data
+            });
+            // cardEstimateArr.push([key['id'],key['idList'],data]);
+            listEstimateArr.push({
+              idList: key.idList,
+              backendEstimate: data
+            });
+          })
+        )
+      // .then(() =>console.log("listEstimateArr: ", listEstimateArr))
+    );
+
+    //Pass listEstimateArr to promise caller, merge idList that are equal and sum the their backendEstimate values
+    Promise.all(promises).then(() => {
+      var holder = {};
+      listEstimateArr.forEach(function(d) {
+        if (holder.hasOwnProperty(d.idList)) {
+          holder[d.idList] =
+            holder[d.idList] +
+            (parseInt(d.backendEstimate) ? parseInt(d.backendEstimate) : 0);
+        } else {
+          holder[d.idList] = parseInt(d.backendEstimate)
+            ? parseInt(d.backendEstimate)
+            : 0;
+        }
+      });
+
+      for (var prop in holder) {
+        obj2.push({ idList: prop, value: holder[prop] });
+      }
+      console.log(obj2);
+      return t.popup({
+        title: "Calculated Points",
+        url: "./results.html",
+        args: { message: "obj" }
+      });
+
+      return obj2;
+      //           return t.popup({
+      //            title: 'Change Time',
+      //              url: "./results.html",
+      //             args: { obj2: "You can access these with t.arg()" },
+      //             height: 278 // initial height, can be changed later
+
+      //           })
+    });
+    // console.log(obj2);
+  });
+};
 
 // var onBtnClick = function(t, opts) {
 //   // console.log('Someone clicked the button');
@@ -89,28 +173,26 @@ var Promise = TrelloPowerUp.Promise;
 //             }
 //           });
 
-          
 //           for (var prop in holder) {
-            
-            
+
 //             obj2.push({ idList: prop, value: holder[prop] });
 //           }
 //           console.log(obj2);
-          
+
 //           return obj2;
 // //           return t.popup({
 // //            title: 'Change Time',
 // //              url: "./results.html",
 // //             args: { obj2: "You can access these with t.arg()" },
-// //             height: 278 // initial height, can be changed later  
-            
+// //             height: 278 // initial height, can be changed later
+
 // //           })
-          
+
 //         });
 //         // console.log(obj2);
 //       });
 //     }
-  
+
 //   });
 // };
 
