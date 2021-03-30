@@ -1,7 +1,7 @@
 var t = TrelloPowerUp.iframe();
 
-const message = t.arg('message');
-
+var message = t.arg('obj2');
+console.log("Message:",message)
 if (message) {
   document.getElementById("message").innerText = message;
 };

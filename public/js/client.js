@@ -22,9 +22,9 @@ var onBtnClick = function(t, opts) {
   var cardEstimateArr = new Array();
   const mm = "how are you"
   return t.popup({
-    // title: "Calculated Points",
-    // url: './results.html',
-    args: { message: mm },
+    title: "Calculated Points",
+    url: './results.html',
+    args: { message: obj2 },
     items: function(t, options) {
       // t.cards return a set of values,
       //values are in object of nested array,
@@ -92,10 +92,12 @@ var onBtnClick = function(t, opts) {
             
             obj2.push({ idList: prop, value: holder[prop] });
           }
-
           console.log(obj2);
+          
+          return [{obj2: obj2}]
+          
         });
-        console.log(obj2);
+        // console.log(obj2);
       });
     }
   });
