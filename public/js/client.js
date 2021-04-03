@@ -26,6 +26,13 @@ var onBtnClick = function(t, opts) {
   //values of outer array assign to tempArray
   //then values of inner array assigned to an array of card IDs as keys
 
+  
+//   return t.popup({
+//         title: "Calculated Points",
+//         url: "./results.html",
+//         args: { message: "obj" }
+//       });
+  
   return t.cards("id", "idList", "name").then(function(cards) {
     // console.log(JSON.stringify(cards, null, 2))
     // console.log('backend_esitmate: ',t.get("5f53e15a6bb8a9122694687f", 'shared', 'backend_estimate'))
@@ -99,6 +106,12 @@ var onBtnClick = function(t, opts) {
       //           })
     });
     // console.log(obj2);
+  
+  // return t.popup({
+  //       title: "Calculated Points",
+  //       url: "./results.html",
+  //       args: { message: "obj" }
+  //     });
   });
 };
 
