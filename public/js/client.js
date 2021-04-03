@@ -72,7 +72,7 @@ var onBtnClick = function(t, opts) {
     );
 
     //Pass listEstimateArr to promise caller, merge idList that are equal and sum the their backendEstimate values
-    Promise.all(promises).then(() => {
+    Promise.all(promises).then(function(t,opts) => {
       var holder = {};
       listEstimateArr.forEach(function(d) {
         if (holder.hasOwnProperty(d.idList)) {
@@ -95,8 +95,10 @@ var onBtnClick = function(t, opts) {
       //   url: "./results.html",
       //   args: { message: "obj" }
       // });
-
-      return obj2;
+     
+      t.set('board', 'shared', obj2);
+      
+      // return obj2;
       //           return t.popup({
       //            title: 'Change Time',
       //              url: "./results.html",
@@ -228,7 +230,7 @@ window.TrelloPowerUp.initialize({
                     return t.popup({
                       title: "Calculated Points",
                       url: "./results.html",
-                      args: { message: objl\ }
+                      args: { message: t.get('board', 'shared', obj2) }
                     });
               })
           }
