@@ -94,7 +94,7 @@ var onBtnClick = function(t, opts) {
       return t.popup({
         title: "Calculated Points",
         url: "./results.html",
-        args: { message: obj2 }
+        args: { message: "obj"}
       });
       // t.set('board', 'shared', obj2);
       // return obj2;
@@ -111,7 +111,7 @@ var onBtnClick = function(t, opts) {
   // return t.popup({
   //       title: "Calculated Points",
   //       url: "./results.html",
-  //       args: { message: "obj" }
+  //       args: { message: obj2 }
   //     });
   });
 };
@@ -224,7 +224,7 @@ window.TrelloPowerUp.initialize({
         callback: function(t) {
             // obj = onBtnClick(t)
           
-            return onBtnClick(t)
+            return obj = onBtnClick(t)
               // .then(function() {
               //       return t.popup({
               //         title: "Calculated Points",
