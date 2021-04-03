@@ -72,8 +72,9 @@ var onBtnClick = function(t, opts) {
     );
 
     //Pass listEstimateArr to promise caller, merge idList that are equal and sum the their backendEstimate values
-    Promise.all(promises).then(function(t,opts) => {
+    Promise.all(promises,t).then(() => {
       var holder = {};
+      // console.log(t)
       listEstimateArr.forEach(function(d) {
         if (holder.hasOwnProperty(d.idList)) {
           holder[d.idList] =
@@ -90,14 +91,12 @@ var onBtnClick = function(t, opts) {
         obj2.push({ idList: prop, value: holder[prop] });
       }
       console.log("obj2:",obj2);
-      // return t.popup({
-      //   title: "Calculated Points",
-      //   url: "./results.html",
-      //   args: { message: "obj" }
-      // });
-     
-      t.set('board', 'shared', obj2);
-      
+      return t.popup({
+        title: "Calculated Points",
+        url: "./results.html",
+        args: { message: obj2 }
+      });
+      // t.set('board', 'shared', obj2);
       // return obj2;
       //           return t.popup({
       //            title: 'Change Time',
@@ -225,14 +224,14 @@ window.TrelloPowerUp.initialize({
         callback: function(t) {
             // obj = onBtnClick(t)
           
-            return obj = onBtnClick(t)
-              .then(function() {
-                    return t.popup({
-                      title: "Calculated Points",
-                      url: "./results.html",
-                      args: { message: t.get('board', 'shared', obj2) }
-                    });
-              })
+            return onBtnClick(t)
+              // .then(function() {
+              //       return t.popup({
+              //         title: "Calculated Points",
+              //         url: "./results.html",
+              //         // args: { message: t.get('board', 'shared', obj2) }
+              //       });
+              // })
           }
         
         
