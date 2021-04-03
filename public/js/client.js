@@ -89,12 +89,12 @@ var onBtnClick = function(t, opts) {
       for (var prop in holder) {
         obj2.push({ idList: prop, value: holder[prop] });
       }
-      console.log(obj2);
-      return t.popup({
-        title: "Calculated Points",
-        url: "./results.html",
-        args: { message: "obj" }
-      });
+      console.log("obj2:",obj2);
+      // return t.popup({
+      //   title: "Calculated Points",
+      //   url: "./results.html",
+      //   args: { message: "obj" }
+      // });
 
       return obj2;
       //           return t.popup({
@@ -220,7 +220,19 @@ window.TrelloPowerUp.initialize({
         },
         text: "Callback",
         condition: "always",
-        callback: onBtnClick,
+        callback: function(t) {
+            // obj = onBtnClick(t)
+          
+            return obj = onBtnClick(t)
+              .then(function() {
+                    return t.popup({
+                      title: "Calculated Points",
+                      url: "./results.html",
+                      args: { message: objl\ }
+                    });
+              })
+          }
+        
         
       }
       //         {
