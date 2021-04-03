@@ -219,8 +219,15 @@ window.TrelloPowerUp.initialize({
           light: BLACK_ROCKET_ICON
         },
         text: "Callback",
-        callback: onBtnClick,
-        condition: "always"
+        condition: "always",
+        callback: function(t) {
+          return t.popup({
+            title: "estimatee",
+            items:[{
+            text: 't.navigate(boardUrl) (internal)',
+            callback: onBtnClick
+            }]
+                                }]
       }
       //         {
       //   // or we can also have a button that is just a simple url
