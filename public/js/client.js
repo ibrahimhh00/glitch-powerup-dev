@@ -94,7 +94,7 @@ var onBtnClick = function(t, opts) {
       return t.popup({
         title: "Calculated Points",
         url: "./results.html",
-        args: { message: "obj"}
+        args: { message: obj2}
       });
       // t.set('board', 'shared', obj2);
       // return obj2;
@@ -108,11 +108,11 @@ var onBtnClick = function(t, opts) {
     });
     // console.log(obj2);
   
-  // return t.popup({
-  //       title: "Calculated Points",
-  //       url: "./results.html",
-  //       args: { message: obj2 }
-  //     });
+  return t.popup({
+        title: "Calculated Points",
+        url: "./results.html"
+        // args: { message: obj2 }
+      });
   });
 };
 
@@ -229,7 +229,7 @@ window.TrelloPowerUp.initialize({
               //       return t.popup({
               //         title: "Calculated Points",
               //         url: "./results.html",
-              //         // args: { message: t.get('board', 'shared', obj2) }
+              //         args: { message: obj }
               //       });
               // })
           }

@@ -3,7 +3,7 @@ var t = TrelloPowerUp.iframe();
 var message = t.arg('message');
 console.log("Message:",message)
 if (message) {
-  document.getElementById("message").innerText = message;
+  document.getElementById("message").innerText = Object.values(message);
 };
 
 // t.render is called when there is an update, here it i used 
