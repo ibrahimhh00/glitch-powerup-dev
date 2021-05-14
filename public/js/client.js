@@ -79,10 +79,10 @@ var onBtnClick = function(t, opts) {
         if (holder.hasOwnProperty(d.idList)) {
           holder[d.idList] =
             holder[d.idList] +
-            (parseInt(d.backendEstimate) ? parseInt(d.backendEstimate) : 0);
+            (parseFloat(d.backendEstimate) ? parseFloat(d.backendEstimate) : 0);
         } else {
-          holder[d.idList] = parseInt(d.backendEstimate)
-            ? parseInt(d.backendEstimate)
+          holder[d.idList] = parseFloat(d.backendEstimate)
+            ? parseFloat(d.backendEstimate)
             : 0;
         }
       });
