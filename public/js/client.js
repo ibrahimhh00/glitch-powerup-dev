@@ -88,7 +88,55 @@ var onBtnClickX= function(t, opts) {
 
 var Promise = TrelloPowerUp.Promise;
 
-var onBtnClick = function(t, opts) {
+var onBtnClick = new Promise( function(t, opts) {
+ 
+    var cardEstimateArr = new Array();
+  var listEstimateArr = new Array();
+  var obj2 = [];
+  return t.cards("id", "idList", "name").then(function(cards) {
+    console.log("t.cards is:", cards);
+
+    var tempArray = Object.values(cards);
+    console.log("Cards values :", tempArray);
+    
+
+        // console.log('test')
+        // console.log(key["id"]),
+        // console.log('backend_esitmate: ',t.get("5f53e15a6bb8a9122694687f", 'shared', 'backend_estimate','no value')))
+
+        //retrieve value of backend_estimate for each card and then assign it to cardEstimateArr values and listEstimateArr
+       
+// toCall(t,tempArray,cardEstimateArr,listEstimateArr,callBack)
+        tempArray.map(
+      key =>
+          t.get(key.id, "shared", "backend_estimate", "").then(function(data) {
+            cardEstimateArr.push({
+              id: key.id,
+              idList: key.idList,
+              backendEstimate: data
+            });
+            // cardEstimateArr.push([key['id'],key['idList'],data]);
+            listEstimateArr.push({
+              idList: key.idList,
+              backendEstimate: data
+            });
+          })  
+  )
+  
+})})
+
+onBtnClick.then(
+ function successValue(cardEstimateArr,listEstimateArr){
+   console.log("cardEstimateArr:",cardEstimateArr)
+  console.log("listEstimateArr:",listEstimateArr)
+ },
+
+)
+
+  
+
+
+var onBtnClick2 = function(t, opts) {
   // console.log('Someone clicked the button');
   var cardEstimateArr = new Array();
   var obj2 = [];
