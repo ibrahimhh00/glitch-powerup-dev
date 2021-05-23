@@ -230,7 +230,7 @@ var onBtnClick = function(t, opts) {
     // console.log(obj2);
 
     return t.popup({
-      // title: "Calculated Points",
+      title: "Calculated Points",
       url: "./results.html"
       // args: { message: obj2 }
     });
@@ -344,9 +344,8 @@ window.TrelloPowerUp.initialize({
         condition: "always",
         callback: function(t) {
           // obj = onBtnClick(t)
-          var obj;
 
-          return (obj = onBtnClick(t));
+          return onBtnClick(t);
           // .then(function() {
           //       return t.popup({
           //         title: "Calculated Points",
