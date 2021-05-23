@@ -88,7 +88,7 @@ var onBtnClickX= function(t, opts) {
 
 var Promise = TrelloPowerUp.Promise;
 
-var onBtnClick = new Promise( function(t, opts) {
+var onBtnClick3 = new Promise( function(t, opts) {
  
     var cardEstimateArr = new Array();
   var listEstimateArr = new Array();
@@ -125,10 +125,11 @@ var onBtnClick = new Promise( function(t, opts) {
   
 })})
 
-onBtnClick.then(
- function successValue(cardEstimateArr,listEstimateArr){
-   console.log("cardEstimateArr:",cardEstimateArr)
-  console.log("listEstimateArr:",listEstimateArr)
+onBtnClick3.then(
+ function successValue(result){
+   console.log("result:",result)
+   // console.log("cardEstimateArr:",result.cardEstimateArr)
+  // console.log("listEstimateArr:",result.listEstimateArr)
  },
 
 )
@@ -136,7 +137,7 @@ onBtnClick.then(
   
 
 
-var onBtnClick2 = function(t, opts) {
+var onBtnClick = function(t, opts) {
   // console.log('Someone clicked the button');
   var cardEstimateArr = new Array();
   var obj2 = [];
@@ -229,7 +230,7 @@ var onBtnClick2 = function(t, opts) {
     // console.log(obj2);
 
     return t.popup({
-      title: "Calculated Points",
+      // title: "Calculated Points",
       url: "./results.html"
       // args: { message: obj2 }
     });
