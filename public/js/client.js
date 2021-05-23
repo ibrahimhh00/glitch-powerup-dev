@@ -139,6 +139,10 @@ onBtnClick3.then(
 
 var onBtnClick = function(t, opts) {
   // console.log('Someone clicked the button');
+  
+  return t.popup({
+  title: "estimated",
+  callback: function(t, opts){
   var cardEstimateArr = new Array();
   var obj2 = [];
   var obj3 = [3, 3, 3];
@@ -212,11 +216,7 @@ var onBtnClick = function(t, opts) {
         obj2.push({ idList: prop, value: holder[prop] });
       }
       console.log("obj2:", obj2);
-      return t.popup({
-        title: "Calculated Points",
-        url: "./results.html",
-        args: { message: obj2 }
-      });
+      return obj2
       // t.set('board', 'shared', obj2);
       // return obj2;
       //           return t.popup({
@@ -229,12 +229,7 @@ var onBtnClick = function(t, opts) {
     });
     // console.log(obj2);
 
-    return t.popup({
-      title: "Calculated Points",
-      url: "./results.html"
-      // args: { message: obj2 }
-    });
-  });
+  }))};
 };
 
 // var onBtnClick = function(t, opts) {
