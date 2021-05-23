@@ -14,12 +14,33 @@ var ROCKET_ICON =
   "https://cdn.glitch.com/aef55bcb-cec2-438b-98c0-959249969810%2Fc69415fd-f70e-4e03-b43b-98b8960cd616_white-rocket-ship.png?v=1616729876518";
 
 
-function callback()
+function toCall(t,tempArray,cardEstimateArr,listEstimateArr,callBack)
 {
-  
+    tempArray.map(
+      key =>
+          t.get(key.id, "shared", "backend_estimate", "").then(function(data) {
+            cardEstimateArr.push({
+              id: key.id,
+              idList: key.idList,
+              backendEstimate: data
+            });
+            // cardEstimateArr.push([key['id'],key['idList'],data]);
+            listEstimateArr.push({
+              idList: key.idList,
+              backendEstimate: data
+            });
+          })  
+  )
+  callBack(cardEstimateArr,listEstimateArr)
   
 }
 
+
+function callBack(cardEstimateArr,listEstimateArr)
+{
+      console.log("cardEstimateArr:",cardEstimateArr)
+    console.log("listEstimateArr:",listEstimateArr)
+}
 
 var onBtnClick = function(t, opts) {
   // console.log('Someone clicked the button');
@@ -32,32 +53,18 @@ var onBtnClick = function(t, opts) {
     var tempArray = Object.values(cards);
     console.log("Cards values :", tempArray);
     
-    
-    tempArray.map(
-      key =>
+
         // console.log('test')
         // console.log(key["id"]),
         // console.log('backend_esitmate: ',t.get("5f53e15a6bb8a9122694687f", 'shared', 'backend_estimate','no value')))
 
         //retrieve value of backend_estimate for each card and then assign it to cardEstimateArr values and listEstimateArr
        
-          t.get(key.id, "shared", "backend_estimate", "").then(function(data) {
-            cardEstimateArr.push({
-              id: key.id,
-              idList: key.idList,
-              backendEstimate: data
-            });
-            // cardEstimateArr.push([key['id'],key['idList'],data]);
-            listEstimateArr.push({
-              idList: key.idList,
-              backendEstimate: data
-            });
-          })
+toCall(t,tempArray,cardEstimateArr,listEstimateArr,callBack)
         
       // .then(() =>console.log("listEstimateArr: ", listEstimateArr))
-    )
-    console.log("cardEstimateArr:",cardEstimateArr)
-    console.log("listEstimateArr:",listEstimateArr)
+    
+
     
   });
 };
