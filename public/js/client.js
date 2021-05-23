@@ -135,7 +135,11 @@ onBtnClick3.then(
 )
 
   
-var onBtnClick4 = function(t, opts) {
+
+
+
+
+var onBtnClick = function(t, opts) {
   // console.log('Someone clicked the button');
   
   return t.popup({
@@ -214,7 +218,8 @@ var onBtnClick4 = function(t, opts) {
         obj2.push({ idList: prop, value: holder[prop] });
       }
       console.log("obj2:", obj2);
-      return obj2
+      // return obj2
+      t.set('board', 'shared', obj2)
       // t.set('board', 'shared', obj2);
       // return obj2;
       //           return t.popup({
@@ -227,10 +232,9 @@ var onBtnClick4 = function(t, opts) {
     });
     // console.log(obj2);
   
-  })
-  return obj2;
-  },
-  url: "results.html"
+  })},
+  url: "results.html",
+  args: { message: t.get('board', 'shared' ,'obj2') }
   });
 };
 
@@ -252,7 +256,7 @@ var onBtnClick4 = function(t, opts) {
 
 
 
-var onBtnClick = function(t, opts) {
+var onBtnClickX = function(t, opts) {
   // console.log('Someone clicked the button');
   var cardEstimateArr = new Array();
   var obj2 = [];
