@@ -219,7 +219,8 @@ var onBtnClick = function(t, opts) {
       }
       console.log("obj2:", obj2);
       // return obj2
-      t.set('board', 'shared', obj2)
+      // t.set('board', 'shared','obj2size', obj2)
+      // console.log("t.get(board):", t.get('board', 'shared' ,'obj2size'))
       // t.set('board', 'shared', obj2);
       // return obj2;
       //           return t.popup({
@@ -233,8 +234,8 @@ var onBtnClick = function(t, opts) {
     // console.log(obj2);
   
   })},
-  url: "results.html",
-  args: { message: t.get('board', 'shared' ,'obj2') }
+  // url: "results.html",
+  // args: { message: t.get('board', 'shared' ,'obj2size') }
   });
 };
 
