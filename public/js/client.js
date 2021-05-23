@@ -223,6 +223,7 @@ window.TrelloPowerUp.initialize({
         condition: "always",
         callback: function(t) {
             // obj = onBtnClick(t)
+            var obj
           
             return obj = onBtnClick(t)
               // .then(function() {
