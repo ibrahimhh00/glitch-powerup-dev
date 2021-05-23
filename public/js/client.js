@@ -332,7 +332,7 @@ var onBtnClick = function(t, opts) {
       }
       console.log("obj2:", obj2);
       // t.set('board', 'shared','obj2size', obj2);
-      return t.popup({
+      return t.modal({
         title: "Calculated Points",
         url: "./results.html",
         args: { message: obj2 }
