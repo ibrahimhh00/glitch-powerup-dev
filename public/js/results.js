@@ -4,17 +4,17 @@ var message = Object.values(t.arg('message'));
 console.log("message type:",typeof message)
 console.log("Message:",message)
 if (message) {
-  var i, x = ""
+  var i, x = "";
   for (i=0 ; i<message.length ; i++)
   { 
     // console.log("i value:", i);
     // console.log("message.length:", message.length);
     console.log("message[i][idList]", message[i]['idList']);
-    x = x + "<p>" + message[i]['idList'] + "</p>";
+    // x = x + "<p>" + message[i]['idList'] + "</p>";
   // document.getElementById("value").innerText = message[i]['value'];
   }
   document.getElementById("list").innerText = x;
-};
+}
 
 // t.render is called when there is an update, here it i used 
 // If you open the popup via the card button, select a size, 
