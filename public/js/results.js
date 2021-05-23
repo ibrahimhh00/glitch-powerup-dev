@@ -5,10 +5,12 @@ console.log("message type:",typeof message)
 console.log("Message:",message)
 if (message) {
   var i
-  for (i = 0 ; i < message.length ; i++)
-  {
+  for (i=0 ; i<message.length ; i++)
+  { 
+    // console.log("i value:", i);
+    // console.log("message.length:", message.length);
   document.getElementById("list").innerText = message[i]['idList'];
-  document.getElementById("value").innerText = message[i]['value']
+  // document.getElementById("value").innerText = message[i]['value'];
   }
 };
 
