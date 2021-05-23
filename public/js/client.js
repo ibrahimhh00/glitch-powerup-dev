@@ -332,7 +332,7 @@ var onBtnClick = function(t, opts) {
       }
       console.log("obj2:", obj2);
       // t.set('board', 'shared','obj2size', obj2);
-      return t.modal({
+      return t.boardBar({
         title: "Calculated Points",
         url: "./results.html",
         args: { message: obj2 }
@@ -349,11 +349,11 @@ var onBtnClick = function(t, opts) {
     });
     // console.log(obj2);
 
-    return t.popup({
-      title: "Calculated Points",
-      url: "./results.html",
-      // args: { message: t.get('board', 'shared','obj2size') }
-    });
+    // return t.popup({
+    //   title: "Calculated Points",
+    //   url: "./results.html",
+    //   // args: { message: t.get('board', 'shared','obj2size') }
+    // });
   });
 };
 
