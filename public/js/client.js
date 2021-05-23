@@ -13,6 +13,14 @@ var BACKEND_ICON =
 var ROCKET_ICON =
   "https://cdn.glitch.com/aef55bcb-cec2-438b-98c0-959249969810%2Fc69415fd-f70e-4e03-b43b-98b8960cd616_white-rocket-ship.png?v=1616729876518";
 
+
+function callback()
+{
+  
+  
+}
+
+
 var onBtnClick = function(t, opts) {
   // console.log('Someone clicked the button');
   var cardEstimateArr = new Array();
@@ -23,7 +31,7 @@ var onBtnClick = function(t, opts) {
 
     var tempArray = Object.values(cards);
     console.log("Cards values :", tempArray);
-    function 
+    
     
     tempArray.map(
       key =>
