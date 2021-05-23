@@ -139,7 +139,7 @@ onBtnClick3.then(
 
 
 
-var onBtnClick = function(t, opts) {
+var onBtnClick4 = function(t, opts) {
   // console.log('Someone clicked the button');
   
   return t.popup({
@@ -218,9 +218,7 @@ var onBtnClick = function(t, opts) {
         obj2.push({ idList: prop, value: holder[prop] });
       }
       console.log("obj2:", obj2);
-      // return obj2
-      // t.set('board', 'shared','obj2size', obj2)
-      // console.log("t.get(board):", t.get('board', 'shared' ,'obj2size'))
+      return obj2
       // t.set('board', 'shared', obj2);
       // return obj2;
       //           return t.popup({
@@ -233,9 +231,10 @@ var onBtnClick = function(t, opts) {
     });
     // console.log(obj2);
   
-  })},
-  // url: "results.html",
-  // args: { message: t.get('board', 'shared' ,'obj2size') }
+  })
+  return obj2;
+  },
+  url: "results.html"
   });
 };
 
@@ -257,7 +256,7 @@ var onBtnClick = function(t, opts) {
 
 
 
-var onBtnClickX = function(t, opts) {
+var onBtnClick = function(t, opts) {
   // console.log('Someone clicked the button');
   var cardEstimateArr = new Array();
   var obj2 = [];
@@ -332,6 +331,7 @@ var onBtnClickX = function(t, opts) {
         obj2.push({ idList: prop, value: holder[prop] });
       }
       console.log("obj2:", obj2);
+      // t.set('board', 'shared','obj2size', obj2);
       return t.popup({
         title: "Calculated Points",
         url: "./results.html",
@@ -351,8 +351,8 @@ var onBtnClickX = function(t, opts) {
 
     return t.popup({
       title: "Calculated Points",
-      url: "./results.html"
-      // args: { message: obj2 }
+      url: "./results.html",
+      // args: { message: t.get('board', 'shared','obj2size') }
     });
   });
 };
