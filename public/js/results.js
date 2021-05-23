@@ -10,9 +10,10 @@ if (message) {
     // console.log("i value:", i);
     // console.log("message.length:", message.length);
     console.log("message[i][idList]", message[i]['idList']);
-  document.getElementById("list").innerText = message[i]['idList'];
+  
   // document.getElementById("value").innerText = message[i]['value'];
   }
+  document.getElementById("list").innerText = message[i]['idList'];
 };
 
 // t.render is called when there is an update, here it i used 
