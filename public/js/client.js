@@ -13,9 +13,50 @@ var BACKEND_ICON =
 var ROCKET_ICON =
   "https://cdn.glitch.com/aef55bcb-cec2-438b-98c0-959249969810%2Fc69415fd-f70e-4e03-b43b-98b8960cd616_white-rocket-ship.png?v=1616729876518";
 
+var onBtnClick = function(t, opts) {
+  // console.log('Someone clicked the button');
+  var cardEstimateArr = new Array();
+  var listEstimateArr = new Array();
+  var obj2 = [];
+  return t.cards("id", "idList", "name").then(function(cards) {
+    console.log("t.cards is:", cards);
+
+    var tempArray = Object.values(cards);
+    console.log("Cards values :", tempArray);
+    function 
+    
+    tempArray.map(
+      key =>
+        // console.log('test')
+        // console.log(key["id"]),
+        // console.log('backend_esitmate: ',t.get("5f53e15a6bb8a9122694687f", 'shared', 'backend_estimate','no value')))
+
+        //retrieve value of backend_estimate for each card and then assign it to cardEstimateArr values and listEstimateArr
+       
+          t.get(key.id, "shared", "backend_estimate", "").then(function(data) {
+            cardEstimateArr.push({
+              id: key.id,
+              idList: key.idList,
+              backendEstimate: data
+            });
+            // cardEstimateArr.push([key['id'],key['idList'],data]);
+            listEstimateArr.push({
+              idList: key.idList,
+              backendEstimate: data
+            });
+          })
+        
+      // .then(() =>console.log("listEstimateArr: ", listEstimateArr))
+    )
+    console.log("cardEstimateArr:",cardEstimateArr)
+    console.log("listEstimateArr:",listEstimateArr)
+    
+  });
+};
+
 var Promise = TrelloPowerUp.Promise;
 
-var onBtnClick = function(t, opts) {
+var onBtnClick2 = function(t, opts) {
   // console.log('Someone clicked the button');
   var cardEstimateArr = new Array();
   var obj2 = [];
@@ -26,13 +67,12 @@ var onBtnClick = function(t, opts) {
   //values of outer array assign to tempArray
   //then values of inner array assigned to an array of card IDs as keys
 
-  
-//   return t.popup({
-//         title: "Calculated Points",
-//         url: "./results.html",
-//         args: { message: "obj" }
-//       });
-  
+  //   return t.popup({
+  //         title: "Calculated Points",
+  //         url: "./results.html",
+  //         args: { message: "obj" }
+  //       });
+
   return t.cards("id", "idList", "name").then(function(cards) {
     // console.log(JSON.stringify(cards, null, 2))
     // console.log('backend_esitmate: ',t.get("5f53e15a6bb8a9122694687f", 'shared', 'backend_estimate'))
@@ -72,7 +112,7 @@ var onBtnClick = function(t, opts) {
     );
 
     //Pass listEstimateArr to promise caller, merge idList that are equal and sum the their backendEstimate values
-    Promise.all(promises,t).then(() => {
+    Promise.all(promises, t).then(() => {
       var holder = {};
       // console.log(t)
       listEstimateArr.forEach(function(d) {
@@ -90,11 +130,11 @@ var onBtnClick = function(t, opts) {
       for (var prop in holder) {
         obj2.push({ idList: prop, value: holder[prop] });
       }
-      console.log("obj2:",obj2);
+      console.log("obj2:", obj2);
       return t.popup({
         title: "Calculated Points",
         url: "./results.html",
-        args: { message: obj2}
+        args: { message: obj2 }
       });
       // t.set('board', 'shared', obj2);
       // return obj2;
@@ -107,12 +147,12 @@ var onBtnClick = function(t, opts) {
       //           })
     });
     // console.log(obj2);
-  
-  return t.popup({
-        title: "Calculated Points",
-        url: "./results.html"
-        // args: { message: obj2 }
-      });
+
+    return t.popup({
+      title: "Calculated Points",
+      url: "./results.html"
+      // args: { message: obj2 }
+    });
   });
 };
 
@@ -222,20 +262,18 @@ window.TrelloPowerUp.initialize({
         text: "Callback",
         condition: "always",
         callback: function(t) {
-            // obj = onBtnClick(t)
-            var obj
-          
-            return obj = onBtnClick(t)
-              // .then(function() {
-              //       return t.popup({
-              //         title: "Calculated Points",
-              //         url: "./results.html",
-              //         args: { message: obj }
-              //       });
-              // })
-          }
-        
-        
+          // obj = onBtnClick(t)
+          var obj;
+
+          return (obj = onBtnClick(t));
+          // .then(function() {
+          //       return t.popup({
+          //         title: "Calculated Points",
+          //         url: "./results.html",
+          //         args: { message: obj }
+          //       });
+          // })
+        }
       }
       //         {
       //   // or we can also have a button that is just a simple url
