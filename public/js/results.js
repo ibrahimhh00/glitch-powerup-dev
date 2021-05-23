@@ -4,7 +4,12 @@ var message = Object.values(t.arg('message'));
 console.log("message type:",typeof message)
 console.log("Message:",message)
 if (message) {
-  document.getElementById("message").innerText = message;
+  var i
+  for (i = 0 ; i < message.length ; i++)
+  {
+  document.getElementById("list").innerText = message[i]['idList'];
+  document.getElementById("value").innerText = message[i]['value']
+  }
 };
 
 // t.render is called when there is an update, here it i used 
