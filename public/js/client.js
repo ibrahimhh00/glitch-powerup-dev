@@ -279,17 +279,17 @@ var onBtnClick = function(t, opts) {
       var holder = {};
       // console.log(t)
 
-      return t.lists("id", "name").then(function(lists) {
-        lists.map(key1 =>
-          listEstimateArr.map(key2 => {
-            if (key1.id == key2.idList){
-            console.log("this id", key2.idList, " belongs to this name", key1.name);
-            }
-          })
-        );
-      });
+      // return t.lists("id", "name").then(function(lists) {
+      //   lists.map(key1 =>
+      //     listEstimateArr.map(key2 => {
+      //       if (key1.id == key2.idList){
+      //       console.log("this id", key2.idList, " belongs to this name", key1.name);
+      //       }
+      //     })
+      //   );
+      // });
 
-
+// Combine same idList and add their values      
       listEstimateArr.forEach(function(d) {
         if (holder.hasOwnProperty(d.idList)) {
           holder[d.idList] =
@@ -302,6 +302,21 @@ var onBtnClick = function(t, opts) {
         }
       });
 
+      
+        
+            return t.lists("id", "name").then(function(lists) {
+        lists.map(key1 =>
+          listEstimateArr.map(key2 => {
+            if (key1.id == key2.idList){
+            console.log("this id", key2.idList, " belongs to this name", key1.name);
+            }
+          })
+        );
+      });
+    
+                  return t.lists("id", "name").then(function(lists) {
+        lists.map(key1 =>
+                  
       for (var prop in holder) {
         obj2.push({ idList: prop, value: holder[prop] });
       }
