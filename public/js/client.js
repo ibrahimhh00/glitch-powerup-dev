@@ -289,7 +289,7 @@ var onBtnClick = function(t, opts) {
       //   );
       // });
 
-// Combine same idList and add their values      
+      // Combine same idList and add their values
       listEstimateArr.forEach(function(d) {
         if (holder.hasOwnProperty(d.idList)) {
           holder[d.idList] =
@@ -302,30 +302,36 @@ var onBtnClick = function(t, opts) {
         }
       });
 
-      
-        
-            return t.lists("id", "name").then(function(lists) {
-        lists.map(key1 =>
-          listEstimateArr.map(key2 => {
-            if (key1.id == key2.idList){
-            console.log("this id", key2.idList, " belongs to this name", key1.name);
+      // return t.lists("id", "name").then(function(lists) {
+      //   lists.map(key1 =>
+      //     listEstimateArr.map(key2 => {
+      //       if (key1.id == key2.idList) {
+      //         console.log(
+      //           "this id",
+      //           key2.idList,
+      //           " belongs to this name",
+      //           key1.name
+      //         );
+      //       }
+      //     })
+      //   );
+      // });
+
+      return t.lists("id", "name").then(function(lists) {
+        lists.map(key => {
+          for (var prop in holder) {
+            if (key.id == prop) {
+              obj2.push({ idList: key.name, value: holder[prop] });
             }
-          })
-        );
-      });
-    
-                  return t.lists("id", "name").then(function(lists) {
-        lists.map(key1 =>
-                  
-      for (var prop in holder) {
-        obj2.push({ idList: prop, value: holder[prop] });
-      }
-      console.log("obj2:", obj2);
-      // t.set('board', 'shared','obj2size', obj2);
-      return t.boardBar({
-        title: "Calculated Points",
-        url: "./results.html",
-        args: { message: obj2 }
+          }
+        });
+        console.log("obj2:", obj2);
+        // t.set('board', 'shared','obj2size', obj2);
+        return t.boardBar({
+          title: "Calculated Points",
+          url: "./results.html",
+          args: { message: obj2 }
+        });
       });
       // t.set('board', 'shared', obj2);
       // return obj2;
