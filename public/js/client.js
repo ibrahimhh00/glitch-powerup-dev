@@ -257,15 +257,7 @@ var onBtnClick = function(t, opts) {
   //         args: { message: "obj" }
   //       });
   
-  return t.lists("id","name").then(function(lists)
-                                  {
-    
-    
-    console.log("tlist is...:",lists)
-  }
-                                  
-                                  
-                                  )
+
 
   return t.cards("id", "idList", "name").then(function(cards) {
     // console.log(JSON.stringify(cards, null, 2))
@@ -300,6 +292,17 @@ var onBtnClick = function(t, opts) {
               idList: key.idList,
               backendEstimate: data
             });
+              
+            
+            return t.lists("id","name").then(function(lists)
+                                  {
+        
+    console.log("the list is..:",JSON.stringify(lists, null, 2));
+  })
+                                  
+                          
+            
+            
           })
         )
       // .then(() =>console.log("listEstimateArr: ", listEstimateArr))
