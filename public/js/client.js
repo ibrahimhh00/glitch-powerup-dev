@@ -13,36 +13,31 @@ var BACKEND_ICON =
 var ROCKET_ICON =
   "https://cdn.glitch.com/aef55bcb-cec2-438b-98c0-959249969810%2Fc69415fd-f70e-4e03-b43b-98b8960cd616_white-rocket-ship.png?v=1616729876518";
 
-
-function toCall(t,tempArray,cardEstimateArr,listEstimateArr,callBack)
-{
-    tempArray.map(
-      key =>
-          t.get(key.id, "shared", "backend_estimate", "").then(function(data) {
-            cardEstimateArr.push({
-              id: key.id,
-              idList: key.idList,
-              backendEstimate: data
-            });
-            // cardEstimateArr.push([key['id'],key['idList'],data]);
-            listEstimateArr.push({
-              idList: key.idList,
-              backendEstimate: data
-            });
-          })  
-  )
-  .then (callBack(cardEstimateArr,listEstimateArr))
-  
+function toCall(t, tempArray, cardEstimateArr, listEstimateArr, callBack) {
+  tempArray
+    .map(key =>
+      t.get(key.id, "shared", "backend_estimate", "").then(function(data) {
+        cardEstimateArr.push({
+          id: key.id,
+          idList: key.idList,
+          backendEstimate: data
+        });
+        // cardEstimateArr.push([key['id'],key['idList'],data]);
+        listEstimateArr.push({
+          idList: key.idList,
+          backendEstimate: data
+        });
+      })
+    )
+    .then(callBack(cardEstimateArr, listEstimateArr));
 }
 
-
-function callBack(cardEstimateArr,listEstimateArr)
-{
-      console.log("cardEstimateArr:",cardEstimateArr)
-    console.log("listEstimateArr:",listEstimateArr)
+function callBack(cardEstimateArr, listEstimateArr) {
+  console.log("cardEstimateArr:", cardEstimateArr);
+  console.log("listEstimateArr:", listEstimateArr);
 }
 
-var onBtnClickX= function(t, opts) {
+var onBtnClickX = function(t, opts) {
   // console.log('Someone clicked the button');
   var cardEstimateArr = new Array();
   var listEstimateArr = new Array();
@@ -52,45 +47,38 @@ var onBtnClickX= function(t, opts) {
 
     var tempArray = Object.values(cards);
     console.log("Cards values :", tempArray);
-    
 
-        // console.log('test')
-        // console.log(key["id"]),
-        // console.log('backend_esitmate: ',t.get("5f53e15a6bb8a9122694687f", 'shared', 'backend_estimate','no value')))
+    // console.log('test')
+    // console.log(key["id"]),
+    // console.log('backend_esitmate: ',t.get("5f53e15a6bb8a9122694687f", 'shared', 'backend_estimate','no value')))
 
-        //retrieve value of backend_estimate for each card and then assign it to cardEstimateArr values and listEstimateArr
-       
-// toCall(t,tempArray,cardEstimateArr,listEstimateArr,callBack)
-        tempArray.map(
-      key =>
-          t.get(key.id, "shared", "backend_estimate", "").then(function(data) {
-            cardEstimateArr.push({
-              id: key.id,
-              idList: key.idList,
-              backendEstimate: data
-            });
-            // cardEstimateArr.push([key['id'],key['idList'],data]);
-            listEstimateArr.push({
-              idList: key.idList,
-              backendEstimate: data
-            });
-          })  
-  )
-  .then (
-        
-        )
-      // .then(() =>console.log("listEstimateArr: ", listEstimateArr))
-    
+    //retrieve value of backend_estimate for each card and then assign it to cardEstimateArr values and listEstimateArr
 
-    
+    // toCall(t,tempArray,cardEstimateArr,listEstimateArr,callBack)
+    tempArray
+      .map(key =>
+        t.get(key.id, "shared", "backend_estimate", "").then(function(data) {
+          cardEstimateArr.push({
+            id: key.id,
+            idList: key.idList,
+            backendEstimate: data
+          });
+          // cardEstimateArr.push([key['id'],key['idList'],data]);
+          listEstimateArr.push({
+            idList: key.idList,
+            backendEstimate: data
+          });
+        })
+      )
+      .then();
+    // .then(() =>console.log("listEstimateArr: ", listEstimateArr))
   });
 };
 
 var Promise = TrelloPowerUp.Promise;
 
-var onBtnClick3 = new Promise( function(t, opts) {
- 
-    var cardEstimateArr = new Array();
+var onBtnClick3 = new Promise(function(t, opts) {
+  var cardEstimateArr = new Array();
   var listEstimateArr = new Array();
   var obj2 = [];
   return t.cards("id", "idList", "name").then(function(cards) {
@@ -98,144 +86,138 @@ var onBtnClick3 = new Promise( function(t, opts) {
 
     var tempArray = Object.values(cards);
     console.log("Cards values :", tempArray);
-    
 
-        // console.log('test')
-        // console.log(key["id"]),
-        // console.log('backend_esitmate: ',t.get("5f53e15a6bb8a9122694687f", 'shared', 'backend_estimate','no value')))
+    // console.log('test')
+    // console.log(key["id"]),
+    // console.log('backend_esitmate: ',t.get("5f53e15a6bb8a9122694687f", 'shared', 'backend_estimate','no value')))
 
-        //retrieve value of backend_estimate for each card and then assign it to cardEstimateArr values and listEstimateArr
-       
-// toCall(t,tempArray,cardEstimateArr,listEstimateArr,callBack)
-        tempArray.map(
-      key =>
-          t.get(key.id, "shared", "backend_estimate", "").then(function(data) {
-            cardEstimateArr.push({
-              id: key.id,
-              idList: key.idList,
-              backendEstimate: data
-            });
-            // cardEstimateArr.push([key['id'],key['idList'],data]);
-            listEstimateArr.push({
-              idList: key.idList,
-              backendEstimate: data
-            });
-          })  
-  )
-  
-})})
+    //retrieve value of backend_estimate for each card and then assign it to cardEstimateArr values and listEstimateArr
 
-onBtnClick3.then(
- function successValue(result){
-   console.log("result:",result)
-   // console.log("cardEstimateArr:",result.cardEstimateArr)
+    // toCall(t,tempArray,cardEstimateArr,listEstimateArr,callBack)
+    tempArray.map(key =>
+      t.get(key.id, "shared", "backend_estimate", "").then(function(data) {
+        cardEstimateArr.push({
+          id: key.id,
+          idList: key.idList,
+          backendEstimate: data
+        });
+        // cardEstimateArr.push([key['id'],key['idList'],data]);
+        listEstimateArr.push({
+          idList: key.idList,
+          backendEstimate: data
+        });
+      })
+    );
+  });
+});
+
+onBtnClick3.then(function successValue(result) {
+  console.log("result:", result);
+  // console.log("cardEstimateArr:",result.cardEstimateArr)
   // console.log("listEstimateArr:",result.listEstimateArr)
- },
-
-)
-
-
+});
 
 var onBtnClick4 = function(t, opts) {
   // console.log('Someone clicked the button');
-  
+
   return t.popup({
-  title: "estimated",
-  callback: function(t, opts){
-  var cardEstimateArr = new Array();
-  var obj2 = [];
-  var obj3 = [3, 3, 3];
+    title: "estimated",
+    callback: function(t, opts) {
+      var cardEstimateArr = new Array();
+      var obj2 = [];
+      var obj3 = [3, 3, 3];
 
-  // t.cards return a set of values,
-  //values are in object of nested array,
-  //values of outer array assign to tempArray
-  //then values of inner array assigned to an array of card IDs as keys
+      // t.cards return a set of values,
+      //values are in object of nested array,
+      //values of outer array assign to tempArray
+      //then values of inner array assigned to an array of card IDs as keys
 
-  //   return t.popup({
-  //         title: "Calculated Points",
-  //         url: "./results.html",
-  //         args: { message: "obj" }
-  //       });
+      //   return t.popup({
+      //         title: "Calculated Points",
+      //         url: "./results.html",
+      //         args: { message: "obj" }
+      //       });
 
-  return t.cards("id", "idList", "name").then(function(cards) {
-    // console.log(JSON.stringify(cards, null, 2))
-    // console.log('backend_esitmate: ',t.get("5f53e15a6bb8a9122694687f", 'shared', 'backend_estimate'))
+      return t.cards("id", "idList", "name").then(function(cards) {
+        // console.log(JSON.stringify(cards, null, 2))
+        // console.log('backend_esitmate: ',t.get("5f53e15a6bb8a9122694687f", 'shared', 'backend_estimate'))
 
-    //cardID array created with all IDs in on the board
-    var tempArray = Object.values(cards);
-    console.log("Cards values :", tempArray);
+        //cardID array created with all IDs in on the board
+        var tempArray = Object.values(cards);
+        console.log("Cards values :", tempArray);
 
-    var listEstimateArr = [];
-    var backendEstimate = 0;
-    var result = [];
+        var listEstimateArr = [];
+        var backendEstimate = 0;
+        var result = [];
 
-    var promises = [];
-    var cArr = [];
-    tempArray.map(
-      key =>
-        // console.log('test')
-        // console.log(key["id"]),
-        // console.log('backend_esitmate: ',t.get("5f53e15a6bb8a9122694687f", 'shared', 'backend_estimate','no value')))
+        var promises = [];
+        var cArr = [];
+        tempArray.map(
+          key =>
+            // console.log('test')
+            // console.log(key["id"]),
+            // console.log('backend_esitmate: ',t.get("5f53e15a6bb8a9122694687f", 'shared', 'backend_estimate','no value')))
 
-        //retrieve value of backend_estimate for each card and then assign it to cardEstimateArr values and listEstimateArr
-        promises.push(
-          t.get(key.id, "shared", "backend_estimate", "").then(function(data) {
-            cardEstimateArr.push({
-              id: key.id,
-              idList: key.idList,
-              backendEstimate: data
-            });
-            // cardEstimateArr.push([key['id'],key['idList'],data]);
-            listEstimateArr.push({
-              idList: key.idList,
-              backendEstimate: data
-            });
-          })
-        )
-      // .then(() =>console.log("listEstimateArr: ", listEstimateArr))
-    );
+            //retrieve value of backend_estimate for each card and then assign it to cardEstimateArr values and listEstimateArr
+            promises.push(
+              t
+                .get(key.id, "shared", "backend_estimate", "")
+                .then(function(data) {
+                  cardEstimateArr.push({
+                    id: key.id,
+                    idList: key.idList,
+                    backendEstimate: data
+                  });
+                  // cardEstimateArr.push([key['id'],key['idList'],data]);
+                  listEstimateArr.push({
+                    idList: key.idList,
+                    backendEstimate: data
+                  });
+                })
+            )
+          // .then(() =>console.log("listEstimateArr: ", listEstimateArr))
+        );
 
-    //Pass listEstimateArr to promise caller, merge idList that are equal and sum the their backendEstimate values
-    Promise.all(promises, t).then(() => {
-      var holder = {};
-      // console.log(t)
-      listEstimateArr.forEach(function(d) {
-        if (holder.hasOwnProperty(d.idList)) {
-          holder[d.idList] =
-            holder[d.idList] +
-            (parseFloat(d.backendEstimate) ? parseFloat(d.backendEstimate) : 0);
-        } else {
-          holder[d.idList] = parseFloat(d.backendEstimate)
-            ? parseFloat(d.backendEstimate)
-            : 0;
-        }
+        //Pass listEstimateArr to promise caller, merge idList that are equal and sum the their backendEstimate values
+        Promise.all(promises, t).then(() => {
+          var holder = {};
+          // console.log(t)
+          listEstimateArr.forEach(function(d) {
+            if (holder.hasOwnProperty(d.idList)) {
+              holder[d.idList] =
+                holder[d.idList] +
+                (parseFloat(d.backendEstimate)
+                  ? parseFloat(d.backendEstimate)
+                  : 0);
+            } else {
+              holder[d.idList] = parseFloat(d.backendEstimate)
+                ? parseFloat(d.backendEstimate)
+                : 0;
+            }
+          });
+
+          for (var prop in holder) {
+            obj2.push({ idList: prop, value: holder[prop] });
+          }
+          console.log("obj2:", obj2);
+          return obj2;
+          // t.set('board', 'shared', obj2);
+          // return obj2;
+          //           return t.popup({
+          //            title: 'Change Time',
+          //              url: "./results.html",
+          //             args: { obj2: "You can access these with t.arg()" },
+          //             height: 278 // initial height, can be changed later
+
+          //           })
+        });
+        // console.log(obj2);
       });
-
-      for (var prop in holder) {
-        obj2.push({ idList: prop, value: holder[prop] });
-      }
-      console.log("obj2:", obj2);
-      return obj2
-      // t.set('board', 'shared', obj2);
-      // return obj2;
-      //           return t.popup({
-      //            title: 'Change Time',
-      //              url: "./results.html",
-      //             args: { obj2: "You can access these with t.arg()" },
-      //             height: 278 // initial height, can be changed later
-
-      //           })
-    });
-    // console.log(obj2);
-  
-  })
-  return obj2;
-  },
-  url: "results.html"
+      return obj2;
+    },
+    url: "results.html"
   });
 };
-
-
 
 var onBtnClick = function(t, opts) {
   // console.log('Someone clicked the button');
@@ -253,8 +235,6 @@ var onBtnClick = function(t, opts) {
   //         url: "./results.html",
   //         args: { message: "obj" }
   //       });
-  
-
 
   return t.cards("id", "idList", "name").then(function(cards) {
     // console.log(JSON.stringify(cards, null, 2))
@@ -289,28 +269,25 @@ var onBtnClick = function(t, opts) {
               idList: key.idList,
               backendEstimate: data
             });
-                                                                            
-            
-            
           })
         )
       // .then(() =>console.log("listEstimateArr: ", listEstimateArr))
     );
 
-    
-    
     //Pass listEstimateArr to promise caller, merge idList that are equal and sum the their backendEstimate values
     Promise.all(promises, t).then(() => {
       var holder = {};
       // console.log(t)
-          
-    listEstimateArr.map(
-    key =>
-      console.log("the id of the list is:",key.idList)
-    
-    )
-      
-      
+
+      return t.list("id", "name").then(function(lists) {
+        var tempArrayLists = Object.values(lists);
+        tempArrayLists.map(key1 =>
+          listEstimateArr.map(key2 =>
+            console.log("the id of the list is:", key2.idList)
+          )
+        );
+      });
+
       listEstimateArr.forEach(function(d) {
         if (holder.hasOwnProperty(d.idList)) {
           holder[d.idList] =
