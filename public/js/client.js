@@ -78,7 +78,7 @@ var onBtnClick = function(t, opts) {
         //retrieve value of backend_estimate for each card and then assign it to cardEstimateArr values and listEstimateArr
         promises.push(
           t.get(key.id, "shared", "backend_estimate", "").then(function(data) {
-          
+           t.get(key.id, "shared", "frontend_estimate", "").then(function(data2) {
             // cardEstimateArr.push({
             //   id: key.id,
             //   idList: key.idList,
@@ -87,9 +87,11 @@ var onBtnClick = function(t, opts) {
             // cardEstimateArr.push([key['id'],key['idList'],data]);
             listEstimateArr.push({
               idList: key.idList,
-              backendEstimate: data
+              backendEstimate: data,
+              frontendEstimate: data2
             });
-          })
+           })
+           })
         )
       // .then(() =>console.log("listEstimateArr: ", listEstimateArr))
     );
@@ -111,6 +113,19 @@ var onBtnClick = function(t, opts) {
             : 0;
         }
       });
+      
+      //  // Combine same idList and add their values
+      // listEstimateArr.forEach(function(d) {
+      //   if (holder.hasOwnProperty(d.idList)) {
+      //     holder[d.idList] =
+      //       holder[d.idList] +
+      //       (parseFloat(d.frontendEstimate) ? parseFloat(d.frontendEstimate) : 0);
+      //   } else {
+      //     holder[d.idList] = parseFloat(d.frontendEstimate)
+      //       ? parseFloat(d.frontendEstimate)
+      //       : 0;
+      //   }
+      // });
 
 
       return t.lists("id", "name").then(function(lists) {
