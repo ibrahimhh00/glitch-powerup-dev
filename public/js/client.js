@@ -280,23 +280,15 @@ var onBtnClick = function(t, opts) {
       // console.log(t)
 
       return t.lists("id", "name").then(function(lists) {
-        lists.reduce(key1 =>
-                  
-  
-          listEstimateArr.reduce(key2 =>
-            {
-          if (key1.id == key2.id){
-            console.log("this id",key1.id," belongs to this name",key2.name)
-          }
-          
-          
-        }
-          )
+        lists.map(key1 =>
+          listEstimateArr.map(key2 => {
+            if (key1.id == key2.idList){
+            console.log("this id", key2.idList, " belongs to this name", key1.name);
+            }
+          })
         );
       });
-      
-      
-      
+
 
       listEstimateArr.forEach(function(d) {
         if (holder.hasOwnProperty(d.idList)) {
