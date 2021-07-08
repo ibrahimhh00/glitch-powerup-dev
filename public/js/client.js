@@ -134,9 +134,6 @@ onBtnClick3.then(
 
 )
 
-  
-
-
 
 
 var onBtnClick4 = function(t, opts) {
@@ -292,15 +289,7 @@ var onBtnClick = function(t, opts) {
               idList: key.idList,
               backendEstimate: data
             });
-              
-            
-            return t.lists("id","name").then(function(lists)
-                                  {
-        
-    console.log("tlist is...:",lists)
-  })
-                                  
-                          
+                                                                            
             
             
           })
@@ -308,10 +297,20 @@ var onBtnClick = function(t, opts) {
       // .then(() =>console.log("listEstimateArr: ", listEstimateArr))
     );
 
+    
+    
     //Pass listEstimateArr to promise caller, merge idList that are equal and sum the their backendEstimate values
     Promise.all(promises, t).then(() => {
       var holder = {};
       // console.log(t)
+          
+    listEstimateArr.map(
+    key =>
+      console.log("the id of the list is:",key.idList)
+    
+    )
+      
+      
       listEstimateArr.forEach(function(d) {
         if (holder.hasOwnProperty(d.idList)) {
           holder[d.idList] =
