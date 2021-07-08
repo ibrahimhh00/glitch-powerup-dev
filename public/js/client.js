@@ -240,22 +240,6 @@ var onBtnClick4 = function(t, opts) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 var onBtnClick = function(t, opts) {
   // console.log('Someone clicked the button');
   var cardEstimateArr = new Array();
