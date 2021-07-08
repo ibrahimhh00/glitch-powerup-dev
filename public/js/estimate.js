@@ -50,7 +50,7 @@ t.render(function(){
     // console.log("object_estimate: ", object_estimate[1])
     // console.log("object_estimat type: ", typeof object_estimate)
     
-    
+    console.log("sss",Object.values(estimates["card"]["shared"]["backend_estimate"]))
     window.backend_estimateSize.value = Object.values(estimates["card"]["shared"]["backend_estimate"]);
     window.frontend_estimateSize.value = Object.values(estimates["card"]["shared"]["frontend_estimate"]);
   })
