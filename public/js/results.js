@@ -11,7 +11,7 @@ if (message) {
     // console.log("message.length:", message.length);
     console.log("message[i][nameList]", message[i]['nameList']);
     
-    x = x + "<br>" + message[i]['nameList']+ ":" + "<p></p>" + message[i]['value'] + "</br>";
+    x = x + "<br>" + "(" + message[i]['nameList']+ ")" + "<p></p> B:" + message[i]['value'] + "</br>";
   // document.getElementById("value").innerText = message[i]['value'];
   }
   document.getElementById("list").innerHTML = x;

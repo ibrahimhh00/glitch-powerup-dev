@@ -78,6 +78,7 @@ var onBtnClick = function(t, opts) {
         //retrieve value of backend_estimate for each card and then assign it to cardEstimateArr values and listEstimateArr
         promises.push(
           t.get(key.id, "shared", "backend_estimate", "").then(function(data) {
+          
             // cardEstimateArr.push({
             //   id: key.id,
             //   idList: key.idList,
