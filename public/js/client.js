@@ -297,7 +297,7 @@ var onBtnClick = function(t, opts) {
             return t.lists("id","name").then(function(lists)
                                   {
         
-    console.log("the list is..:",JSON.stringify(lists, null, 2));
+    console.log("tlist is...:",lists)
   })
                                   
                           
