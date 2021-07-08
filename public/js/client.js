@@ -256,6 +256,16 @@ var onBtnClick = function(t, opts) {
   //         url: "./results.html",
   //         args: { message: "obj" }
   //       });
+  
+  return t.lists("id","name").then(function(lists)
+                                  {
+    
+    
+    console.log("tlist is...:",lists)
+  }
+                                  
+                                  
+                                  )
 
   return t.cards("id", "idList", "name").then(function(cards) {
     // console.log(JSON.stringify(cards, null, 2))

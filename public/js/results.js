@@ -10,7 +10,7 @@ if (message) {
     // console.log("i value:", i);
     // console.log("message.length:", message.length);
     console.log("message[i][idList]", message[i]['idList']);
-    console.log("find the list:",t.lists('all'))
+    
     x = x + "<br>" + message[i]['idList']+ ":" + message[i]['value'] + "</br>";
   // document.getElementById("value").innerText = message[i]['value'];
   }
