@@ -137,6 +137,8 @@ var onBtnClick = function(t, opts) {
       // });
 
       return t.lists("id", "name").then(function(lists) {
+        
+      //retrieve list name from list id         
         lists.map(key => {
           for (var prop in holder) {
             if (key.id == prop) {
