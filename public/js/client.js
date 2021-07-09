@@ -13,23 +13,17 @@ var BACKEND_ICON =
 var ROCKET_ICON =
   "https://cdn.glitch.com/aef55bcb-cec2-438b-98c0-959249969810%2Fc69415fd-f70e-4e03-b43b-98b8960cd616_white-rocket-ship.png?v=1616729876518";
 
-
-
 var onBtnClick = function(t, opts) {
   // console.log('Someone clicked the button');
   var cardEstimateArr = new Array();
   var obj2 = [];
-
 
   // t.cards return a set of values,
   //values are in object of nested array,
   //values of outer array assign to tempArray
   //then values of inner array assigned to an array of card IDs as keys
 
-
   return t.cards("id", "idList", "name").then(function(cards) {
-
-
     //cardID array created with all IDs in on the board
     // var tempArray = Object.values(cards);
     console.log("Cards values :", cards);
@@ -40,23 +34,22 @@ var onBtnClick = function(t, opts) {
 
     var promises = [];
     var cArr = [];
-    
+
     cards.map(
       key =>
- 
         promises.push(
- 
           t.get(key.id, "shared").then(function(data) {
-
-              listEstimateArr.push({
-                idList: key.idList,
-                backendEstimate: data.backend_estimate ? data.backend_estimate: 0,
-                frontendEstimate: data.frontend_estimate ? data.frontend_estimate : 0
-              });
+            listEstimateArr.push({
+              idList: key.idList,
+              backendEstimate: data.backend_estimate
+                ? data.backend_estimate
+                : 0,
+              frontendEstimate: data.frontend_estimate
+                ? data.frontend_estimate
+                : 0
+            });
             // });
           })
-          
-          
         )
       // .then(() =>console.log("listEstimateArr: ", listEstimateArr))
     );
@@ -74,37 +67,50 @@ var onBtnClick = function(t, opts) {
             holder[d.idList] +
             (parseFloat(d.backendEstimate) ? parseFloat(d.backendEstimate) : 0);
           
-          holder2[d.idList] = holder2[d.idList] + parseFloat(d.frontendEstimate)
-            ? parseFloat(d.frontendEstimate)
-            : 0;
+             holder2[d.idList] =
+            holder2[d.idList] +
+            (parseFloat(d.frontendEstimate) ? parseFloat(d.frontendEstimate) : 0);
           
         } else {
           holder[d.idList] = parseFloat(d.backendEstimate)
             ? parseFloat(d.backendEstimate)
             : 0;
-          holder2[d.idList] = (parseFloat(d.frontendEstimate)
-            ? parseFloat(d.frontendEstimate)
-            : 0);
+              holder2[d.idList] = parseFloat(d.backendEstimate)
+            ? parseFloat(d.backendEstimate)
+            : 0;
+        }})
+
         
-        }
-      });
+      //         listEstimateArr.forEach(function(d) {
+      //   if (holder2.hasOwnProperty(d.idList)) {
+      //     holder2[d.idList] =
+      //       holder2[d.idList] + parseFloat(d.frontendEstimate)
+      //         ? parseFloat(d.frontendEstimate)
+      //         : 0;
+      //   } else {
+      //     holder2[d.idList] = parseFloat(d.frontendEstimate)
+      //       ? parseFloat(d.frontendEstimate)
+      //       : 0;
+      //   }
+      // });
 
       console.log("listEstimateArr...3:", listEstimateArr);
 
+      console.log("holder: ", holder);
+      console.log("holder2: ", holder2);
 
-      
-      console.log("holder: ",holder)
-      console.log("holder2: ",holder2)
-      
       return t.lists("id", "name").then(function(lists) {
-        
-      //retrieve list name from list id         
+        //retrieve list name from list id
         lists.map(key => {
           for (var prop in holder) {
-            console.log("holder[prop]: ",holder[prop])
+            console.log("holder[prop]: ", holder[prop]);
             if (key.id == prop) {
-              console.log("holder2[prop]: ",holder2[prop])
-              obj2.push({ nameList: key.name, value: holder[prop], value2:holder2[prop] });
+              console.log("holder2[prop]: ", holder2[prop]);
+              obj2.push({
+                nameList: key.name,
+                value: holder[prop],
+                value2: holder2[prop]
+              });
             }
           }
         });
@@ -116,9 +122,7 @@ var onBtnClick = function(t, opts) {
           args: { message: obj2 }
         });
       });
-
     });
-
   });
 };
 
@@ -134,13 +138,9 @@ window.TrelloPowerUp.initialize({
         text: "Callback",
         condition: "always",
         callback: function(t) {
-
-
           return onBtnClick(t);
-
         }
       }
-
     ];
   },
 
