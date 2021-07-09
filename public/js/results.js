@@ -14,12 +14,12 @@ if (message) {
     x =
       x +
       "<p></p>" +
-      "(" +
+      "<b>" +
       message[i]["nameList"] +
-      ")" +
-      "<p><span style='background-color:DodgerBlue'>B:" +
+      "</b>" +
+      "<p><span style='background-color:RoyalBlue;color:white'>B: &nbsp" +
       message[i]["value"] +
-      "</span> &nbsp <span tyle='background-color:Orange'>F:"  +
+      "</span> <span style='background-color:Orange;color:white'>F: &nbsp"  +
       message[i]["value2"] +
       "</span> </p>";
     // document.getElementById("value").innerText = message[i]['value'];
