@@ -13,29 +13,7 @@ var BACKEND_ICON =
 var ROCKET_ICON =
   "https://cdn.glitch.com/aef55bcb-cec2-438b-98c0-959249969810%2Fc69415fd-f70e-4e03-b43b-98b8960cd616_white-rocket-ship.png?v=1616729876518";
 
-// function toCall(t, tempArray, cardEstimateArr, listEstimateArr, callBack) {
-//   tempArray
-//     .map(key =>
-//       t.get(key.id, "shared", "backend_estimate", "").then(function(data) {
-//         cardEstimateArr.push({
-//           id: key.id,
-//           idList: key.idList,
-//           backendEstimate: data
-//         });
-//         // cardEstimateArr.push([key['id'],key['idList'],data]);
-//         listEstimateArr.push({
-//           idList: key.idList,
-//           backendEstimate: data
-//         });
-//       })
-//     )
-//     .then(callBack(cardEstimateArr, listEstimateArr));
-// }
 
-// function callBack(cardEstimateArr, listEstimateArr) {
-//   console.log("cardEstimateArr:", cardEstimateArr);
-//   console.log("listEstimateArr:", listEstimateArr);
-// }
 
 var onBtnClick = function(t, opts) {
   // console.log('Someone clicked the button');
@@ -48,11 +26,6 @@ var onBtnClick = function(t, opts) {
   //values of outer array assign to tempArray
   //then values of inner array assigned to an array of card IDs as keys
 
-  //   return t.popup({
-  //         title: "Calculated Points",
-  //         url: "./results.html",
-  //         args: { message: "obj" }
-  //       });
 
   return t.cards("id", "idList", "name").then(function(cards) {
 
@@ -67,7 +40,7 @@ var onBtnClick = function(t, opts) {
 
     var promises = [];
     var cArr = [];
-             // let myKey = ["backend_estimate"]
+    
     cards.map(
       key =>
  
@@ -101,7 +74,7 @@ var onBtnClick = function(t, opts) {
             holder[d.idList] +
             (parseFloat(d.backendEstimate) ? parseFloat(d.backendEstimate) : 0);
           
-          holder2[d.idList] = holder[d.idList] + parseFloat(d.frontendEstimate)
+          holder2[d.idList] = holder2[d.idList] + parseFloat(d.frontendEstimate)
             ? parseFloat(d.frontendEstimate)
             : 0;
           
@@ -121,15 +94,16 @@ var onBtnClick = function(t, opts) {
 
       
       console.log("holder: ",holder)
+      console.log("holder2: ",holder2)
       
       return t.lists("id", "name").then(function(lists) {
         
       //retrieve list name from list id         
         lists.map(key => {
           for (var prop in holder) {
-            console.log("holder[prop]1: ",holder[prop])
+            console.log("holder[prop]: ",holder[prop])
             if (key.id == prop) {
-              console.log("holder[prop]2: ",holder[prop])
+              console.log("holder2[prop]: ",holder2[prop])
               obj2.push({ nameList: key.name, value: holder[prop], value2:holder2[prop] });
             }
           }
@@ -142,23 +116,9 @@ var onBtnClick = function(t, opts) {
           args: { message: obj2 }
         });
       });
-      // t.set('board', 'shared', obj2);
-      // return obj2;
-      //           return t.popup({
-      //            title: 'Change Time',
-      //              url: "./results.html",
-      //             args: { obj2: "You can access these with t.arg()" },
-      //             height: 278 // initial height, can be changed later
 
-      //           })
     });
-    // console.log(obj2);
 
-    // return t.popup({
-    //   title: "Calculated Points",
-    //   url: "./results.html",
-    //   // args: { message: t.get('board', 'shared','obj2size') }
-    // });
   });
 };
 
@@ -174,30 +134,13 @@ window.TrelloPowerUp.initialize({
         text: "Callback",
         condition: "always",
         callback: function(t) {
-          // obj = onBtnClick(t)
+
 
           return onBtnClick(t);
-          // .then(function() {
-          //       return t.popup({
-          //         title: "Calculated Points",
-          //         url: "./results.html",
-          //         args: { message: obj }
-          //       });
-          // })
+
         }
       }
-      //         {
-      //   // or we can also have a button that is just a simple url
-      //   // clicking it will open a new tab at the provided url
-      //   icon: {
-      //     dark: WHITE_ROCKET_ICON,
-      //     light: BLACK_ROCKET_ICON
-      //   },
-      //   text: 'URL',
-      //   condition: 'always',
-      //   url: 'https://trello.com/inspiration',
-      //   target: 'Inspiring Boards' // optional target for above url
-      // }
+
     ];
   },
 
