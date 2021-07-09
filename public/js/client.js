@@ -13,6 +13,10 @@ var BACKEND_ICON =
 var ROCKET_ICON =
   "https://cdn.glitch.com/aef55bcb-cec2-438b-98c0-959249969810%2Fc69415fd-f70e-4e03-b43b-98b8960cd616_white-rocket-ship.png?v=1616729876518";
 
+var DISRUPTEM_ICON1 = "https://cdn.glitch.com/bcb67d52-05a1-4b6e-a315-f5bae36b69eb%2FIcon-Color%403x.png?v=1625811265010"
+var DISRUPTEM_ICON2 = "https://cdn.glitch.com/bcb67d52-05a1-4b6e-a315-f5bae36b69eb%2F1.png?v=1625811412559"
+var DISRUPTEM_ICON3 = "https://cdn.glitch.com/bcb67d52-05a1-4b6e-a315-f5bae36b69eb%2F3.png?v=1625811688561"
+
 var onBtnClick = function(t, opts) {
   // console.log('Someone clicked the button');
   var cardEstimateArr = new Array();
@@ -121,8 +125,8 @@ window.TrelloPowerUp.initialize({
       {
         // we can either provide a button that has a callback function
         icon: {
-          dark: WHITE_ROCKET_ICON,
-          light: BLACK_ROCKET_ICON
+          dark: DISRUPTEM_ICON3,
+          light: DISRUPTEM_ICON3
         },
         text: "Disrupt'em",
         condition: "always",
