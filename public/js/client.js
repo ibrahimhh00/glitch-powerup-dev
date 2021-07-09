@@ -109,16 +109,17 @@ var onBtnClick = function(t, opts) {
           holder[d.idList] =
             holder[d.idList] +
             (parseFloat(d.backendEstimate) ? parseFloat(d.backendEstimate) : 0);
-          +(parseFloat(d.frontendEstimate)
-            ? parseFloat(d.frontendEstimate)
-            : 0);
+          // +(parseFloat(d.frontendEstimate)
+          //   ? parseFloat(d.frontendEstimate)
+          //   : 0);
         } else {
           holder[d.idList] = parseFloat(d.backendEstimate)
             ? parseFloat(d.backendEstimate)
             : 0;
-          +(parseFloat(d.frontendEstimate)
-            ? parseFloat(d.frontendEstimate)
-            : 0);
+          // +(parseFloat(d.frontendEstimate)
+          //   ? parseFloat(d.frontendEstimate)
+          //   : 0);
+        
         }
       });
 
