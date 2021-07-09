@@ -15,7 +15,7 @@ var ROCKET_ICON =
 
 var DISRUPTEM_ICON1 = "https://cdn.glitch.com/bcb67d52-05a1-4b6e-a315-f5bae36b69eb%2FIcon-Color%403x.png?v=1625811265010"
 var DISRUPTEM_ICON2 = "https://cdn.glitch.com/bcb67d52-05a1-4b6e-a315-f5bae36b69eb%2F1.png?v=1625811412559"
-var DISRUPTEM_ICON3 = "https://cdn.glitch.com/bcb67d52-05a1-4b6e-a315-f5bae36b69eb%2F3.png?v=1625811688561"
+var DISRUPTEM_ICON3 = "https://cdn.glitch.com/bcb67d52-05a1-4b6e-a315-f5bae36b69eb%2Fdisruptem-Icon_White.png?v=1625811831046"
 
 var onBtnClick = function(t, opts) {
   // console.log('Someone clicked the button');
