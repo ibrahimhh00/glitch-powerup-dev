@@ -124,7 +124,7 @@ window.TrelloPowerUp.initialize({
           dark: WHITE_ROCKET_ICON,
           light: BLACK_ROCKET_ICON
         },
-        text: "Callback",
+        text: "Disrupt'em",
         condition: "always",
         callback: function(t) {
           return onBtnClick(t);
