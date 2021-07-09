@@ -37,6 +37,7 @@ var ROCKET_ICON =
 //   console.log("listEstimateArr:", listEstimateArr);
 // }
 
+
 var onBtnClick = function(t, opts) {
   // console.log('Someone clicked the button');
   var cardEstimateArr = new Array();
@@ -77,23 +78,21 @@ var onBtnClick = function(t, opts) {
         //retrieve value of backend_estimate for each card and then assign it to cardEstimateArr values and listEstimateArr
         promises.push(
           t.get(key.id, "shared", "backend_estimate", "").then(function(data) {
-            t.get(key.id, "shared", "frontend_estimate", "").then(function(
-              data2
-            ) {
-              console.log("data2:", data2);
-              // cardEstimateArr.push({
-              //   id: key.id,
-              //   idList: key.idList,
-              //   backendEstimate: data
-              // });
-              // cardEstimateArr.push([key['id'],key['idList'],data]);
-              listEstimateArr.push({
-                idList: key.idList,
-                backendEstimate: data,
-                frontendEstimate: data2
-              });
+           t.get(key.id, "shared", "frontend_estimate", "").then(function(data2) {
+             console.log("data2:",data2)
+            // cardEstimateArr.push({
+            //   id: key.id,
+            //   idList: key.idList,
+            //   backendEstimate: data
+            // });
+            // cardEstimateArr.push([key['id'],key['idList'],data]);
+            listEstimateArr.push({
+              idList: key.idList,
+              backendEstimate: data,
+              frontendEstimate: data2
             });
-          })
+           })
+           })
         )
       // .then(() =>console.log("listEstimateArr: ", listEstimateArr))
     );
@@ -102,29 +101,22 @@ var onBtnClick = function(t, opts) {
     Promise.all(promises, t).then(() => {
       var holder = {};
 
-      console.log("listEstimateArr...:", listEstimateArr);
+      console.log("listEstimateArr...:",listEstimateArr)
       // Combine same idList and add their values
       listEstimateArr.forEach(function(d) {
         if (holder.hasOwnProperty(d.idList)) {
           holder[d.idList] =
             holder[d.idList] +
             (parseFloat(d.backendEstimate) ? parseFloat(d.backendEstimate) : 0);
-          holder[d.idList] =
-            holder[d.idList] +
-            (parseFloat(d.frontendEstimate)
-              ? parseFloat(d.frontendEstimate)
-              : 0);
+            + 
+              (parseFloat(d.frontendEstimate) ? parseFloat(d.frontendEstimate) : 0);
         } else {
           holder[d.idList] = parseFloat(d.backendEstimate)
             ? parseFloat(d.backendEstimate)
             : 0;
-
-          holder[d.idList] = parseFloat(d.frontendEstimate)
-            ? parseFloat(d.frontendEstimate)
-            : 0;
         }
       });
-
+      
       //  // Combine same idList and add their values
       // listEstimateArr.forEach(function(d) {
       //   if (holder.hasOwnProperty(d.idList)) {
@@ -137,6 +129,7 @@ var onBtnClick = function(t, opts) {
       //       : 0;
       //   }
       // });
+
 
       return t.lists("id", "name").then(function(lists) {
         lists.map(key => {
@@ -482,6 +475,9 @@ window.TrelloPowerUp.initialize({
 
 // cardEstimateArr.map((key, value) => value.map((value1,value2) => listEstimateArr.set(value1,value2)))
 
+
+
+
 // =========
 
 // var onBtnClickX = function(t, opts) {
@@ -666,7 +662,11 @@ window.TrelloPowerUp.initialize({
 //   });
 // };
 
+
+
 // ======
+
+
 
 // var onBtnClick = function(t, opts) {
 //   // console.log('Someone clicked the button');
@@ -761,3 +761,4 @@ window.TrelloPowerUp.initialize({
 
 //   });
 // };
+
