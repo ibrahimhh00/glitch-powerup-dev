@@ -79,6 +79,7 @@ var onBtnClick = function(t, opts) {
         promises.push(
           t.get(key.id, "shared", "backend_estimate", "").then(function(data) {
            t.get(key.id, "shared", "frontend_estimate", "").then(function(data2) {
+             console.log("data2:",data2)
             // cardEstimateArr.push({
             //   id: key.id,
             //   idList: key.idList,
