@@ -68,7 +68,7 @@ var onBtnClick = function(t, opts) {
 
     var promises = [];
     var cArr = [];
-             let myKey = ["backend_estimate"]
+             // let myKey = ["backend_estimate"]
     cards.map(
       key =>
         // console.log('test')
@@ -78,11 +78,11 @@ var onBtnClick = function(t, opts) {
         //retrieve value of backend_estimate for each card and then assign it to cardEstimateArr values and listEstimateArr
         promises.push(
  
-          t.get(key.id, "shared", myKey, "").then(function(data) {
+          t.get(key.id, "shared").then(function(data) {
             // t.get(key.id, "shared", "frontend_estimate", "").then(function(
             //   data2
             // ) {
-              // console.log("data2:", data2);
+              // console.log("data:", data.backend_estimate);
               // cardEstimateArr.push({
               //   id: key.id,
               //   idList: key.idList,
@@ -91,8 +91,8 @@ var onBtnClick = function(t, opts) {
               // cardEstimateArr.push([key['id'],key['idList'],data]);
               listEstimateArr.push({
                 idList: key.idList,
-                backendEstimate: data,
-                // frontendEstimate: data2
+                backendEstimate: data.backend_estimate ? data.backend_estimate: 0,
+                frontendEstimate: data.frontend_estimate ? data.frontend_estimate : 0
               });
             // });
           })
