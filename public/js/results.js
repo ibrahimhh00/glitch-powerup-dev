@@ -17,11 +17,11 @@ if (message) {
       "(" +
       message[i]["nameList"] +
       ")" +
-      "<p>B:" +
+      "<p><span style='background-color:DodgerBlue'>B:" +
       message[i]["value"] +
-      "   F:"  +
+      "</span> &nbsp <span tyle='background-color:Orange'>F:"  +
       message[i]["value2"] +
-      "</p>";
+      "</span> </p>";
     // document.getElementById("value").innerText = message[i]['value'];
   }
   document.getElementById("list").innerHTML = x;
