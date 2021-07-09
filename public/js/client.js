@@ -102,7 +102,7 @@ var onBtnClick = function(t, opts) {
     Promise.all(promises, t).then(() => {
       var holder = {};
 
-      console.log("listEstimateArr...:", listEstimateArr);
+      console.log("listEstimateArr...2:", listEstimateArr);
       // Combine same idList and add their values
       listEstimateArr.forEach(function(d) {
         if (holder.hasOwnProperty(d.idList)) {
@@ -122,7 +122,7 @@ var onBtnClick = function(t, opts) {
         }
       });
 
-      console.log("listEstimateArr...2:", listEstimateArr);
+      console.log("listEstimateArr...3:", listEstimateArr);
       //  // Combine same idList and add their values
       // listEstimateArr.forEach(function(d) {
       //   if (holder.hasOwnProperty(d.idList)) {
