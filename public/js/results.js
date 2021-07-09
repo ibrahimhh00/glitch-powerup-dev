@@ -19,6 +19,8 @@ if (message) {
       ")" +
       "<p></p> B:" +
       message[i]["value"] +
+      "<p></p> F:" +
+      message[i]["value2"] +
       "</br>";
     // document.getElementById("value").innerText = message[i]['value'];
   }

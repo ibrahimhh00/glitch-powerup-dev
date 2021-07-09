@@ -41,7 +41,7 @@ var onBtnClick = function(t, opts) {
   // console.log('Someone clicked the button');
   var cardEstimateArr = new Array();
   var obj2 = [];
-  // var obj3 = [3, 3, 3];
+
 
   // t.cards return a set of values,
   //values are in object of nested array,
@@ -55,8 +55,7 @@ var onBtnClick = function(t, opts) {
   //       });
 
   return t.cards("id", "idList", "name").then(function(cards) {
-    // console.log(JSON.stringify(cards, null, 2))
-    // console.log('backend_esitmate: ',t.get("5f53e15a6bb8a9122694687f", 'shared', 'backend_estimate'))
+
 
     //cardID array created with all IDs in on the board
     // var tempArray = Object.values(cards);
@@ -71,24 +70,11 @@ var onBtnClick = function(t, opts) {
              // let myKey = ["backend_estimate"]
     cards.map(
       key =>
-        // console.log('test')
-        // console.log(key["id"]),
-        // console.log('backend_esitmate: ',t.get("5f53e15a6bb8a9122694687f", 'shared', 'backend_estimate','no value')))
-
-        //retrieve value of backend_estimate for each card and then assign it to cardEstimateArr values and listEstimateArr
+ 
         promises.push(
  
           t.get(key.id, "shared").then(function(data) {
-            // t.get(key.id, "shared", "frontend_estimate", "").then(function(
-            //   data2
-            // ) {
-              // console.log("data:", data.backend_estimate);
-              // cardEstimateArr.push({
-              //   id: key.id,
-              //   idList: key.idList,
-              //   backendEstimate: data
-              // });
-              // cardEstimateArr.push([key['id'],key['idList'],data]);
+
               listEstimateArr.push({
                 idList: key.idList,
                 backendEstimate: data.backend_estimate ? data.backend_estimate: 0,
@@ -104,7 +90,8 @@ var onBtnClick = function(t, opts) {
 
     //Pass listEstimateArr to promise caller, merge idList that are equal and sum the their backendEstimate values
     Promise.all(promises, t).then(() => {
-      var holder = {};
+      var holder = {}; // holds the merged lists of backend_estimate
+      var holder2 = {}; // holds the merged lists of frontend_estimate
 
       console.log("listEstimateArr...2:", listEstimateArr);
       // Combine same idList and add their values
@@ -113,33 +100,24 @@ var onBtnClick = function(t, opts) {
           holder[d.idList] =
             holder[d.idList] +
             (parseFloat(d.backendEstimate) ? parseFloat(d.backendEstimate) : 0);
-          // +(parseFloat(d.frontendEstimate)
-          //   ? parseFloat(d.frontendEstimate)
-          //   : 0);
+          
+          holder2[d.idList] = holder[d.idList] + parseFloat(d.frontendEstimate)
+            ? parseFloat(d.frontendEstimate)
+            : 0;
+          
         } else {
           holder[d.idList] = parseFloat(d.backendEstimate)
             ? parseFloat(d.backendEstimate)
             : 0;
-          // +(parseFloat(d.frontendEstimate)
-          //   ? parseFloat(d.frontendEstimate)
-          //   : 0);
+          holder2[d.idList] = (parseFloat(d.frontendEstimate)
+            ? parseFloat(d.frontendEstimate)
+            : 0);
         
         }
       });
 
       console.log("listEstimateArr...3:", listEstimateArr);
-      //  // Combine same idList and add their values
-      // listEstimateArr.forEach(function(d) {
-      //   if (holder.hasOwnProperty(d.idList)) {
-      //     holder[d.idList] =
-      //       holder[d.idList] +
-      //       (parseFloat(d.frontendEstimate) ? parseFloat(d.frontendEstimate) : 0);
-      //   } else {
-      //     holder[d.idList] = parseFloat(d.frontendEstimate)
-      //       ? parseFloat(d.frontendEstimate)
-      //       : 0;
-      //   }
-      // });
+
 
       
       console.log("holder: ",holder)
@@ -152,7 +130,7 @@ var onBtnClick = function(t, opts) {
             console.log("holder[prop]1: ",holder[prop])
             if (key.id == prop) {
               console.log("holder[prop]2: ",holder[prop])
-              obj2.push({ nameList: key.name, value: holder[prop] });
+              obj2.push({ nameList: key.name, value: holder[prop], value2:holder2[prop] });
             }
           }
         });
