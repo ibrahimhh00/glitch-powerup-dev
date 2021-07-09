@@ -13,15 +13,15 @@ if (message) {
 
     x =
       x +
-      "<br>" +
+      "<p></p>" +
       "(" +
       message[i]["nameList"] +
       ")" +
-      "<p></p> B:" +
+      "<p>B:" +
       message[i]["value"] +
-      "<p></p> F:" +
+      "   F:"  +
       message[i]["value2"] +
-      "</br>";
+      "</p>";
     // document.getElementById("value").innerText = message[i]['value'];
   }
   document.getElementById("list").innerHTML = x;

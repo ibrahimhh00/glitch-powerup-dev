@@ -66,33 +66,22 @@ var onBtnClick = function(t, opts) {
           holder[d.idList] =
             holder[d.idList] +
             (parseFloat(d.backendEstimate) ? parseFloat(d.backendEstimate) : 0);
-          
-             holder2[d.idList] =
+
+          holder2[d.idList] =
             holder2[d.idList] +
-            (parseFloat(d.frontendEstimate) ? parseFloat(d.frontendEstimate) : 0);
-          
+            (parseFloat(d.frontendEstimate)
+              ? parseFloat(d.frontendEstimate)
+              : 0);
         } else {
           holder[d.idList] = parseFloat(d.backendEstimate)
             ? parseFloat(d.backendEstimate)
             : 0;
-              holder2[d.idList] = parseFloat(d.backendEstimate)
-            ? parseFloat(d.backendEstimate)
+          holder2[d.idList] = parseFloat(d.frontendEstimate)
+            ? parseFloat(d.frontendEstimate)
             : 0;
-        }})
+        }
+      });
 
-        
-      //         listEstimateArr.forEach(function(d) {
-      //   if (holder2.hasOwnProperty(d.idList)) {
-      //     holder2[d.idList] =
-      //       holder2[d.idList] + parseFloat(d.frontendEstimate)
-      //         ? parseFloat(d.frontendEstimate)
-      //         : 0;
-      //   } else {
-      //     holder2[d.idList] = parseFloat(d.frontendEstimate)
-      //       ? parseFloat(d.frontendEstimate)
-      //       : 0;
-      //   }
-      // });
 
       console.log("listEstimateArr...3:", listEstimateArr);
 
