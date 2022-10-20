@@ -119,7 +119,6 @@ var onBtnClick = function(t, opts) {
   });
 };
 
-var t = TrelloPowerUp.iframe();
 
 window.TrelloPowerUp.initialize({
   "board-buttons": function(t, opts) {
@@ -169,8 +168,8 @@ window.TrelloPowerUp.initialize({
       
       console.log(estimates);
       
-      var backend_estimate = estimates["card"]["shared"]["backend_estimate"];
-      var frontend_estimate = estimates["card"]["shared"]["frontend_estimate"];
+      var backend_estimate =   12 // estimates["card"]["shared"]["backend_estimate"];
+      var frontend_estimate =   15 // estimates["card"]["shared"]["frontend_estimate"];
 
       return [
         {
