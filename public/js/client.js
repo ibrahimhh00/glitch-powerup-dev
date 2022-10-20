@@ -119,8 +119,13 @@ var onBtnClick = function(t, opts) {
   });
 };
 
+var t = TrelloPowerUp.iframe();
+
 window.TrelloPowerUp.initialize({
   "board-buttons": function(t, opts) {
+    
+    console.log(opts);
+    
     return [
       {
         // we can either provide a button that has a callback function
@@ -161,6 +166,9 @@ window.TrelloPowerUp.initialize({
   "card-badges": function(t, options) {
     // return t.get('card', 'shared', 'backend_estimate')
     return t.getAll().then(function(estimates) {
+      
+      console.log(estimates);
+      
       var backend_estimate = estimates["card"]["shared"]["backend_estimate"];
       var frontend_estimate = estimates["card"]["shared"]["frontend_estimate"];
 
