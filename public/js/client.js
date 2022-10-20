@@ -121,7 +121,7 @@ var onBtnClick = function(t, opts) {
 
 var t = TrelloPowerUp.iframe();
 
-window.TrelloPowerUp.initialize({
+TrelloPowerUp.initialize({
   "board-buttons": function(t, opts) {
     
     console.log(opts);
