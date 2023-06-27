@@ -9,7 +9,7 @@ var BLACK_ROCKET_ICON =
 
 var BACKEND_ICON =
   "https://cdn.glitch.com/aef55bcb-cec2-438b-98c0-959249969810%2Fworksheet-number-monochrome-b-classroom.jpg?v=1616731943091";
-// var FRONTEND_ICON
+// var FRONTEND_ICONn
 var ROCKET_ICON =
   "https://cdn.glitch.com/aef55bcb-cec2-438b-98c0-959249969810%2Fc69415fd-f70e-4e03-b43b-98b8960cd616_white-rocket-ship.png?v=1616729876518";
 
