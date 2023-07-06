@@ -5,7 +5,7 @@ window.backend_estimate.addEventListener("submit", function (event) {
     backend_estimate: window.backend_estimateSize.value,
     frontend_estimate: window.frontend_estimateSize.value,
   };
-
+console.log("hello worlddddd")
   // Stop the browser trying to submit the form itself.
   event.preventDefault();
   return t

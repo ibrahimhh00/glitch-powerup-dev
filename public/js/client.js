@@ -26,7 +26,6 @@ var onBtnClick = function(t, opts) {
   //values are in object of nested array,
   //values of outer array assign to tempArray
   //then values of inner array assigned to an array of card IDs as keys
-
   return t.cards("id", "idList", "name").then(function(cards) {
     //cardID array created with all IDs in on the board
     // var tempArray = Object.values(cards);
