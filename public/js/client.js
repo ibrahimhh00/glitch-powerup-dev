@@ -13,11 +13,14 @@ var BACKEND_ICON =
 var ROCKET_ICON =
   "https://cdn.glitch.com/aef55bcb-cec2-438b-98c0-959249969810%2Fc69415fd-f70e-4e03-b43b-98b8960cd616_white-rocket-ship.png?v=1616729876518";
 
-var DISRUPTEM_ICON1 = "https://cdn.glitch.com/bcb67d52-05a1-4b6e-a315-f5bae36b69eb%2FIcon-Color%403x.png?v=1625811265010"
-var DISRUPTEM_ICON2 = "https://cdn.glitch.com/bcb67d52-05a1-4b6e-a315-f5bae36b69eb%2F1.png?v=1625811412559"
-var DISRUPTEM_ICON3 = "https://cdn.glitch.com/bcb67d52-05a1-4b6e-a315-f5bae36b69eb%2Fdisruptem-Icon_White.png?v=1625811831046"
+var DISRUPTEM_ICON1 =
+  "https://cdn.glitch.com/bcb67d52-05a1-4b6e-a315-f5bae36b69eb%2FIcon-Color%403x.png?v=1625811265010";
+var DISRUPTEM_ICON2 =
+  "https://cdn.glitch.com/bcb67d52-05a1-4b6e-a315-f5bae36b69eb%2F1.png?v=1625811412559";
+var DISRUPTEM_ICON3 =
+  "https://cdn.glitch.com/bcb67d52-05a1-4b6e-a315-f5bae36b69eb%2Fdisruptem-Icon_White.png?v=1625811831046";
 
-var onBtnClick = function(t, opts) {
+var onBtnClick = function (t, opts) {
   // console.log('Someone clicked the button');
   var cardEstimateArr = new Array();
   var obj2 = [];
@@ -26,7 +29,7 @@ var onBtnClick = function(t, opts) {
   //values are in object of nested array,
   //values of outer array assign to tempArray
   //then values of inner array assigned to an array of card IDs as keys
-  return t.cards("id", "idList", "name").then(function(cards) {
+  return t.cards("id", "idList", "name").then(function (cards) {
     //cardID array created with all IDs in on the board
     // var tempArray = Object.values(cards);
     console.log("Cards values :", cards);
@@ -39,9 +42,9 @@ var onBtnClick = function(t, opts) {
     var cArr = [];
 
     cards.map(
-      key =>
+      (key) =>
         promises.push(
-          t.get(key.id, "shared").then(function(data) {
+          t.get(key.id, "shared").then(function (data) {
             listEstimateArr.push({
               idList: key.idList,
               backendEstimate: data.backend_estimate
@@ -49,7 +52,7 @@ var onBtnClick = function(t, opts) {
                 : 0,
               frontendEstimate: data.frontend_estimate
                 ? data.frontend_estimate
-                : 0
+                : 0,
             });
             // });
           })
@@ -64,7 +67,7 @@ var onBtnClick = function(t, opts) {
 
       console.log("listEstimateArr...2:", listEstimateArr);
       // Combine same idList and add their values
-      listEstimateArr.forEach(function(d) {
+      listEstimateArr.forEach(function (d) {
         if (holder.hasOwnProperty(d.idList)) {
           holder[d.idList] =
             holder[d.idList] +
@@ -85,15 +88,14 @@ var onBtnClick = function(t, opts) {
         }
       });
 
-
       console.log("listEstimateArr...3:", listEstimateArr);
 
       console.log("holder: ", holder);
       console.log("holder2: ", holder2);
 
-      return t.lists("id", "name").then(function(lists) {
+      return t.lists("id", "name").then(function (lists) {
         //retrieve list name from list id
-        lists.map(key => {
+        lists.map((key) => {
           for (var prop in holder) {
             console.log("holder[prop]: ", holder[prop]);
             if (key.id == prop) {
@@ -101,7 +103,7 @@ var onBtnClick = function(t, opts) {
               obj2.push({
                 nameList: key.name,
                 value: holder[prop],
-                value2: holder2[prop]
+                value2: holder2[prop],
               });
             }
           }
@@ -111,48 +113,91 @@ var onBtnClick = function(t, opts) {
         return t.boardBar({
           title: "Calculated Points",
           url: "./results.html",
-          args: { message: obj2 }
+          args: { message: obj2 },
         });
       });
     });
   });
 };
 
-
 window.TrelloPowerUp.initialize({
-  "board-buttons": function(t, opts) {
-    
+  "board-buttons": function (t, opts) {
     console.log(opts);
-    
+
     return [
       {
         // we can either provide a button that has a callback function
         icon: {
           dark: DISRUPTEM_ICON3,
-          light: DISRUPTEM_ICON3
+          light: DISRUPTEM_ICON3,
         },
         text: "Disrupt'em",
         condition: "always",
-        callback: function(t) {
+        callback: function (t) {
           return onBtnClick(t);
-        }
-      }
+        },
+      },
     ];
   },
 
-  "card-buttons": function(t, options) {
+  "card-buttons": function (t, options) {
     return [
       {
-        icon:
-          "https://cdn.glitch.com/1b42d7fe-bda8-4af8-a6c8-eff0cea9e08a%2Frocket-ship.png?1494946700421",
+        icon: "https://cdn.glitch.com/1b42d7fe-bda8-4af8-a6c8-eff0cea9e08a%2Frocket-ship.png?1494946700421",
         text: "Estimate Size",
-        callback: function(t) {
+        callback: function (t) {
           return t.popup({
             title: "Estimation",
-            url: "estimate.html"
+            url: "estimate.html",
           });
-        }
-      }
+        },
+      },
+      {
+        // icon is the URL to an image to be used as the button's icon.
+        // The image should be 24x24 pixels.
+        icon: "https://cdn.glitch.global/bcb67d52-05a1-4b6e-a315-f5bae36b69eb/Add-Button-PNG.png?v=1688645933100",
+
+        // text is the name of the button.
+        text: "Add/Update Sizing",
+
+        // callback is a function that is called when the button is clicked.
+        callback: function (t) {
+          // Popup an iframe when the button is clicked.
+          // The iframe will load the URL provided and display it in a modal.
+          return t.popup({
+            // Title of the popup
+            title: "Sizing Details",
+
+            // URL of the page to load into the iframe
+            url: "./sizing.html",
+
+            // Height of the popup in pixels
+            height: 184,
+          });
+        },
+      },
+      {
+        icon: "https://cdn.glitch.global/bcb67d52-05a1-4b6e-a315-f5bae36b69eb/Add-Button-PNG.png?v=1688645933100",
+        text: "Select Account",
+        callback: function (t) {
+          return t.popup({
+            title: "Select Account",
+            url: "./account.html",
+            height: 184,
+          });
+        },
+      },
+      {
+        icon: "./images/icon.png",
+        text: "Select Category",
+        callback: function (t) {
+          return t.popup({
+            title: "Select Category",
+            url: "./category.html",
+            height: 184,
+          });
+        },
+      },
     ];
   },
 
@@ -161,14 +206,13 @@ window.TrelloPowerUp.initialize({
   // 2. use t.get(board, shared ) to get all listIDs on the board-button level
   // 3. add all values for each estimate-listID_ match
   // 4. display the added value for each list with list name and value addition
-  "card-badges": function(t, options) {
+  "card-badges": function (t, options) {
     // return t.get('card', 'shared', 'backend_estimate')
-    return t.getAll().then(function(estimates) {
-      
+    return t.getAll().then(function (estimates) {
       console.log(estimates);
-      
-      var backend_estimate =   estimates["card"]["shared"]["backend_estimate"];
-      var frontend_estimate =   estimates["card"]["shared"]["frontend_estimate"];
+
+      var backend_estimate = estimates["card"]["shared"]["backend_estimate"];
+      var frontend_estimate = estimates["card"]["shared"]["frontend_estimate"];
 
       return [
         {
@@ -182,7 +226,7 @@ window.TrelloPowerUp.initialize({
               ? null
               : "B: " + backend_estimate,
           color:
-            backend_estimate == null || backend_estimate == 0 ? null : "blue"
+            backend_estimate == null || backend_estimate == 0 ? null : "blue",
         },
         {
           // icon: 'https://cdn.glitch.com/c69415fd-f70e-4e03-b43b-98b8960cd616%2Frocket-ship-grey.png?1496162964717',
@@ -197,15 +241,15 @@ window.TrelloPowerUp.initialize({
           color:
             frontend_estimate == null || frontend_estimate == 0
               ? null
-              : "orange"
-        }
+              : "orange",
+        },
       ];
     });
   },
 
-  "card-detail-badges": function(t, options) {
+  "card-detail-badges": function (t, options) {
     // return t.get('card', 'shared', 'backend_estimate')
-    return t.getAll().then(function(estimates) {
+    return t.getAll().then(function (estimates) {
       var backend_estimate = estimates["card"]["shared"]["backend_estimate"];
       var frontend_estimate = estimates["card"]["shared"]["frontend_estimate"];
       return [
@@ -217,12 +261,12 @@ window.TrelloPowerUp.initialize({
             backend_estimate == null || backend_estimate == 0
               ? null
               : backend_estimate,
-          callback: function(t) {
+          callback: function (t) {
             return t.popup({
               title: "Backend Estimation",
-              url: "estimate.html"
+              url: "estimate.html",
             });
-          }
+          },
         },
         {
           title: "Frontend Estimate",
@@ -234,14 +278,14 @@ window.TrelloPowerUp.initialize({
             frontend_estimate == null || frontend_estimate == 0
               ? null
               : frontend_estimate,
-          callback: function(t) {
+          callback: function (t) {
             return t.popup({
               title: "Frontend Estimation",
-              url: "estimate.html"
+              url: "estimate.html",
             });
-          }
-        }
+          },
+        },
       ];
     });
-  }
+  },
 });
