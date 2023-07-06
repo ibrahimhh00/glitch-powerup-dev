@@ -158,7 +158,7 @@ window.TrelloPowerUp.initialize({
         icon: "https://cdn.glitch.global/bcb67d52-05a1-4b6e-a315-f5bae36b69eb/Add-Button-PNG.png?v=1688645933100",
 
         // text is the name of the button.
-        text: "Add/Update Sizing",
+        text: "Estimate",
 
         // callback is a function that is called when the button is clicked.
         callback: function (t) {
