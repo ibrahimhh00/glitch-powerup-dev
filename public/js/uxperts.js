@@ -1,10 +1,8 @@
 <html>
   <head>
     <link rel="stylesheet" href="https://p.trellocdn.com/power-up.min.css">
-    <style>
-      select {
-        wi: 30px;
-      }
+    <style> 
+      select { height: 30px; }
     </style>
     <script src="https://p.trellocdn.com/power-up.min.js"></script>
   </head>
