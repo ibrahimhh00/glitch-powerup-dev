@@ -169,7 +169,7 @@ window.TrelloPowerUp.initialize({
             title: "Sizing Details",
 
             // URL of the page to load into the iframe
-            url: "./uxperts.html",
+            url: "./sizing.html",
 
             // Height of the popup in pixels
             height: 184,

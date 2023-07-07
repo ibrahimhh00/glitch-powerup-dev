@@ -3,6 +3,16 @@
     <link rel="stylesheet" href="https://p.trellocdn.com/power-up.min.css">
     <style>
       select { height: 30px; }
+      body {
+        background-color: gray;
+      }
+      .select-members {
+        display: flex;
+        flex-direction: column
+      }
+      .select-members select {
+        width: 50%;
+      }
     </style>
     <script src="https://p.trellocdn.com/power-up.min.js"></script>
   </head>
@@ -19,12 +29,16 @@
         <option value="x-large">Extra Large 👖</option>
       </select> -->
       
-      <label for="frontend_estimateSize">Frontend Estimate:</label>
-      <input type="number" step="any" id="frontend_estimateSize">
+      <div class="select-members">
+        <label for="members">Choose a member:</label>
+      <select name="members" id="members">
+        <option value="">Ibrahim</option>
+      </select>
+      </div>
       
       <button type="submit" class="mod-primary">Save</button>
   
-    <script src="./js/estimate.js"></script>
+    <script src="./js/sizing.js"></script>
     </form>
   </body>
 </html>
