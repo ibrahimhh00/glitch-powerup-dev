@@ -28,13 +28,16 @@ function populateMembers(members) {
   });
 }
 
-$("estimate").submit((event) => {
+$("#estimate").submit(function(event) {
   event.preventDefault();
 
-  const selectedMemberId = $("membersList").val();
-  const sizing = $("estimation-size").val();
+  const selectedMemberId = $("#members").val();
+  const sizing = $("#estimation-size").val();
+  const selectedMemberName = $("#members option:selected").text();
+  console.log(selectedMemberId, sizing);
   t.set("card", "shared", "memberSizing", {
     memberId: selectedMemberId,
+    memberName: selectedMemberName,
     sizing: sizing,
   }).then(() => console.log("stored"));
   return t.closePopup();
