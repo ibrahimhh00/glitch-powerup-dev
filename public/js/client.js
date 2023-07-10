@@ -217,7 +217,7 @@ window.TrelloPowerUp.initialize({
         return memberSizing.map(function (ms) {
           return {
             // Display the member ID and sizing as the badge text
-            text: "Member: " + ms.memberId + ", Sizing: " + ms.sizing,
+            text: "Member: " + ms.memberName + ", Sizing: " + ms.sizing,
             // You could also set color and icon properties
           };
         });

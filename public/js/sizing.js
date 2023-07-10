@@ -28,7 +28,7 @@ function populateMembers(members) {
   });
 }
 
-$("#estimate").submit(function(event) {
+$("#estimate").submit(function (event) {
   event.preventDefault();
 
   const selectedMemberId = $("#members").val();
@@ -39,6 +39,14 @@ $("#estimate").submit(function(event) {
     memberId: selectedMemberId,
     memberName: selectedMemberName,
     sizing: sizing,
-  }).then(() => console.log("stored"));
+  })
+    .then(() => {
+      return t.get("card", "shared", "memberSizing");
+    })
+    .then((data) => {
+      console.log("Retrieved data: ", data);
+    })
+    .catch((error) => console.log("Error occurred: ", error));
+  console.log("saved");
   return t.closePopup();
 });
