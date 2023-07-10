@@ -143,16 +143,6 @@ window.TrelloPowerUp.initialize({
   "card-buttons": function (t, options) {
     return [
       {
-        icon: "https://cdn.glitch.com/1b42d7fe-bda8-4af8-a6c8-eff0cea9e08a%2Frocket-ship.png?1494946700421",
-        text: "Estimate Size",
-        callback: function (t) {
-          return t.popup({
-            title: "Estimation",
-            url: "estimate.html",
-          });
-        },
-      },
-      {
         // icon is the URL to an image to be used as the button's icon.
         // The image should be 24x24 pixels.
         icon: "https://cdn.glitch.global/bcb67d52-05a1-4b6e-a315-f5bae36b69eb/Add-Button-PNG.png?v=1688645933100",
@@ -176,28 +166,6 @@ window.TrelloPowerUp.initialize({
           });
         },
       },
-      {
-        icon: "https://cdn.glitch.global/bcb67d52-05a1-4b6e-a315-f5bae36b69eb/Add-Button-PNG.png?v=1688645933100",
-        text: "Select Account",
-        callback: function (t) {
-          return t.popup({
-            title: "Select Account",
-            url: "./account.html",
-            height: 184,
-          });
-        },
-      },
-      {
-        icon: "./images/icon.png",
-        text: "Select Category",
-        callback: function (t) {
-          return t.popup({
-            title: "Select Category",
-            url: "./category.html",
-            height: 184,
-          });
-        },
-      },
     ];
   },
 
@@ -213,13 +181,14 @@ window.TrelloPowerUp.initialize({
       .then(function (memberSizing) {
         // memberSizing is an array of member sizing objects
         // Map each member sizing to a badge
-      console.log("memberSizing", memberSizing)
+        console.log("memberSizing", memberSizing);
         return memberSizing.map(function (ms) {
+          console.log(ms)
           return {
             // Display the member ID and sizing as the badge text
-            title: 'Member sizing',
-            text: "Member: " + ms.memberName + ", Sizing: " + ms.sizing,
-            color: 'red'
+            title: ms.memberName,
+            text: "Sizing: " + ms.sizing,
+            color: "red",
             // You could also set color and icon properties
           };
         });
@@ -232,13 +201,13 @@ window.TrelloPowerUp.initialize({
       .then(function (memberSizing) {
         // memberSizing is an array of member sizing objects
         // Map each member sizing to a badge
-      console.log("memberSizing from card-detail-badges", memberSizing)
+        console.log("memberSizing from card-detail-badges", memberSizing);
         return memberSizing.map(function (ms) {
           return {
             // Display the member ID and sizing as the badge text
-            title: 'Member sizing',
+            title: "Member sizing",
             text: "Member: " + ms.memberName + ", Sizing: " + ms.sizing,
-            color: 'red'
+            color: "red",
             // You could also set color and icon properties
           };
         });
