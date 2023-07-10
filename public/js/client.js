@@ -217,7 +217,28 @@ window.TrelloPowerUp.initialize({
         return memberSizing.map(function (ms) {
           return {
             // Display the member ID and sizing as the badge text
+            title: 'Member sizing',
             text: "Member: " + ms.memberName + ", Sizing: " + ms.sizing,
+            color: 'red'
+            // You could also set color and icon properties
+          };
+        });
+      });
+  },
+  "card-detail-badges": function (t, options) {
+    // Use t.get to retrieve the stored data
+    return t
+      .get("card", "shared", "memberSizing")
+      .then(function (memberSizing) {
+        // memberSizing is an array of member sizing objects
+        // Map each member sizing to a badge
+      console.log("memberSizing from card-detail-badges", memberSizing)
+        return memberSizing.map(function (ms) {
+          return {
+            // Display the member ID and sizing as the badge text
+            title: 'Member sizing',
+            text: "Member: " + ms.memberName + ", Sizing: " + ms.sizing,
+            color: 'red'
             // You could also set color and icon properties
           };
         });

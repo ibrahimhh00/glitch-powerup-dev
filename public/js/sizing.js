@@ -48,5 +48,5 @@ $("#estimate").submit(function (event) {
     })
     .catch((error) => console.log("Error occurred: ", error));
   console.log("saved");
-  return t.closePopup();
+  // t.closePopup();
 });
