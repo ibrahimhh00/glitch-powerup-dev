@@ -207,46 +207,21 @@ window.TrelloPowerUp.initialize({
   // 3. add all values for each estimate-listID_ match
   // 4. display the added value for each list with list name and value addition
   "card-badges": function (t, options) {
-    // return t.get('card', 'shared', 'backend_estimate')
-    return t.getAll().then(function (estimates) {
-      console.log(estimates);
-
-      var backend_estimate = estimates["card"]["shared"]["backend_estimate"];
-      var frontend_estimate = estimates["card"]["shared"]["frontend_estimate"];
-
-      return [
-        {
-          // icon: 'https://cdn.glitch.com/c69415fd-f70e-4e03-b43b-98b8960cd616%2Frocket-ship-grey.png?1496162964717',
-          icon:
-            backend_estimate == null || backend_estimate == 0
-              ? null
-              : BLACK_ROCKET_ICON,
-          text:
-            backend_estimate == null || backend_estimate == 0
-              ? null
-              : "B: " + backend_estimate,
-          color:
-            backend_estimate == null || backend_estimate == 0 ? null : "blue",
-        },
-        {
-          // icon: 'https://cdn.glitch.com/c69415fd-f70e-4e03-b43b-98b8960cd616%2Frocket-ship-grey.png?1496162964717',
-          icon:
-            frontend_estimate == null || frontend_estimate == 0
-              ? null
-              : BLACK_ROCKET_ICON,
-          text:
-            frontend_estimate == null || frontend_estimate == 0
-              ? null
-              : "F: " + frontend_estimate,
-          color:
-            frontend_estimate == null || frontend_estimate == 0
-              ? null
-              : "orange",
-        },
-      ];
-    });
+    // Use t.get to retrieve the stored data
+    return t
+      .get("card", "shared", "memberSizing")
+      .then(function (memberSizing) {
+        // memberSizing is an array of member sizing objects
+        // Map each member sizing to a badge
+        return memberSizing.map(function (ms) {
+          return {
+            // Display the member ID and sizing as the badge text
+            text: "Member: " + ms.memberId + ", Sizing: " + ms.sizing,
+            // You could also set color and icon properties
+          };
+        });
+      });
   },
-
   "card-detail-badges": function (t, options) {
     // return t.get('card', 'shared', 'backend_estimate')
     return t.getAll().then(function (estimates) {

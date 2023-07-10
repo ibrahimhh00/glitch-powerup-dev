@@ -1,4 +1,3 @@
-
 const API_URL = "https://jsonplaceholder.typicode.com/users/";
 
 var t = window.TrelloPowerUp.iframe();
@@ -29,12 +28,14 @@ function populateMembers(members) {
   });
 }
 
-$('estimate').submit((event) => {
+$("estimate").submit((event) => {
   event.preventDefault();
-  
-  const selectedMemberId = $('membersList').val();
-  
-  t.set('card', 'shared', 'selectedMemberId', selectedMemberId).then(() => console.log("stored"))
+
+  const selectedMemberId = $("membersList").val();
+  const sizing = $("estimation-size").val();
+  t.set("card", "shared", "memberSizing", {
+    memberId: selectedMemberId,
+    sizing: sizing,
+  }).then(() => console.log("stored"));
   return t.closePopup();
-  
-})
+});
