@@ -35,18 +35,22 @@ $("#estimate").submit(function (event) {
   const sizing = $("#estimation-size").val();
   const selectedMemberName = $("#members option:selected").text();
   console.log(selectedMemberId, sizing);
-  t.set("card", "shared", "memberSizing", {
-    memberId: selectedMemberId,
-    memberName: selectedMemberName,
-    sizing: sizing,
-  })
+  t.get("card", "shared", "memberSizing", [])
+    .then(function (memberSizing) {
+      // memberSizing will be an empty array if it's not set yet.
+      // Now add the new member to it
+      memberSizing.push({
+        memberId: selectedMemberId,
+        memberName: selectedMemberName,
+        sizing: sizing,
+      });
+
+      // Now save it back
+      return t.set("card", "shared", "memberSizing", memberSizing);
+    })
     .then(() => {
-      return t.get("card", "shared", "memberSizing");
-    })
-    .then((data) => {
-      console.log("Retrieved data: ", data);
-    })
-    .catch((error) => console.log("Error occurred: ", error));
-  console.log("saved");
+      console.log("New member stored.");
+      return t.closePopup();
+    });
   // t.closePopup();
 });

@@ -186,8 +186,7 @@ window.TrelloPowerUp.initialize({
           console.log(ms)
           return {
             // Display the member ID and sizing as the badge text
-            title: ms.memberName,
-            text: "Sizing: " + ms.sizing,
+            text: ms.memberName + " Sizing: " + ms.sizing,
             color: "red",
             // You could also set color and icon properties
           };
@@ -205,8 +204,8 @@ window.TrelloPowerUp.initialize({
         return memberSizing.map(function (ms) {
           return {
             // Display the member ID and sizing as the badge text
-            title: "Member sizing",
-            text: "Member: " + ms.memberName + ", Sizing: " + ms.sizing,
+            title: ms.memberName,
+            text: "Sizing: " + ms.sizing,
             color: "red",
             // You could also set color and icon properties
           };
