@@ -250,9 +250,13 @@ window.TrelloPowerUp.initialize({
   },
   "card-detail-badges": function (t, options) {
     // Use t.get to retrieve the stored data
-    return t
-      .get("card", "shared", "memberSizing")
-      .then(function (memberSizing) {
+    return Promise.all([
+      t
+                        .get("card", "shared", "memberSizing"),
+                        t.get("card", "shared", "account"),
+                       ])
+      
+      .then(function ([memberSizing, account]) {
         // memberSizing is an array of member sizing objects
         // Map each member sizing to a badge
         console.log("memberSizing from card-detail-badges", memberSizing);
