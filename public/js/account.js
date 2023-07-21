@@ -22,12 +22,12 @@ function fetchMembers() {
 
 function populateMembers(accounts) {
   t.get("card", "shared", "account").then(function (account) {
-    let accountIds = account?.map((ms) => ms.accountId);
+    let accountIds = account.accountId;
 
     const accountsList = $("#accounts");
     accounts?.forEach(function (account) {
       console.log(account.id)
-      if (!accountIds?.includes(String(account.id))) {
+      if (!accountIds === account.id) {
         const option = `<option value="${account.id}">${account.name}</option>`;
         accountsList.append(option);
       }
