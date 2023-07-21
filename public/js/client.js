@@ -237,7 +237,12 @@ window.TrelloPowerUp.initialize({
       t.get("card", "shared", "account"),
       t.get("card", "shared", "category"),
     ]).then(function ([account, category]) {
-      return [{ text: account.accountName, color: "yellow" }];
+      return [account && { text: account.accountName, color: "yellow" }, category && {
+          // Display the member ID and sizing as the badge text
+          title: "Category",
+          text: "Name: " + category.categoryName,
+          color: "lime",
+        },];
     });
   },
   // return memberSizing.map(function (ms) {
@@ -254,7 +259,7 @@ window.TrelloPowerUp.initialize({
     return Promise.all([
       t.get("card", "shared", "memberSizing"),
       t.get("card", "shared", "account"),
-      t.get("card", "shared", "category")
+      t.get("card", "shared", "category"),
     ]).then(function ([memberSizing, account, category]) {
       console.log(memberSizing, account);
       // memberSizing is an array of member sizing objects
@@ -284,9 +289,9 @@ window.TrelloPowerUp.initialize({
         category && {
           // Display the member ID and sizing as the badge text
           title: "Category",
-          text: "Name: " + account.categoryName,
+          text: "Name: " + category.categoryName,
           color: "lime",
-        }
+        },
       ];
       return result;
     });
