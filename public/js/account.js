@@ -27,7 +27,7 @@ function populateMembers(accounts) {
     const accountsList = $("#accounts");
     accounts?.forEach(function (account) {
       console.log(account.id);
-      if (!(accountIds === account.id)) {
+      if (!(String(accountIds) === String(account.id))) {
         const option = `<option value="${account.id}">${account.name}</option>`;
         console.log(true)
         accountsList.append(option);

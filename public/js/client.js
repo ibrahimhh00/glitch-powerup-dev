@@ -233,51 +233,61 @@ window.TrelloPowerUp.initialize({
   // 4. display the added value for each list with list name and value addition
   "card-badges": function (t, options) {
     // Use t.get to retrieve the stored data
-    return t
-      .get("card", "shared", "memberSizing")
-      .then(function (memberSizing) {
-        // memberSizing is an array of member sizing objects
-        // Map each member sizing to a badge
-        console.log("memberSizing", memberSizing);
-        return memberSizing.map(function (ms) {
-          console.log(ms);
-          return {
-            // Display the member ID and sizing as the badge text
-            text: ms.memberName + " Sizing: " + ms.sizing,
-            color: "red",
-            // You could also set color and icon properties
-          };
-        });
-      });
+    return Promise.all([
+      t.get("card", "shared", "account"),
+      t.get("card", "shared", "category"),
+    ]).then(function ([account, category]) {
+      return [{ text: account.accountName, color: "yellow" }];
+    });
   },
+  // return memberSizing.map(function (ms) {
+  //         console.log(ms);
+  //         return {
+  //           // Display the member ID and sizing as the badge text
+  //           text: ms.memberName + " Sizing: " + ms.sizing,
+  //           color: "red",
+  //           // You could also set color and icon properties
+  //         };
+  //       });
   "card-detail-badges": function (t, options) {
     // Use t.get to retrieve the stored data
     return Promise.all([
       t.get("card", "shared", "memberSizing"),
       t.get("card", "shared", "account"),
-    ])
-    .then(function ([memberSizing, account]) {
-      console.log(memberSizing, account)
+      t.get("card", "shared", "category")
+    ]).then(function ([memberSizing, account, category]) {
+      console.log(memberSizing, account);
       // memberSizing is an array of member sizing objects
       // Map each member sizing to a badge
-      const members = memberSizing ? memberSizing.map(function (ms, index) {
-        return {
-          // Display the member ID and sizing as the badge text
-          title: ms.memberName,
-          text: "Sizing: " + ms.sizing,
-          color: "red",
-          callback: function (t, opts) {
-            return removeMemberBadge(t, index);
-          },
-          // You could also set color and icon properties
-        };
-      }) : [];
-      const result = [...members, {
+      const members = memberSizing
+        ? memberSizing.map(function (ms, index) {
+            return {
+              // Display the member ID and sizing as the badge text
+              title: ms.memberName,
+              text: "Sizing: " + ms.sizing,
+              color: "red",
+              callback: function (t, opts) {
+                return removeMemberBadge(t, index);
+              },
+              // You could also set color and icon properties
+            };
+          })
+        : [];
+      const result = [
+        ...members,
+        account && {
           // Display the member ID and sizing as the badge text
           title: "Account",
           text: "Name: " + account.accountName,
-          color: "yellow"
-      }];
+          color: "yellow",
+        },
+        category && {
+          // Display the member ID and sizing as the badge text
+          title: "Category",
+          text: "Name: " + account.categoryName,
+          color: "lime",
+        }
+      ];
       return result;
     });
   },
