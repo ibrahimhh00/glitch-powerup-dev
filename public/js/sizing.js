@@ -21,7 +21,7 @@ function fetchMembers() {
 }
 
 function populateMembers(members) {
-  t.get("card", "shared", "memberSizing").then(function (memberSizing) {
+  t.get("card", "shared", "memberSizing").then(function (memberSizing = []) {
     // memberSizing now contains the sizing data for members
     let memberIdsWithSizing = memberSizing.map((ms) => ms.memberId);
     console.log("memberIdsWithSizing", memberIdsWithSizing)
