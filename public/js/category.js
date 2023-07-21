@@ -3,16 +3,16 @@ const API_URL = "https://jsonplaceholder.typicode.com/users/";
 var t = window.TrelloPowerUp.iframe();
 
 $(document).ready(function () {
-  fetchMembers();
+  fetchCategories();
 });
 
-function fetchMembers() {
+function fetchCategories() {
   $.ajax({
     url: API_URL,
     type: "GET",
     success: function (data) {
       console.log(data);
-      populateMembers(data);
+      populateCategories(data);
     },
     error: function (error) {
       console.error("Error fetching members", error);
@@ -20,7 +20,7 @@ function fetchMembers() {
   });
 }
 
-function populateMembers(categories) {
+function populateCategories(categories) {
   t.get("card", "shared", "category").then(function (category) {
     let categoryIds = category?.categoryId;
   console.log(categoryIds)
@@ -39,18 +39,18 @@ function populateMembers(categories) {
 $("#category").submit(function (event) {
   event.preventDefault();
 
-  const selectedAccountId = $("#categories").val();
-  const selectedAccountName = $("#categories option:selected").text();
-  if (!selectedAccountName) {
+  const selectedCategoryId = $("#categories").val();
+  const selectedCategoryName = $("#categories option:selected").text();
+  if (!selectedCategoryName) {
     return;
   }
-  console.log(selectedAccountId, selectedAccountName);
+  console.log(selectedCategoryId, selectedCategoryName);
   t.get("card", "shared", "category", {})
     .then(function (category) {
       // Now save it back
       return t.set("card", "shared", "category", {
-        categoryId: selectedAccountId,
-        categoryName: selectedAccountName,
+        categoryId: selectedCategoryId,
+        categoryName: selectedCategoryName,
       });
     })
     .then(() => {
