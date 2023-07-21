@@ -256,7 +256,8 @@ window.TrelloPowerUp.initialize({
         // memberSizing is an array of member sizing objects
         // Map each member sizing to a badge
         console.log("memberSizing from card-detail-badges", memberSizing);
-        return memberSizing.map(function (ms, index) {
+      const result = []
+        const members = memberSizing.map(function (ms, index) {
           return {
             // Display the member ID and sizing as the badge text
             title: ms.memberName,
@@ -269,6 +270,7 @@ window.TrelloPowerUp.initialize({
             // You could also set color and icon properties
           };
         });
+        
       });
   },
   // "card-detail-badges": function (t, options) {

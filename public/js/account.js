@@ -48,7 +48,7 @@ $("#account").submit(function (event) {
     .then(function (account) {
       
       // Now save it back
-      return t.set("card", "shared", "accounts", {accountId: selectedAccountId, accountName: selectedAccountName});
+      return t.set("card", "shared", "account", {accountId: selectedAccountId, accountName: selectedAccountName});
     })
     .then(() => {
       console.log("New account stored.");
