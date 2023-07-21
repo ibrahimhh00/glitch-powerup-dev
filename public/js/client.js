@@ -130,7 +130,7 @@ function onBtnClickTwo(t) {
         let totalSize = 0;
         // dictionary to hold points per category
         let categoryPoints = {};
-        let categories = []
+        let categories = {}
         cards.forEach(function (card) {
           // retrieve memberSizing from the card
           Promise.all([t.get(card.id, "shared", "memberSizing"),t.get(card.id, "shared", "category") ]).then(function (
@@ -139,7 +139,9 @@ function onBtnClickTwo(t) {
             // calculate total points
             totalSize += memberSizing && memberSizing.reduce((acc, element) => Number(acc) + Number(element.sizing))
             if(category) {
-              
+              if(category in categories) {
+                categories[]
+              }
             }
             
           });
