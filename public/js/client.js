@@ -138,7 +138,9 @@ function onBtnClickTwo(t) {
           ) {
             // calculate total points
             totalSize += memberSizing && memberSizing.reduce((acc, element) => Number(acc) + Number(element.sizing))
-            if(categories)
+            if(category) {
+              
+            }
             
           });
         });
