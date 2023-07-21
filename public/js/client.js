@@ -260,7 +260,7 @@ window.TrelloPowerUp.initialize({
       console.log(memberSizing, account)
       // memberSizing is an array of member sizing objects
       // Map each member sizing to a badge
-      const members = memberSizing.map(function (ms, index) {
+      const members = memberSizing ? memberSizing.map(function (ms, index) {
         return {
           // Display the member ID and sizing as the badge text
           title: ms.memberName,
@@ -271,7 +271,7 @@ window.TrelloPowerUp.initialize({
           },
           // You could also set color and icon properties
         };
-      });
+      }) : [];
       const result = [...members, {
           // Display the member ID and sizing as the badge text
           title: "Account",

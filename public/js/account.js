@@ -22,13 +22,14 @@ function fetchMembers() {
 
 function populateMembers(accounts) {
   t.get("card", "shared", "account").then(function (account) {
-    let accountIds = account.accountId;
-
+    let accountIds = account?.accountId;
+  console.log(accountIds)
     const accountsList = $("#accounts");
     accounts?.forEach(function (account) {
-      console.log(account.id)
-      if (!accountIds === account.id) {
+      console.log(account.id);
+      if (!(accountIds === account.id)) {
         const option = `<option value="${account.id}">${account.name}</option>`;
+        console.log(true)
         accountsList.append(option);
       }
     });
@@ -40,15 +41,17 @@ $("#account").submit(function (event) {
 
   const selectedAccountId = $("#accounts").val();
   const selectedAccountName = $("#accounts option:selected").text();
-  if(!selectedAccountName) {
-    return
+  if (!selectedAccountName) {
+    return;
   }
   console.log(selectedAccountId, selectedAccountName);
   t.get("card", "shared", "account", {})
     .then(function (account) {
-      
       // Now save it back
-      return t.set("card", "shared", "account", {accountId: selectedAccountId, accountName: selectedAccountName});
+      return t.set("card", "shared", "account", {
+        accountId: selectedAccountId,
+        accountName: selectedAccountName,
+      });
     })
     .then(() => {
       console.log("New account stored.");
