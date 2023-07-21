@@ -44,7 +44,9 @@ $("#estimate").submit(function (event) {
   const selectedMemberId = $("#members").val();
   const sizing = $("#estimation-size").val();
   const selectedMemberName = $("#members option:selected").text();
-  if()
+  if(!sizing || !selectedMemberName) {
+    return
+  }
   console.log(selectedMemberId, sizing);
   t.get("card", "shared", "memberSizing", [])
     .then(function (memberSizing) {

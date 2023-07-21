@@ -119,7 +119,14 @@ var onBtnClick = function (t, opts) {
     });
   });
 };
-
+function removeMemberBadge(t, indexToRemove) {
+  return t.get('card', 'shared', 'memberSizing').then(function(memberSizing) {
+    // Remove the element at indexToRemove from memberSizing
+    const updatedMemberSizing = memberSizing.filter((_, index) => index !== indexToRemove);
+    // Update the memberSizing data in Trello
+    return t.set('card', 'shared', 'memberSizing', updatedMemberSizing);
+  });
+}
 window.TrelloPowerUp.initialize({
   "board-buttons": function (t, opts) {
     console.log(opts);
@@ -160,7 +167,7 @@ window.TrelloPowerUp.initialize({
 
             // URL of the page to load into the iframe
             url: "./sizing.html",
-
+        
             // Height of the popup in pixels
             height: 184,
           });
@@ -249,12 +256,16 @@ window.TrelloPowerUp.initialize({
         // memberSizing is an array of member sizing objects
         // Map each member sizing to a badge
         console.log("memberSizing from card-detail-badges", memberSizing);
-        return memberSizing.map(function (ms) {
+        return memberSizing.map(function (ms, index) {
           return {
             // Display the member ID and sizing as the badge text
             title: ms.memberName,
             text: "Sizing: " + ms.sizing,
             color: "red",
+            callback: function (t, opts) {
+              return removeMemberBadge(t, index);
+            }
+            
             // You could also set color and icon properties
           };
         });
