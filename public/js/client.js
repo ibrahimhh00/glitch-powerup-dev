@@ -129,6 +129,16 @@ function removeMemberBadge(t, indexToRemove) {
     return t.set("card", "shared", "memberSizing", updatedMemberSizing);
   });
 }
+function removeAccountBadge(t) {
+  return t.get("card", "shared", "account").then(function () {
+    return t.remove("card", "shared", "account");
+  });
+}
+function removeCategoryBadge(t) {
+  return t.get("card", "shared", "category").then(function () {
+    return t.remove("card", "shared", "category");
+  });
+}
 window.TrelloPowerUp.initialize({
   "board-buttons": function (t, opts) {
     console.log(opts);
@@ -237,12 +247,15 @@ window.TrelloPowerUp.initialize({
       t.get("card", "shared", "account"),
       t.get("card", "shared", "category"),
     ]).then(function ([account, category]) {
-      return [account && { text: account.accountName, color: "yellow" }, category && {
+      return [
+        account && { text: account.accountName, color: "yellow" },
+        category && {
           // Display the member ID and sizing as the badge text
           title: "Category",
           text: "Name: " + category.categoryName,
           color: "lime",
-        },];
+        },
+      ];
     });
   },
   // return memberSizing.map(function (ms) {
@@ -285,12 +298,18 @@ window.TrelloPowerUp.initialize({
           title: "Account",
           text: "Name: " + account.accountName,
           color: "yellow",
+          callback: function (t, opts) {
+            return removeAccountBadge(t);
+          },
         },
         category && {
           // Display the member ID and sizing as the badge text
           title: "Category",
           text: "Name: " + category.categoryName,
           color: "lime",
+          callback: function (t, opts) {
+            return removeCategoryBadge(t);
+          },
         },
       ];
       return result;
