@@ -119,6 +119,44 @@ var onBtnClick = function (t, opts) {
     });
   });
 };
+
+function onBtnClickTwo(t) {
+  // get all lists on the board
+  return t.lists("all").then(function (lists) {
+    lists.forEach(function (list) {
+      console.log("List name: ", list.name);
+      // get all cards in the list
+      t.cards("all", list.id).then(function (cards) {
+        let totalPoints = 0;
+        // dictionary to hold points per category
+        let categoryPoints = {};
+        cards.forEach(function (card) {
+          // retrieve memberSizing from the card
+          t.get(card.id, "shared", "memberSizing").then(function (
+            memberSizing
+          ) {
+            // calculate total points
+            totalPoints += parseInt(memberSizing.sizing);
+            // calculate points per category
+            if (memberSizing.memberName in categoryPoints) {
+              categoryPoints[memberSizing.memberName] += parseInt(
+                memberSizing.sizing
+              );
+            } else {
+              categoryPoints[memberSizing.memberName] = parseInt(
+                memberSizing.sizing
+              );
+            }
+          });
+        });
+        // log the totals
+        console.log("Total points for list: ", totalPoints);
+        console.log("Category points: ", categoryPoints);
+      });
+    });
+  });
+}
+
 function removeMemberBadge(t, indexToRemove) {
   return t.get("card", "shared", "memberSizing").then(function (memberSizing) {
     // Remove the element at indexToRemove from memberSizing
