@@ -127,30 +127,23 @@ function onBtnClickTwo(t) {
       console.log("List name: ", list.name);
       // get all cards in the list
       t.cards("all", list.id).then(function (cards) {
-        let totalPoints = 0;
+        let totalSize = 0;
         // dictionary to hold points per category
         let categoryPoints = {};
+        let categories = []
         cards.forEach(function (card) {
           // retrieve memberSizing from the card
-          t.get(card.id, "shared", "memberSizing").then(function (
-            memberSizing
+          Promise.all([t.get(card.id, "shared", "memberSizing"),t.get(card.id, "shared", "category") ]).then(function (
+            memberSizing, category
           ) {
             // calculate total points
-            totalPoints += parseInt(memberSizing.sizing);
-            // calculate points per category
-            if (memberSizing.memberName in categoryPoints) {
-              categoryPoints[memberSizing.memberName] += parseInt(
-                memberSizing.sizing
-              );
-            } else {
-              categoryPoints[memberSizing.memberName] = parseInt(
-                memberSizing.sizing
-              );
-            }
+            totalSize += memberSizing && memberSizing.reduce((acc, element) => Number(acc) + Number(element.sizing))
+            if(categories)
+            
           });
         });
         // log the totals
-        console.log("Total points for list: ", totalPoints);
+        console.log("Total points for list: ", totalSize);
         console.log("Category points: ", categoryPoints);
       });
     });
