@@ -20,19 +20,16 @@ function fetchMembers() {
   });
 }
 
-function populateMembers(members) {
-  t.get("card", "shared", "memberSizing").then(function (memberSizing) {
-    // memberSizing now contains the sizing data for members
-    let memberIdsWithSizing = memberSizing.map((ms) => ms.memberId);
-    console.log("memberIdsWithSizing", memberIdsWithSizing)
+function populateMembers(accounts) {
+  t.get("card", "shared", "account").then(function (account) {
+    let accountIds = account?.map((ms) => ms.accountId);
 
-    const membersList = $("#members");
-    members.forEach(function (member) {
-      // Exclude members that have sizing data
-      console.log(member.id)
-      if (!memberIdsWithSizing.includes(String(member.id))) {
-        const option = `<option value="${member.id}">${member.name}</option>`;
-        membersList.append(option);
+    const accountsList = $("#accounts");
+    accounts?.forEach(function (account) {
+      console.log(account.id)
+      if (!accountIds?.includes(String(account.id))) {
+        const option = `<option value="${account.id}">${account.name}</option>`;
+        accountsList.append(option);
       }
     });
   });
@@ -41,27 +38,20 @@ function populateMembers(members) {
 $("#account").submit(function (event) {
   event.preventDefault();
 
-  const selectedMemberId = $("#accounts").val();
-  const selectedMemberName = $("#accounts option:selected").text();
-  if(!sizing || !selectedMemberName) {
+  const selectedAccountId = $("#accounts").val();
+  const selectedAccountName = $("#accounts option:selected").text();
+  if(!selectedAccountName) {
     return
   }
-  console.log(selectedMemberId, sizing);
-  t.get("card", "shared", "memberSizing", [])
-    .then(function (memberSizing) {
-      // memberSizing will be an empty array if it's not set yet.
-      // Now add the new member to it
-      memberSizing.push({
-        memberId: selectedMemberId,
-        memberName: selectedMemberName,
-        sizing: sizing,
-      });
-
+  console.log(selectedAccountId, selectedAccountName);
+  t.get("card", "shared", "account", {})
+    .then(function (account) {
+      
       // Now save it back
-      return t.set("card", "shared", "memberSizing", memberSizing);
+      return t.set("card", "shared", "accounts", {accountId: selectedAccountId, accountName: selectedAccountName});
     })
     .then(() => {
-      console.log("New member stored.");
+      console.log("New account stored.");
       return t.closePopup();
     });
   // t.closePopup();
