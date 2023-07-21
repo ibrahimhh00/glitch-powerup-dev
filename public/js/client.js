@@ -180,10 +180,34 @@ window.TrelloPowerUp.initialize({
           // The iframe will load the URL provided and display it in a modal.
           return t.popup({
             // Title of the popup
-            title: "Sizing Details",
+            title: "Categories",
 
             // URL of the page to load into the iframe
-            url: "./sizing.html",
+            url: "./category.html",
+
+            // Height of the popup in pixels
+            height: 184,
+          });
+        },
+      },
+      {
+        // icon is the URL to an image to be used as the button's icon.
+        // The image should be 24x24 pixels.
+        icon: "https://icons.veryicon.com/png/o/miscellaneous/administration/account-25.png",
+
+        // text is the name of the button.
+        text: "Accounts",
+
+        // callback is a function that is called when the button is clicked.
+        callback: function (t) {
+          // Popup an iframe when the button is clicked.
+          // The iframe will load the URL provided and display it in a modal.
+          return t.popup({
+            // Title of the popup
+            title: "Account",
+
+            // URL of the page to load into the iframe
+            url: "./account.html",
 
             // Height of the popup in pixels
             height: 184,
