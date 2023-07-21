@@ -21,10 +21,20 @@ function fetchMembers() {
 }
 
 function populateMembers(members) {
-  const membersList = $("#members");
-  members.forEach(function (member) {
-    const option = `<option value="${member.id}">${member.name}</option>`;
-    membersList.append(option);
+  t.get("card", "shared", "memberSizing").then(function (memberSizing) {
+    // memberSizing now contains the sizing data for members
+    let memberIdsWithSizing = memberSizing.map((ms) => ms.memberId);
+    console.log("memberIdsWithSizing", memberIdsWithSizing)
+
+    const membersList = $("#members");
+    members.forEach(function (member) {
+      // Exclude members that have sizing data
+      console.log(member.id)
+      if (!memberIdsWithSizing.includes(String(member.id))) {
+        const option = `<option value="${member.id}">${member.name}</option>`;
+        membersList.append(option);
+      }
+    });
   });
 }
 
@@ -34,6 +44,7 @@ $("#estimate").submit(function (event) {
   const selectedMemberId = $("#members").val();
   const sizing = $("#estimation-size").val();
   const selectedMemberName = $("#members option:selected").text();
+  if()
   console.log(selectedMemberId, sizing);
   t.get("card", "shared", "memberSizing", [])
     .then(function (memberSizing) {
