@@ -122,43 +122,49 @@ var onBtnClick = function (t, opts) {
 
 function onBtnClickTwo(t) {
   // get all lists on the board
-  return t.lists("all").then(function (lists) {
-    lists.forEach(function (list) {
-      console.log("List name: ", list.name);
-      // get all cards in the list
-      t.cards("all", list.id).then(function (cards) {
-        console.log("cards", cards);
-        let totalSize = 0;
-        // dictionary to hold points per category
-        let categories = {};
-        cards.forEach(function (card) {
-          // retrieve memberSizing from the card
-          console.log("card", card)
-          Promise.all([
-            t.get(card.id, "shared", "memberSizing"),
-            t.get(card.id, "shared", "category"),
-          ]).then(function (memberSizing, category) {
-            // calculate total points
-            totalSize +=
-              memberSizing &&
-              memberSizing.reduce(
-                (acc, element) => Number(acc) + Number(element.sizing)
-              );
-            if (category) {
-              if (category in categories) {
-                categories[category] += totalSize;
-              } else {
-                categories[category] = totalSize;
-              }
-            }
-          });
-        });
-        // log the totals
-        console.log("Total points for list: ", totalSize);
-        console.log("Category points: ", categories);
-      });
-    });
-  });
+  return t.lists("all")
+    .then(function (lists) {
+        return Promise.all(lists.map(function (list) {
+            console.log("List name: ", list.name);
+            // get all cards in the list
+            return t.cards("all", list.id)
+                .then(function (cards) {
+                    console.log("cards", cards);
+                    let totalSize = 0;
+                    // dictionary to hold points per category
+                    let categories = {};
+                    return Promise.all(cards.map(function (card) {
+                        // retrieve memberSizing from the card
+                        console.log("card", card)
+                        return Promise.all([
+                            t.get(card.id, "shared", "memberSizing"),
+                            t.get(card.id, "shared", "category"),
+                        ]).then(function (results) {
+                            const memberSizing = results[0];
+                            const category = results[1];
+                            // calculate total points
+                            totalSize +=
+                                memberSizing &&
+                                memberSizing.reduce(
+                                    (acc, element) => Number(acc) + Number(element.sizing)
+                                );
+                            if (category) {
+                                if (category in categories) {
+                                    categories[category] += totalSize;
+                                } else {
+                                    categories[category] = totalSize;
+                                }
+                            }
+                        }).catch(err => console.error('Error in card Promise.all:', err));
+                    })).then(() => {
+                        // log the totals
+                        console.log("Total points for list: ", totalSize);
+                        console.log("Category points: ", categories);
+                    }).catch(err => console.error('Error in cards Promise.all:', err));
+                }).catch(err => console.error('Error in t.cards:', err));
+        }));
+    }).catch(err => console.error('Error in t.lists:', err));
+
 }
 
 function removeMemberBadge(t, indexToRemove) {
