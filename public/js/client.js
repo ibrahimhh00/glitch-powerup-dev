@@ -121,29 +121,20 @@ var onBtnClick = function (t, opts) {
 };
 
 function onBtnClickTwo(t) {
-  // get all lists on the board
   return t.lists("all").then(function (lists) {
-    lists.forEach(function (list) {
-      // get all cards in the list
-      t.cards("all").then(function (cards) {
+    let results = []; // Array to collect all the results
+    let listPromises = lists.map(function (list) {
+      return t.cards("all").then(function (cards) {
         var cardList = cards.filter(function (card) {
           return card.idList === list.id;
         });
         let totalSize = 0;
-        // dictionary to hold points per category
         let categories = {};
-
-        // create an array to store all the promises
-        let promises = [];
-
-        cardList.forEach(function (card) {
-          // retrieve memberSizing and category from the card
-          let promise = Promise.all([
+        let promises = cardList.map(function (card) {
+          return Promise.all([
             t.get(card.id, "shared", "memberSizing"),
             t.get(card.id, "shared", "category"),
           ]).then(function ([memberSizing, category]) {
-            // calculate total points
-            console.log(category);
             if (memberSizing) {
               totalSize += memberSizing.reduce(
                 (acc, element) => Number(acc) + Number(element.sizing),
@@ -159,34 +150,27 @@ function onBtnClickTwo(t) {
               }
             }
           });
-
-          // add the promise to the promises array
-          promises.push(promise);
         });
-
-        // use Promise.all to wait for all the promises to resolve before logging the totals
-        Promise.all(promises).then(() => {
-          console.log("List name: ", list.name);
-          console.log("Total points for list: ", totalSize);
-          console.log("Category points: ", categories);
-
-          // Send the data to the Board Bar
-          showResults(t, {
+        return Promise.all(promises).then(() => {
+          results.push({
             listName: list.name,
             totalPoints: totalSize,
-            categoryPoints: categories
+            categoryPoints: categories,
           });
-          
         });
       });
     });
+    return Promise.all(listPromises).then(() => {
+      showResults(t, results); // Call the showResults function once all the results have been collected
+    });
   });
 }
+
 function showResults(t, obj2) {
   return t.boardBar({
-    url: './results.html', // The URL of your results page
-    height: 300, // The height of the Board Bar in pixels
-    args: { message: obj2 }, // The data you want to send to the results page
+    url: "./results.html",
+    height: 300,
+    args: { message: obj2 },
   });
 }
 
