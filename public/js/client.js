@@ -127,28 +127,34 @@ function onBtnClickTwo(t) {
       console.log("List name: ", list.name);
       // get all cards in the list
       t.cards("all", list.id).then(function (cards) {
+        console.log(cards);
         let totalSize = 0;
         // dictionary to hold points per category
-        let categoryPoints = {};
-        let categories = {}
+        let categories = {};
         cards.forEach(function (card) {
           // retrieve memberSizing from the card
-          Promise.all([t.get(card.id, "shared", "memberSizing"),t.get(card.id, "shared", "category") ]).then(function (
-            memberSizing, category
-          ) {
+          Promise.all([
+            t.get(card.id, "shared", "memberSizing"),
+            t.get(card.id, "shared", "category"),
+          ]).then(function (memberSizing, category) {
             // calculate total points
-            totalSize += memberSizing && memberSizing.reduce((acc, element) => Number(acc) + Number(element.sizing))
-            if(category) {
-              if(category in categories) {
-                categories[]
+            totalSize +=
+              memberSizing &&
+              memberSizing.reduce(
+                (acc, element) => Number(acc) + Number(element.sizing)
+              );
+            if (category) {
+              if (category in categories) {
+                categories[category] += totalSize;
+              } else {
+                categories[category] = totalSize;
               }
             }
-            
           });
         });
         // log the totals
         console.log("Total points for list: ", totalSize);
-        console.log("Category points: ", categoryPoints);
+        console.log("Category points: ", categories);
       });
     });
   });
@@ -177,7 +183,6 @@ function removeCategoryBadge(t) {
 window.TrelloPowerUp.initialize({
   "board-buttons": function (t, opts) {
     console.log(opts);
-
     return [
       {
         // we can either provide a button that has a callback function
@@ -185,10 +190,10 @@ window.TrelloPowerUp.initialize({
           dark: DISRUPTEM_ICON3,
           light: DISRUPTEM_ICON3,
         },
-        text: "Disrupt'em",
+        text: "Report",
         condition: "always",
         callback: function (t) {
-          return onBtnClick(t);
+          return onBtnClickTwo(t);
         },
       },
     ];
