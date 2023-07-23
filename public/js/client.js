@@ -127,28 +127,32 @@ function onBtnClickTwo(t) {
       console.log("List name: ", list.name);
       // get all cards in the list
       t.cards("all").then(function (cards) {
-        console.log("cards", cards);
         var cardList = cards.filter(function (card) {
           return card.idList === list.id;
         });
         let totalSize = 0;
         // dictionary to hold points per category
         let categories = {};
-        cards.forEach(function (card) {
-          // retrieve memberSizing from the card
-          console.log("card", card);
-          Promise.all([
+
+        // create an array to store all the promises
+        let promises = [];
+
+        cardList.forEach(function (card) {
+          // retrieve memberSizing and category from the card
+          let promise = Promise.all([
             t.get(card.id, "shared", "memberSizing"),
             t.get(card.id, "shared", "category"),
           ]).then(function ([memberSizing, category]) {
-            console.log("memberSizing", memberSizing)
-            console.log("category", category)
+            console.log("memberSizing", memberSizing);
+            console.log("category", category);
             // calculate total points
-            totalSize +=
-              memberSizing &&
-              memberSizing.reduce(
-                (acc, element) => Number(acc) + Number(element.sizing)
+            if (memberSizing) {
+              totalSize += memberSizing.reduce(
+                (acc, element) => Number(acc) + Number(element.sizing),
+                0
               );
+            }
+
             if (category) {
               if (category in categories) {
                 categories[category] += totalSize;
@@ -157,10 +161,16 @@ function onBtnClickTwo(t) {
               }
             }
           });
+
+          // add the promise to the promises array
+          promises.push(promise);
         });
-        // log the totals
-        console.log("Total points for list: ", totalSize);
-        console.log("Category points: ", categories);
+
+        // use Promise.all to wait for all the promises to resolve before logging the totals
+        Promise.all(promises).then(() => {
+          console.log("Total points for list: ", totalSize);
+          console.log("Category points: ", categories);
+        });
       });
     });
   });
