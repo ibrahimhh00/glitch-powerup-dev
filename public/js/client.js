@@ -303,14 +303,14 @@ window.TrelloPowerUp.initialize({
       t.get("card", "shared", "memberSizing"),
     ]).then(function ([account, category, memberSizing]) {
       const members = memberSizing.map(function (ms) {
-          console.log(ms);
-          return {
-            // Display the member ID and sizing as the badge text
-            text: ms.memberName + " Sizing: " + ms.sizing,
-            color: "red",
-            // You could also set color and icon properties
-          };
-        });
+        console.log(ms);
+        return {
+          // Display the member ID and sizing as the badge text
+          text: ms.memberName + " " + ms.sizing,
+          color: "red",
+          // You could also set color and icon properties
+        };
+      });
       return [
         account && { text: account.accountName, color: "yellow" },
         category && {
@@ -319,11 +319,11 @@ window.TrelloPowerUp.initialize({
           text: "Name: " + category.categoryName,
           color: "lime",
         },
-        
+        ...members,
       ];
     });
   },
-  
+
   "card-detail-badges": function (t, options) {
     // Use t.get to retrieve the stored data
     return Promise.all([
@@ -339,7 +339,7 @@ window.TrelloPowerUp.initialize({
             return {
               // Display the member ID and sizing as the badge text
               title: ms.memberName,
-              text: "Sizing: " + ms.sizing,
+              text: ms.sizing,
               color: "red",
               callback: function (t, opts) {
                 return removeMemberBadge(t, index);
@@ -353,7 +353,7 @@ window.TrelloPowerUp.initialize({
         account && {
           // Display the member ID and sizing as the badge text
           title: "Account",
-          text: "Name: " + account.accountName,
+          text: account.accountName,
           color: "yellow",
           callback: function (t, opts) {
             return removeAccountBadge(t);
@@ -362,7 +362,7 @@ window.TrelloPowerUp.initialize({
         category && {
           // Display the member ID and sizing as the badge text
           title: "Category",
-          text: "Name: " + category.categoryName,
+          text: category.categoryName,
           color: "lime",
           callback: function (t, opts) {
             return removeCategoryBadge(t);
