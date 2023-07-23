@@ -1,4 +1,4 @@
-/* global TrelloPowerUp */
+  /* global TrelloPowerUp */
 
 var GREY_ROCKET_ICON =
   "https://cdn.glitch.com/c69415fd-f70e-4e03-b43b-98b8960cd616%2Frocket-ship-grey.png?1496162964717";
@@ -127,12 +127,13 @@ function onBtnClickTwo(t) {
       console.log("List name: ", list.name);
       // get all cards in the list
       t.cards("all", list.id).then(function (cards) {
-        console.log(cards);
+        console.log("cards", cards);
         let totalSize = 0;
         // dictionary to hold points per category
         let categories = {};
         cards.forEach(function (card) {
           // retrieve memberSizing from the card
+          console.log("card", card)
           Promise.all([
             t.get(card.id, "shared", "memberSizing"),
             t.get(card.id, "shared", "category"),
