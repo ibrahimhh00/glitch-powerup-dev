@@ -166,17 +166,27 @@ function onBtnClickTwo(t) {
 
         // use Promise.all to wait for all the promises to resolve before logging the totals
         Promise.all(promises).then(() => {
-          let container = document.getElementById("card-container");
-          let div = document.createElement("div");
-          div.innerHTML = `<h2>List name: ${list.name}</h2>
-                           <p>Total points for list: ${totalSize}</p>`;
-          Object.entries(categories).forEach(([category, points]) => {
-            div.innerHTML += `<p>Category ${category}: ${points}</p>`;
+          console.log("List name: ", list.name);
+          console.log("Total points for list: ", totalSize);
+          console.log("Category points: ", categories);
+
+          // Send the data to the Board Bar
+          showResults(t, {
+            listName: list.name,
+            totalPoints: totalSize,
+            categoryPoints: categories
           });
-          container.appendChild(div);
+          
         });
       });
     });
+  });
+}
+function showResults(t, obj2) {
+  return t.boardBar({
+    url: './results.html', // The URL of your results page
+    height: 300, // The height of the Board Bar in pixels
+    args: { message: obj2 }, // The data you want to send to the results page
   });
 }
 
