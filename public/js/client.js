@@ -124,7 +124,6 @@ function onBtnClickTwo(t) {
   // get all lists on the board
   return t.lists("all").then(function (lists) {
     lists.forEach(function (list) {
-      
       // get all cards in the list
       t.cards("all").then(function (cards) {
         var cardList = cards.filter(function (card) {
@@ -144,7 +143,7 @@ function onBtnClickTwo(t) {
             t.get(card.id, "shared", "category"),
           ]).then(function ([memberSizing, category]) {
             // calculate total points
-            console.log(category)
+            console.log(category);
             if (memberSizing) {
               totalSize += memberSizing.reduce(
                 (acc, element) => Number(acc) + Number(element.sizing),
@@ -167,9 +166,14 @@ function onBtnClickTwo(t) {
 
         // use Promise.all to wait for all the promises to resolve before logging the totals
         Promise.all(promises).then(() => {
-          console.log("List name: ", list.name);
-          console.log("Total points for list: ", totalSize);
-          console.log("Category points: ", categories);
+          let container = document.getElementById("card-container");
+          let div = document.createElement("div");
+          div.innerHTML = `<h2>List name: ${list.name}</h2>
+                           <p>Total points for list: ${totalSize}</p>`;
+          Object.entries(categories).forEach(([category, points]) => {
+            div.innerHTML += `<p>Category ${category}: ${points}</p>`;
+          });
+          container.appendChild(div);
         });
       });
     });
