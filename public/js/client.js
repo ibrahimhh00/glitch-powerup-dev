@@ -300,7 +300,17 @@ window.TrelloPowerUp.initialize({
     return Promise.all([
       t.get("card", "shared", "account"),
       t.get("card", "shared", "category"),
-    ]).then(function ([account, category]) {
+      t.get("card", "shared", "memberSizing"),
+    ]).then(function ([account, category, memberSizing]) {
+      const members = memberSizing.map(function (ms) {
+          console.log(ms);
+          return {
+            // Display the member ID and sizing as the badge text
+            text: ms.memberName + " Sizing: " + ms.sizing,
+            color: "red",
+            // You could also set color and icon properties
+          };
+        });
       return [
         account && { text: account.accountName, color: "yellow" },
         category && {
@@ -309,18 +319,11 @@ window.TrelloPowerUp.initialize({
           text: "Name: " + category.categoryName,
           color: "lime",
         },
+        
       ];
     });
   },
-  // return memberSizing.map(function (ms) {
-  //         console.log(ms);
-  //         return {
-  //           // Display the member ID and sizing as the badge text
-  //           text: ms.memberName + " Sizing: " + ms.sizing,
-  //           color: "red",
-  //           // You could also set color and icon properties
-  //         };
-  //       });
+  
   "card-detail-badges": function (t, options) {
     // Use t.get to retrieve the stored data
     return Promise.all([
