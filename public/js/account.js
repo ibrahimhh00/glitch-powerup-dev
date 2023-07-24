@@ -1,4 +1,4 @@
-const API_URL = "https://jsonplaceholder.typicode.com/users/";
+const API_URL = "https://uxperts-backend-staging.disruptem.com/api/v1/public/trello/accounts";
 
 var t = window.TrelloPowerUp.iframe();
 
@@ -12,7 +12,7 @@ function fetchMembers() {
     type: "GET",
     success: function (data) {
       console.log(data);
-      populateMembers(data);
+      populateMembers(data.data);
     },
     error: function (error) {
       console.error("Error fetching members", error);

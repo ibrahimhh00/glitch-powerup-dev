@@ -1,4 +1,4 @@
-const API_URL = "https://jsonplaceholder.typicode.com/users/";
+const API_URL = "https://uxperts-backend-staging.disruptem.com/api/v1/public/trello/categories";
 
 var t = window.TrelloPowerUp.iframe();
 
@@ -12,7 +12,7 @@ function fetchCategories() {
     type: "GET",
     success: function (data) {
       console.log(data);
-      populateCategories(data);
+      populateCategories(data.data);
     },
     error: function (error) {
       console.error("Error fetching members", error);
@@ -28,7 +28,7 @@ function populateCategories(categories) {
     categories?.forEach(function (category) {
       console.log(category.id);
       if (!(String(categoryIds) === String(category.id))) {
-        const option = `<option value="${category.id}">${category.name}</option>`;
+        const option = `<option value="${category.id}SAPERATOR${cateogry.color}">${category.name}</option>`;
         console.log(true)
         categoriesList.append(option);
       }
@@ -39,7 +39,7 @@ function populateCategories(categories) {
 $("#category").submit(function (event) {
   event.preventDefault();
 
-  const selectedCategoryId = $("#categories").val();
+  const selectedCategoryId = $("#categories").val().split('SAPERATOR');
   const selectedCategoryName = $("#categories option:selected").text();
   if (!selectedCategoryName) {
     return;
@@ -51,6 +51,7 @@ $("#category").submit(function (event) {
       return t.set("card", "shared", "category", {
         categoryId: selectedCategoryId,
         categoryName: selectedCategoryName,
+        categoryColor: 
       });
     })
     .then(() => {
