@@ -28,7 +28,7 @@ function populateCategories(categories) {
     categories?.forEach(function (category) {
       console.log(category.id);
       if (!(String(categoryIds) === String(category.id))) {
-        const option = `<option value="${category.id}SAPERATOR${cateogry.color}">${category.name}</option>`;
+        const option = `<option value="${category.id}SAPERATOR${category.color}">${category.name}</option>`;
         console.log(true)
         categoriesList.append(option);
       }
@@ -39,7 +39,8 @@ function populateCategories(categories) {
 $("#category").submit(function (event) {
   event.preventDefault();
 
-  const selectedCategoryId = $("#categories").val().split('SAPERATOR');
+  const selectedCategoryId = $("#categories").val().split('SAPERATOR')[0]
+  const selectedCategoryColor = $("#categories").val().split('SAPERATOR')[1];
   const selectedCategoryName = $("#categories option:selected").text();
   if (!selectedCategoryName) {
     return;
@@ -51,7 +52,7 @@ $("#category").submit(function (event) {
       return t.set("card", "shared", "category", {
         categoryId: selectedCategoryId,
         categoryName: selectedCategoryName,
-        categoryColor: 
+        categoryColor: selectedCategoryColor
       });
     })
     .then(() => {

@@ -365,7 +365,7 @@ window.TrelloPowerUp.initialize({
           // Display the member ID and sizing as the badge text
           title: "Category",
           text: category.categoryName,
-          color: "lime",
+          color: category.categoryColor,
           callback: function (t, opts) {
             return removeCategoryBadge(t);
           },
