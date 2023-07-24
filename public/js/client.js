@@ -304,6 +304,7 @@ window.TrelloPowerUp.initialize({
       t.get("card", "shared", "category"),
       t.get("card", "shared", "memberSizing"),
     ]).then(function ([account, category, memberSizing]) {
+      console.log(category)
       const members = memberSizing.map(function (ms) {
         console.log(ms);
         return {
@@ -319,7 +320,7 @@ window.TrelloPowerUp.initialize({
           // Display the member ID and sizing as the badge text
           title: "Category",
           text: category.categoryName,
-          color: "lime",
+          color: category.categoryColor,
         },
         ...members,
       ];
