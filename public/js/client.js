@@ -42,7 +42,7 @@ function onBtnClickTwo(t) {
                 0
               );
             }
-            totalSizeAll+=totalSize
+            totalSizeAll += totalSize;
 
             if (category) {
               if (category.categoryName in categories) {
@@ -191,7 +191,7 @@ window.TrelloPowerUp.initialize({
       },
     ];
   },
-  
+
   "card-badges": function (t, options) {
     // Use t.get to retrieve the stored data
     return Promise.all([
@@ -199,7 +199,7 @@ window.TrelloPowerUp.initialize({
       t.get("card", "shared", "category"),
       t.get("card", "shared", "memberSizing"),
     ]).then(function ([account, category, memberSizing]) {
-      console.log("category", category)
+      console.log("categoryyyyy", category);
       const members = memberSizing.map(function (ms) {
         console.log(ms);
         return {
@@ -209,16 +209,35 @@ window.TrelloPowerUp.initialize({
           // You could also set color and icon properties
         };
       });
-      return [
-        account ? { text: account.accountName, color: "yellow" } : {},
-        category ? {
-          // Display the member ID and sizing as the badge text
+      const badges = [];
+
+      // Check if "category" data is available and add the badge if yes
+      if (category) {
+        badges.push({
           title: "Category",
           text: category.categoryName,
           color: category.categoryColor,
-        } : {},
-        ...members,
-      ];
+        });
+      }
+
+      // Check if "account" data is available and add the badge if yes
+      // if (account) {
+      //   badges.push({
+      //     text: account.accountName,
+      //     color: "yellow",
+      //   });
+      // }
+      // if (members) {
+      //   badges.push(...members);
+      // }
+
+      // Add the member badges
+
+      // Return the badges
+      return {
+          text: category.categoryName,
+          color: category.categoryColor,
+        };
     });
   },
 
