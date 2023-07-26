@@ -25,7 +25,9 @@ async function fetchFeatures() {
   const response = await fetch(ENDPOINT_URL, { method: "GET" });
   return await response.json()
 }
+let featuresData = null;
 
+fetchFeatures().then(data => featuresData = data)
 function onBtnClickTwo(t) {
   return t.lists("all").then(function (lists) {
     let results = []; // Array to collect all the results
@@ -121,8 +123,8 @@ window.TrelloPowerUp.initialize({
     ];
   },
 
-  "card-buttons":  function (t, options) {
-    const data = fetchFeatures().then(data => console.log(data))
+  "card-buttons": async function (t, options) {
+    console.log("globalData",)
     return [
       {
         // icon is the URL to an image to be used as the button's icon.
