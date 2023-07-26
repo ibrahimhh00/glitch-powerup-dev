@@ -19,9 +19,11 @@ var DISRUPTEM_ICON2 =
   "https://cdn.glitch.com/bcb67d52-05a1-4b6e-a315-f5bae36b69eb%2F1.png?v=1625811412559";
 var DISRUPTEM_ICON3 =
   "https://cdn.glitch.com/bcb67d52-05a1-4b6e-a315-f5bae36b69eb%2Fdisruptem-Icon_White.png?v=1625811831046";
-var ENDPOINT_URL = "https://uxperts-powerup-node-staging-6notf.ondigitalocean.app/api/v1/public/trello/all"
+var ENDPOINT_URL =
+  "https://uxperts-powerup-node-staging-6notf.ondigitalocean.app/api/v1/public/trello/all";
 async function fetchFeatures() {
-  const response = await fetch(ENDPOINT_URL, {method: "GET"})
+  const response = await fetch(ENDPOINT_URL, { method: "GET" });
+  return await response.json()
 }
 
 function onBtnClickTwo(t) {
@@ -119,7 +121,8 @@ window.TrelloPowerUp.initialize({
     ];
   },
 
-  "card-buttons": function (t, options) {
+  "card-buttons":  function (t, options) {
+    const data = fetchFeatures().then(data => console.log(data))
     return [
       {
         // icon is the URL to an image to be used as the button's icon.
