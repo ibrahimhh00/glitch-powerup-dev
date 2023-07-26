@@ -122,7 +122,7 @@ window.TrelloPowerUp.initialize({
   },
 
   "card-buttons":  function (t, options) {
-    const data = fetchFeatures().then(data => console.log(data  ))
+    const data = fetchFeatures().then(data => console.log(data))
     return [
       {
         // icon is the URL to an image to be used as the button's icon.
