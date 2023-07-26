@@ -213,7 +213,7 @@ window.TrelloPowerUp.initialize({
       memberSizing.forEach(function (ms) {
         console.log(ms);
         featuresData.data.members.forEach((member) => {
-          if (member.id === ms.memberId) {
+          if (member._id === ms.memberId) {
             finalMembers.push({
               text: `${member.name} ${ms.sizing}`,
               color: "red",
@@ -224,17 +224,27 @@ window.TrelloPowerUp.initialize({
 
       // Check if "category" data is available and add the badge if yes
       if (category) {
+        let deleteIt = true
+        console.log("ASDASDASDASDASD")
         featuresData.data.categories.forEach((cat) => {
-          if (cat.id === category.cateogryId) {
+          console.log(cat._id == category.categoryId, cat._id, category.categoryId)
+          if (cat._id === category.categoryId) {
+            deleteIt = false
+            console.log("TREUEEEEEEEEEEEEEEEEE")
             badges.push({
-              text: category.name,
-              color: category.color,
+              text: cat.name,
+              color: cat.color,
             });
             t.set("card", "shared", "category", {
-              categoryId: cat.id,
+              categoryId: cat._id,
               categoryName: cat.name,
               categoryColor: cat.color,
             }).then(() => console.log("Cat Added"));
+          }
+          if(deleteIt) {
+            t.set("card", "shared", "category", {
+              
+            }).then(() => console.log("Category Deleted"));
           }
         });
       }
@@ -242,13 +252,13 @@ window.TrelloPowerUp.initialize({
       if (account) {
         for (let i = 0; i < featuresData.data.accounts.length; i++) {
           let acc = featuresData.data.accounts[i];
-          if (acc.id === account.accountId) {
+          if (acc._id === account.accountId) {
             badges.push({
               text: acc.name,
               color: "yellow",
             });
             t.set("card", "shared", "account", {
-              accountId: acc.id,
+              accountId: acc._id,
               accountName: acc.name,
             }).then(() => console.log("Added Account"));
           }
@@ -259,7 +269,7 @@ window.TrelloPowerUp.initialize({
       }
 
       // Add the member badges
-
+      
       // Return the badges
       return badges;
     });
