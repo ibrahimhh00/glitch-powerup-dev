@@ -20,106 +20,6 @@ var DISRUPTEM_ICON2 =
 var DISRUPTEM_ICON3 =
   "https://cdn.glitch.com/bcb67d52-05a1-4b6e-a315-f5bae36b69eb%2Fdisruptem-Icon_White.png?v=1625811831046";
 
-var onBtnClick = function (t, opts) {
-  // console.log('Someone clicked the button');
-  var cardEstimateArr = new Array();
-  var obj2 = [];
-
-  // t.cards return a set of values,
-  //values are in object of nested array,
-  //values of outer array assign to tempArray
-  //then values of inner array assigned to an array of card IDs as keys
-  return t.cards("id", "idList", "name").then(function (cards) {
-    //cardID array created with all IDs in on the board
-    // var tempArray = Object.values(cards);
-    console.log("Cards values :", cards);
-
-    var listEstimateArr = [];
-    var backendEstimate = 0;
-    var result = [];
-
-    var promises = [];
-    var cArr = [];
-
-    cards.map(
-      (key) =>
-        promises.push(
-          t.get(key.id, "shared").then(function (data) {
-            listEstimateArr.push({
-              idList: key.idList,
-              backendEstimate: data.backend_estimate
-                ? data.backend_estimate
-                : 0,
-              frontendEstimate: data.frontend_estimate
-                ? data.frontend_estimate
-                : 0,
-            });
-            // });
-          })
-        )
-      // .then(() =>console.log("listEstimateArr: ", listEstimateArr))
-    );
-
-    //Pass listEstimateArr to promise caller, merge idList that are equal and sum the their backendEstimate values
-    Promise.all(promises, t).then(() => {
-      var holder = {}; // holds the merged lists of backend_estimate
-      var holder2 = {}; // holds the merged lists of frontend_estimate
-
-      console.log("listEstimateArr...2:", listEstimateArr);
-      // Combine same idList and add their values
-      listEstimateArr.forEach(function (d) {
-        if (holder.hasOwnProperty(d.idList)) {
-          holder[d.idList] =
-            holder[d.idList] +
-            (parseFloat(d.backendEstimate) ? parseFloat(d.backendEstimate) : 0);
-
-          holder2[d.idList] =
-            holder2[d.idList] +
-            (parseFloat(d.frontendEstimate)
-              ? parseFloat(d.frontendEstimate)
-              : 0);
-        } else {
-          holder[d.idList] = parseFloat(d.backendEstimate)
-            ? parseFloat(d.backendEstimate)
-            : 0;
-          holder2[d.idList] = parseFloat(d.frontendEstimate)
-            ? parseFloat(d.frontendEstimate)
-            : 0;
-        }
-      });
-
-      console.log("listEstimateArr...3:", listEstimateArr);
-
-      console.log("holder: ", holder);
-      console.log("holder2: ", holder2);
-
-      return t.lists("id", "name").then(function (lists) {
-        //retrieve list name from list id
-        lists.map((key) => {
-          for (var prop in holder) {
-            console.log("holder[prop]: ", holder[prop]);
-            if (key.id == prop) {
-              console.log("holder2[prop]: ", holder2[prop]);
-              obj2.push({
-                nameList: key.name,
-                value: holder[prop],
-                value2: holder2[prop],
-              });
-            }
-          }
-        });
-        console.log("obj2:", obj2);
-        // t.set('board', 'shared','obj2size', obj2);
-        return t.boardBar({
-          title: "Calculated Points",
-          url: "./results.html",
-          args: { message: obj2 },
-        });
-      });
-    });
-  });
-};
-
 function onBtnClickTwo(t) {
   return t.lists("all").then(function (lists) {
     let results = []; // Array to collect all the results
@@ -291,12 +191,7 @@ window.TrelloPowerUp.initialize({
       },
     ];
   },
-
-  //   didn't need it
-  // 1. use t.set(board, shared, estimate-ListID_cardID,value) instead of t.set(card,shared,key)
-  // 2. use t.get(board, shared ) to get all listIDs on the board-button level
-  // 3. add all values for each estimate-listID_ match
-  // 4. display the added value for each list with list name and value addition
+  
   "card-badges": function (t, options) {
     // Use t.get to retrieve the stored data
     return Promise.all([
@@ -304,7 +199,7 @@ window.TrelloPowerUp.initialize({
       t.get("card", "shared", "category"),
       t.get("card", "shared", "memberSizing"),
     ]).then(function ([account, category, memberSizing]) {
-      console.log(category)
+      console.log("category", category)
       const members = memberSizing.map(function (ms) {
         console.log(ms);
         return {
@@ -315,13 +210,13 @@ window.TrelloPowerUp.initialize({
         };
       });
       return [
-        account && { text: account.accountName, color: "yellow" },
-        category && {
+        account ? { text: account.accountName, color: "yellow" } : {},
+        category ? {
           // Display the member ID and sizing as the badge text
           title: "Category",
           text: category.categoryName,
           color: category.categoryColor,
-        },
+        } : {},
         ...members,
       ];
     });
