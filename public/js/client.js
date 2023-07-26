@@ -208,6 +208,7 @@ window.TrelloPowerUp.initialize({
       t.get("card", "shared", "memberSizing"),
     ]).then(function ([account, category, memberSizing]) {
       console.log("categoryyyyy", category);
+      const badges = [];
       const finalMembers = [];
       memberSizing.forEach(function (ms) {
         console.log(ms);
@@ -220,8 +221,6 @@ window.TrelloPowerUp.initialize({
           }
         });
       });
-      console.log("finalMembers", finalMembers);
-      const badges = [];
 
       // Check if "category" data is available and add the badge if yes
       if (category) {
@@ -231,26 +230,18 @@ window.TrelloPowerUp.initialize({
               text: category.name,
               color: category.color,
             });
-            t.get("card", "shared", "category", {})
-              .then(function (category) {
-                // Now save it back
-                return t.set("card", "shared", "category", {
-                  categoryId: cat.id,
-                  categoryName: cat.name,
-                  categoryColor: cat.color,
-                });
-              })
-              .then(() => {
-                console.log("New category stored.");
-                return t.closePopup();
-              });
+            t.set("card", "shared", "category", {
+              categoryId: cat.id,
+              categoryName: cat.name,
+              categoryColor: cat.color,
+            }).then(() => console.log("Cat Added"));
           }
         });
       }
-
       // Check if "account" data is available and add the badge if yes
       if (account) {
-        featuresData.data.accounts.forEach((acc) => {
+        for (let i = 0; i < featuresData.data.accounts.length; i++) {
+          let acc = featuresData.data.accounts[i];
           if (acc.id === account.accountId) {
             badges.push({
               text: acc.name,
@@ -259,9 +250,9 @@ window.TrelloPowerUp.initialize({
             t.set("card", "shared", "account", {
               accountId: acc.id,
               accountName: acc.name,
-            });
+            }).then(() => console.log("Added Account"));
           }
-        });
+        }
       }
       if (finalMembers) {
         badges.push(...finalMembers);
