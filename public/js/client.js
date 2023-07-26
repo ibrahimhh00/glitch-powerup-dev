@@ -221,23 +221,20 @@ window.TrelloPowerUp.initialize({
       }
 
       // Check if "account" data is available and add the badge if yes
-      // if (account) {
-      //   badges.push({
-      //     text: account.accountName,
-      //     color: "yellow",
-      //   });
-      // }
-      // if (members) {
-      //   badges.push(...members);
-      // }
+      if (account) {
+        badges.push({
+          text: account.accountName,
+          color: "yellow",
+        });
+      }
+      if (members) {
+        badges.push(...members);
+      }
 
       // Add the member badges
 
       // Return the badges
-      return {
-          text: category.categoryName,
-          color: category.categoryColor,
-        };
+      return badges;
     });
   },
 
