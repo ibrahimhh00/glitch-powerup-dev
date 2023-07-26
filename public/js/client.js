@@ -220,25 +220,47 @@ window.TrelloPowerUp.initialize({
           }
         });
       });
-      console.log("finalMembers", finalMembers)
+      console.log("finalMembers", finalMembers);
       const badges = [];
 
       // Check if "category" data is available and add the badge if yes
       if (category) {
-        featuresData.data.categories.forEach((category) => {
-          category.id ===
-        })
-        badges.push({
-          text: category.categoryName,
-          color: category.categoryColor,
+        featuresData.data.categories.forEach((cat) => {
+          if (cat.id === category.cateogryId) {
+            badges.push({
+              text: category.name,
+              color: category.color,
+            });
+            t.get("card", "shared", "category", {})
+              .then(function (category) {
+                // Now save it back
+                return t.set("card", "shared", "category", {
+                  categoryId: cat.id,
+                  categoryName: cat.name,
+                  categoryColor: cat.color,
+                });
+              })
+              .then(() => {
+                console.log("New category stored.");
+                return t.closePopup();
+              });
+          }
         });
       }
 
       // Check if "account" data is available and add the badge if yes
       if (account) {
-        badges.push({
-          text: account.accountName,
-          color: "yellow",
+        featuresData.data.accounts.forEach((acc) => {
+          if (acc.id === account.accountId) {
+            badges.push({
+              text: acc.name,
+              color: "yellow",
+            });
+            t.set("card", "shared", "account", {
+              accountId: acc.id,
+              accountName: acc.name,
+            });
+          }
         });
       }
       if (finalMembers) {
