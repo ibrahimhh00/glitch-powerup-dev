@@ -199,7 +199,7 @@ window.TrelloPowerUp.initialize({
   },
 
   "card-badges": async function (t, options) {
-    const featuresData = await fetchFeatures()
+    const featuresData = await fetchFeatures();
     console.log(featuresData);
     // Use t.get to retrieve the stored data
     return Promise.all([
@@ -208,16 +208,27 @@ window.TrelloPowerUp.initialize({
       t.get("card", "shared", "memberSizing"),
     ]).then(function ([account, category, memberSizing]) {
       console.log("categoryyyyy", category);
-      const members = memberSizing.filter(function (ms) {
+      const finalMembers = [];
+      memberSizing.forEach(function (ms) {
         console.log(ms);
-        
-      })
+        featuresData.data.members.forEach((member) => {
+          if (member.id === ms.memberId) {
+            finalMembers.push({
+              text: `${member.name} ${ms.sizing}`,
+              color: "red",
+            });
+          }
+        });
+      });
+      console.log("finalMembers", finalMembers)
       const badges = [];
 
       // Check if "category" data is available and add the badge if yes
       if (category) {
+        featuresData.data.categories.forEach((category) => {
+          category.id ===
+        })
         badges.push({
-          title: "Category",
           text: category.categoryName,
           color: category.categoryColor,
         });
@@ -230,8 +241,8 @@ window.TrelloPowerUp.initialize({
           color: "yellow",
         });
       }
-      if (members) {
-        badges.push(...members);
+      if (finalMembers) {
+        badges.push(...finalMembers);
       }
 
       // Add the member badges
