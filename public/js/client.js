@@ -224,13 +224,12 @@ window.TrelloPowerUp.initialize({
 
       // Check if "category" data is available and add the badge if yes
       if (category) {
-        let deleteIt = true
-        console.log("ASDASDASDASDASD")
+        let deleteIt = true;
+        console.log("ASDASDASDASDASD");
         featuresData.data.categories.forEach((cat) => {
-          console.log(cat._id == category.categoryId, cat._id, category.categoryId)
           if (cat._id === category.categoryId) {
-            deleteIt = false
-            console.log("TREUEEEEEEEEEEEEEEEEE")
+            deleteIt = false;
+            console.log("TREUEEEEEEEEEEEEEEEEE");
             badges.push({
               text: cat.name,
               color: cat.color,
@@ -241,18 +240,21 @@ window.TrelloPowerUp.initialize({
               categoryColor: cat.color,
             }).then(() => console.log("Cat Added"));
           }
-          if(deleteIt) {
-            t.set("card", "shared", "category", {
-              
-            }).then(() => console.log("Category Deleted"));
-          }
         });
+        console.log("deleteIt", deleteIt)
+        if (deleteIt) {
+            t.remove("card", "shared", "category").then(() =>
+              console.log("Category removed")
+            );
+        }
       }
       // Check if "account" data is available and add the badge if yes
       if (account) {
+        let deleteIt = true;
         for (let i = 0; i < featuresData.data.accounts.length; i++) {
           let acc = featuresData.data.accounts[i];
           if (acc._id === account.accountId) {
+            deleteIt = false
             badges.push({
               text: acc.name,
               color: "yellow",
@@ -263,13 +265,18 @@ window.TrelloPowerUp.initialize({
             }).then(() => console.log("Added Account"));
           }
         }
+        if (deleteIt) {
+            t.remove("card", "shared", "account").then(() =>
+              console.log("Account removed")
+            );
+        }
       }
       if (finalMembers) {
         badges.push(...finalMembers);
       }
 
       // Add the member badges
-      
+
       // Return the badges
       return badges;
     });
