@@ -198,9 +198,8 @@ window.TrelloPowerUp.initialize({
     ];
   },
 
-  "card-badges": function (t, options) {
-    let featuresData;
-    fetchFeatures().then((data) => (featuresData = data));
+  "card-badges": async function (t, options) {
+    const featuresData = await fetchFeatures()
     console.log(featuresData);
     // Use t.get to retrieve the stored data
     return Promise.all([
@@ -209,15 +208,10 @@ window.TrelloPowerUp.initialize({
       t.get("card", "shared", "memberSizing"),
     ]).then(function ([account, category, memberSizing]) {
       console.log("categoryyyyy", category);
-      const members = memberSizing.map(function (ms) {
+      const members = memberSizing.filter(function (ms) {
         console.log(ms);
-        return {
-          // Display the member ID and sizing as the badge text
-          text: ms.memberName + " " + ms.sizing,
-          color: "red",
-          // You could also set color and icon properties
-        };
-      });
+        
+      })
       const badges = [];
 
       // Check if "category" data is available and add the badge if yes
