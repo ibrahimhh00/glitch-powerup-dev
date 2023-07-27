@@ -209,6 +209,7 @@ window.TrelloPowerUp.initialize({
       t.get("card", "shared", "memberSizing"),
     ]).then(function ([account, category, memberSizing]) {
       console.log("categoryyyyy", category);
+      console.log("memberSizingmemberSizing",memberSizing);
       const badges = [];
       const finalMembers = [];
       memberSizing && memberSizing.forEach(function (ms) {
@@ -275,9 +276,7 @@ window.TrelloPowerUp.initialize({
       }
       console.log("third")
       if (finalMembers) {
-        t.remove("card", "shared", "memberSizing").then(() =>
-              t.set("card", "shared", "memberSizing", finalMembers).then(() => )
-            );
+        
         badges.push(...finalMembers);
       }
       console.log("badges", badges)
