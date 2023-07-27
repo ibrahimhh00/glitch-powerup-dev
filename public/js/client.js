@@ -199,7 +199,7 @@ window.TrelloPowerUp.initialize({
   },
 
   "card-badges": async function (t, options) {
-    t.getAll().then(data => console.log("datadatadata",data))
+    t.getAll().then((data) => console.log("datadatadata", data));
     const featuresData = await fetchFeatures();
     console.log(featuresData);
     // Use t.get to retrieve the stored data
@@ -209,21 +209,28 @@ window.TrelloPowerUp.initialize({
       t.get("card", "shared", "memberSizing"),
     ]).then(function ([account, category, memberSizing]) {
       console.log("categoryyyyy", category);
-      console.log("memberSizingmemberSizing",memberSizing);
+      console.log("memberSizingmemberSizing", memberSizing);
       const badges = [];
       const finalMembers = [];
-      memberSizing && memberSizing.forEach(function (ms) {
-        console.log(ms);
-        featuresData.data.members.forEach((member) => {
-          if (member._id === ms.memberId) {
-            finalMembers.push({
-              text: `${member.name} ${ms.sizing}`,
-              color: "red",
-            });
-          }
+      const members = [];
+      memberSizing &&
+        memberSizing.forEach(function (ms) {
+          console.log(ms);
+          featuresData.data.members.forEach((member) => {
+            if (member._id === ms.memberId) {
+              members.push({
+                memberId: member._id,
+                memberName: member.name,
+                sizing: ms.sizing,
+              });
+              finalMembers.push({
+                text: `${member.name} ${ms.sizing}`,
+                color: "red",
+              });
+            }
+          });
         });
-      });
-      console.log("first")
+      console.log("first");
       // Check if "category" data is available and add the badge if yes
       if (category) {
         let deleteIt = true;
@@ -243,21 +250,21 @@ window.TrelloPowerUp.initialize({
             }).then(() => console.log("Cat Added"));
           }
         });
-        console.log("deleteIt", deleteIt)
+        console.log("deleteIt", deleteIt);
         if (deleteIt) {
-            t.remove("card", "shared", "category").then(() =>
-              console.log("Category removed")
-            );
+          t.remove("card", "shared", "category").then(() =>
+            console.log("Category removed")
+          );
         }
       }
-      console.log("second")
+      console.log("second");
       // Check if "account" data is available and add the badge if yes
       if (account) {
         let deleteIt = true;
         for (let i = 0; i < featuresData.data.accounts.length; i++) {
           let acc = featuresData.data.accounts[i];
           if (acc._id === account.accountId) {
-            deleteIt = false
+            deleteIt = false;
             badges.push({
               text: acc.name,
               color: "yellow",
@@ -269,17 +276,19 @@ window.TrelloPowerUp.initialize({
           }
         }
         if (deleteIt) {
-            t.remove("card", "shared", "account").then(() =>
-              console.log("Account removed")
-            );
+          t.remove("card", "shared", "account").then(() =>
+            console.log("Account removed")
+          );
         }
       }
-      console.log("third")
+      if(memberSizing) {
+        t.set('card', 'shared', 'memberSizing', members).then(() => console.log("NEW MEMBERS ADDED SUCCESSFULLY"))
+      }
+      console.log("third");
       if (finalMembers) {
-        
         badges.push(...finalMembers);
       }
-      console.log("badges", badges)
+      console.log("badges", badges);
 
       // Add the member badges
 
