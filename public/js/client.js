@@ -199,6 +199,7 @@ window.TrelloPowerUp.initialize({
   },
 
   "card-badges": async function (t, options) {
+    t.getAll().then(data => console.log("datadatadata",data))
     const featuresData = await fetchFeatures();
     console.log(featuresData);
     // Use t.get to retrieve the stored data
