@@ -211,7 +211,7 @@ window.TrelloPowerUp.initialize({
       console.log("categoryyyyy", category);
       const badges = [];
       const finalMembers = [];
-      memberSizing.forEach(function (ms) {
+      memberSizing && memberSizing.forEach(function (ms) {
         console.log(ms);
         featuresData.data.members.forEach((member) => {
           if (member._id === ms.memberId) {
@@ -222,7 +222,7 @@ window.TrelloPowerUp.initialize({
           }
         });
       });
-
+      console.log("first")
       // Check if "category" data is available and add the badge if yes
       if (category) {
         let deleteIt = true;
@@ -249,6 +249,7 @@ window.TrelloPowerUp.initialize({
             );
         }
       }
+      console.log("second")
       // Check if "account" data is available and add the badge if yes
       if (account) {
         let deleteIt = true;
@@ -272,9 +273,11 @@ window.TrelloPowerUp.initialize({
             );
         }
       }
+      console.log("third")
       if (finalMembers) {
         badges.push(...finalMembers);
       }
+      console.log("badges", badges)
 
       // Add the member badges
 
