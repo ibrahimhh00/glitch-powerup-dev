@@ -345,45 +345,4 @@ window.TrelloPowerUp.initialize({
       return result;
     });
   },
-  // "card-detail-badges": function (t, options) {
-  //   // return t.get('card', 'shared', 'backend_estimate')
-  //   return t.getAll().then(function (estimates) {
-  //     var backend_estimate = estimates["card"]["shared"]["backend_estimate"];
-  //     var frontend_estimate = estimates["card"]["shared"]["frontend_estimate"];
-  //     return [
-  //       {
-  //         title: "Backend Estimate",
-  //         color:
-  //           backend_estimate == null || backend_estimate == 0 ? null : "blue",
-  //         text:
-  //           backend_estimate == null || backend_estimate == 0
-  //             ? null
-  //             : backend_estimate,
-  //         callback: function (t) {
-  //           return t.popup({
-  //             title: "Backend Estimation",
-  //             url: "estimate.html",
-  //           });
-  //         },
-  //       },
-  //       {
-  //         title: "Frontend Estimate",
-  //         color:
-  //           frontend_estimate == null || frontend_estimate == 0
-  //             ? null
-  //             : "orange",
-  //         text:
-  //           frontend_estimate == null || frontend_estimate == 0
-  //             ? null
-  //             : frontend_estimate,
-  //         callback: function (t) {
-  //           return t.popup({
-  //             title: "Frontend Estimation",
-  //             url: "estimate.html",
-  //           });
-  //         },
-  //       },
-  //     ];
-  //   });
-  // },
 });
