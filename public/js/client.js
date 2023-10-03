@@ -213,6 +213,7 @@ window.TrelloPowerUp.initialize({
           .then((response) => response.json())
           .then((data) => {
             console.log("dataDDDDDDDDDDDDD", data);
+          const membersBadges = data.data.members
             return [
               {
                 text: "My Badge",
