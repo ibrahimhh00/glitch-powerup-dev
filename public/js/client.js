@@ -213,22 +213,22 @@ window.TrelloPowerUp.initialize({
           .then((response) => response.json())
           .then((data) => {
             console.log("dataDDDDDDDDDDDDD", data);
-          const membersBadges = data.data.members
-            return [
-              {
-                text: "My Badge",
-                icon: "./images/icon.svg",
-                color: "green",
-                callback: function (context) {
-                  // optional callback to execute on badge click
-                  return context.popup({
-                    title: "My Badge Popup",
-                    url: "./badge-details.html",
-                    height: 400,
+            const membersBadges = data.data.members.map((member) => {
+              return {
+                title: member.memberId.name,
+                text: member.sizing,
+                color: "red",
+                callback: function (t) {
+                  return t.popup({
+                    title: "Adjust Size",
+                    url: "https://example.com/adjust-size.html", // replace with the actual URL of your HTML page
+                    height: 400, // you can adjust the height as needed
                   });
                 },
-              },
-            ];
+              };
+            });
+            const cardDetailBadges = [...membersBadges];
+            return cardDetailBadges;
           });
       });
   },
