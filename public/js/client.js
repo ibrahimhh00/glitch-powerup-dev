@@ -25,8 +25,8 @@ var ENDPOINT_URL = "http://localhost:9000/api/v1";
 //   return await response.json();
 // }
 async function fetchCards() {
-  const response = await fetch(`${ENDPOINT_URL}/cards/`,{method: "GET"})
-  return await response.json()
+  const response = await fetch(`${ENDPOINT_URL}/cards/`, { method: "GET" });
+  return await response.json();
 }
 function onBtnClickTwo(t) {
   return t.lists("all").then(function (lists) {
@@ -204,6 +204,31 @@ window.TrelloPowerUp.initialize({
   },
 
   "card-detail-badges": function (t, options) {
-    
+    return t
+      .card("id")
+      .get("id")
+      .then(function (cardId) {
+        // Replace with the actual API endpoint and data fetching logic
+        return fetch(`${ENDPOINT_URL}/cards/${cardId}`)
+          .then((response) => response.json())
+          .then((data) => {
+            console.log("dataDDDDDDDDDDDDD", data);
+            return [
+              {
+                text: "My Badge",
+                icon: "./images/icon.svg",
+                color: "green",
+                callback: function (context) {
+                  // optional callback to execute on badge click
+                  return context.popup({
+                    title: "My Badge Popup",
+                    url: "./badge-details.html",
+                    height: 400,
+                  });
+                },
+              },
+            ];
+          });
+      });
   },
 });
