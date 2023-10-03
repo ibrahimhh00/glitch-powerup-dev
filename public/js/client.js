@@ -204,54 +204,57 @@ window.TrelloPowerUp.initialize({
   },
 
   "card-detail-badges": function (t, options) {
-    return Promise.all([t.card("id"), t.list("id"), t.board("id")]).then(
-      function ([cardId, idList, idBoard]) {
-        console.log(idList, idBoard);
-        // Replace with the actual API endpoint and data fetching logic
-        return fetch(`${ENDPOINT_URL}/cards/${cardId.id}`)
-          .then((response) => response.json())
-          .then((data) => {
-            console.log("dataDDDDDDDDDDDDD", data);
-            const membersBadges = data.data.members.map((member) => {
-              return {
-                title: member.memberId.name,
-                text: member.sizing,
-                color: "red",
-                callback: function (t) {
-                  return t.popup({
-                    title: "Adjust Member Sizing",
-                    items: [
-                      {
-                        text: "Member: " + member.memberId.name,
-                      },
-                      {
-                        text: "Current Sizing: " + member.sizing,
-                        callback: function (t) {
-                          return t.popup({
-                            url: "input",
-                            title: "Adjust Sizing",
-                            url: `../adjust-size.html?cardId=${cardId.id}&idList=${idList.id}&idBoard=${idBoard.id}&memberId=${member.memberId.id}&memberName=${member.memberId.name}&currentSizing=${member.sizing}`,
-                          });
+    console.log("RERENDINGGGGGGGGGGGGGGGGGGGGGGGGGGG")
+    return t.render(() => {
+      return Promise.all([t.card("id"), t.list("id"), t.board("id")]).then(
+        function ([cardId, idList, idBoard]) {
+          console.log(idList, idBoard);
+          // Replace with the actual API endpoint and data fetching logic
+          return fetch(`${ENDPOINT_URL}/cards/${cardId.id}`)
+            .then((response) => response.json())
+            .then((data) => {
+              console.log("dataDDDDDDDDDDDDD", data);
+              const membersBadges = data.data.members.map((member) => {
+                return {
+                  title: member.memberId.name,
+                  text: member.sizing,
+                  color: "red",
+                  callback: function (t) {
+                    return t.popup({
+                      title: "Adjust Member Sizing",
+                      items: [
+                        {
+                          text: "Member: " + member.memberId.name,
                         },
-                      },
-                      {
-                        text: "Delete Member",
-                        callback: function (t) {
-                          console.log(
-                            "Deleting member with ID: ",
-                            member.memberId
-                          );
-                          // Implement your logic here to delete the member from the card
+                        {
+                          text: "Current Sizing: " + member.sizing,
+                          callback: function (t) {
+                            return t.popup({
+                              url: "input",
+                              title: "Adjust Sizing",
+                              url: `../adjust-size.html?cardId=${cardId.id}&idList=${idList.id}&idBoard=${idBoard.id}&memberId=${member.memberId.id}&memberName=${member.memberId.name}&currentSizing=${member.sizing}`,
+                            });
+                          },
                         },
-                      },
-                    ],
-                  });
-                },
-              };
+                        {
+                          text: "Delete Member",
+                          callback: function (t) {
+                            console.log(
+                              "Deleting member with ID: ",
+                              member.memberId
+                            );
+                            // Implement your logic here to delete the member from the card
+                          },
+                        },
+                      ],
+                    });
+                  },
+                };
+              });
+              return membersBadges;
             });
-            return membersBadges;
-          });
-      }
-    );
+        }
+      );
+    });
   },
 });
