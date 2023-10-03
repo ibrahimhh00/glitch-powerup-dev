@@ -18,15 +18,22 @@
       .inputSizing {
         padding: 10px;
         border: none;
+        outline: 2px solid white;
         background-color: transparent;
         border-radius: 2px;
         color: white;
       }
       button {
-        background-color: transparent;
+        transition: 0.2s;
+        background-color: #B0B0B0;
+        color: white;
         border: none;
-        outline: none;
-        padding: 2px 4px;
+        outline: none;  
+        padding: 10px;
+        border-radius: 2px;
+      }
+      button:hover {
+        background-color: #808080;
       }
     </style>
     <script>
@@ -39,12 +46,16 @@
         const currentSizing = urlParams.get("currentSizing");
         const memberName = urlParams.get("memberName");
         const cardId = urlParams.get("cardId");
+        const idList = urlParams.get("idList");
+        const idBoard = urlParams.get("idBoard");
 
         // Output the memberId and currentSizing to the console (for debugging)
         console.log("memberId:", memberId);
         console.log("currentSizing:", currentSizing);
         console.log("memberName:", memberName);
         console.log("cardId:", cardId);
+        console.log("idList:", idList);
+        console.log("idBoard:", idBoard);
         // If you have form fields to populate, you can do so here. For example:
         document.getElementById("memberName").innerText = memberName;
         document.getElementById("sizingInput").value = currentSizing;
