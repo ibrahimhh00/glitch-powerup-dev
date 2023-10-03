@@ -59,9 +59,11 @@ $("#estimate").submit(async function (event) {
 
     // Send the data to the backend
     const data = {
-      memberId: selectedMemberId,
-      sizing: sizing,
-      date: new Date(), //the current date
+      member: {
+        memberId: selectedMemberId,
+        sizing: sizing,
+        date: new Date(), //the current date
+      },
       cardId: card.id,
       listId: list.id,
       boardId: board.id,
