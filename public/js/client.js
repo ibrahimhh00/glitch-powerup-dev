@@ -92,16 +92,19 @@ function removeMemberBadge(t, indexToRemove) {
     return t.set("card", "shared", "memberSizing", updatedMemberSizing);
   });
 }
+
 function removeAccountBadge(t) {
   return t.get("card", "shared", "account").then(function () {
     return t.remove("card", "shared", "account");
   });
 }
+
 function removeCategoryBadge(t) {
   return t.get("card", "shared", "category").then(function () {
     return t.remove("card", "shared", "category");
   });
 }
+
 window.TrelloPowerUp.initialize({
   "board-buttons": function (t, opts) {
     console.log(opts);
@@ -197,117 +200,16 @@ window.TrelloPowerUp.initialize({
       },
     ];
   },
-
-  // "card-badges": async function (t, options) {
-    t.getAll().then((data) => console.log("datadatadata", data));
-    const featuresData = await fetchFeatures();
-    console.log(featuresData);
-    // Use t.get to retrieve the stored data
-    return Promise.all([
-      t.get("card", "shared", "account"),
-      t.get("card", "shared", "category"),
-      t.get("card", "shared", "memberSizing"),
-    ]).then(function ([account, category, memberSizing]) {
-      console.log("categoryyyyy", category);
-      console.log("memberSizingmemberSizing", memberSizing);
-      const badges = [];
-      const finalMembers = [];
-      const members = [];
-      memberSizing &&
-        memberSizing.forEach(function (ms) {
-          console.log(ms);
-          featuresData.data.members.forEach((member) => {
-            if (member._id === ms.memberId) {
-              members.push({
-                memberId: member._id,
-                memberName: member.name,
-                sizing: ms.sizing,
-              });
-              finalMembers.push({
-                text: `${member.name} ${ms.sizing}`,
-                color: "red",
-              });
-            }
-          });
-        });
-      console.log("first");
-      // Check if "category" data is available and add the badge if yes
-      if (category) {
-        let deleteIt = true;
-        console.log("ASDASDASDASDASD");
-        featuresData.data.categories.forEach((cat) => {
-          if (cat._id === category.categoryId) {
-            deleteIt = false;
-            console.log("TREUEEEEEEEEEEEEEEEEE");
-            badges.push({
-              text: cat.name,
-              color: cat.color,
-            });
-            t.set("card", "shared", "category", {
-              categoryId: cat._id,
-              categoryName: cat.name,
-              categoryColor: cat.color,
-            }).then(() => console.log("Cat Added"));
-          }
-        });
-        console.log("deleteIt", deleteIt);
-        if (deleteIt) {
-          t.remove("card", "shared", "category").then(() =>
-            console.log("Category removed")
-          );
-        }
-      }
-      console.log("second");
-      // Check if "account" data is available and add the badge if yes
-      if (account) {
-        let deleteIt = true;
-        for (let i = 0; i < featuresData.data.accounts.length; i++) {
-          let acc = featuresData.data.accounts[i];
-          if (acc._id === account.accountId) {
-            deleteIt = false;
-            badges.push({
-              text: acc.name,
-              color: "yellow",
-            });
-            t.set("card", "shared", "account", {
-              accountId: acc._id,
-              accountName: acc.name,
-            }).then(() => console.log("Added Account"));
-          }
-        }
-        if (deleteIt) {
-          t.remove("card", "shared", "account").then(() =>
-            console.log("Account removed")
-          );
-        }
-      }
-      if(memberSizing) {
-        t.set('card', 'shared', 'memberSizing', members).then(() => console.log("NEW MEMBERS ADDED SUCCESSFULLY"))
-      }
-      console.log("third");
-      if (finalMembers) {
-        badges.push(...finalMembers);
-      }
-      console.log("badges", badges);
-
-      // Add the member badges
-
-      // Return the badges
-      return badges;
-    });
-  },
-
-  "card-detail-badges": async function (t, options) {
+  
+  "card-detail-badges": function (t, options) {
     
-    const data = await fetch(`${ENDPOINT_URL}/cards/`)
-    console.log("datadatadatadatadatadatadata", data)
+    fetch(`${ENDPOINT_URL}/cards/`).then(response => response.json()).then(data => console.log("dataaaaaaaaaa", data))
     // Use t.get to retrieve the stored data
     return Promise.all([
       t.get("card", "shared", "memberSizing"),
       t.get("card", "shared", "account"),
       t.get("card", "shared", "category"),
     ]).then(function ([memberSizing, account, category]) {
-      console.log(memberSizing, account);
       // memberSizing is an array of member sizing objects
       // Map each member sizing to a badge
       const members = memberSizing
