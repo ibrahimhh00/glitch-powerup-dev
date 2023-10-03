@@ -1,4 +1,4 @@
-const API_URL = "https://uxperts-backend-staging.disruptem.com/api/v1/public/trello/members";
+const API_URL = "http://localhost:9000/api/v1/public/trello/members";
 
 var t = window.TrelloPowerUp.iframe();
 
