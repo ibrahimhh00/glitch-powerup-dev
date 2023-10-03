@@ -42,7 +42,7 @@ function populateMembers(members) {
 }
 
 //handle submit sizing form
-$("#estimate").submit(function (event) {
+$("#estimate").submit(async function (event) {
   event.preventDefault();
 
   const selectedMemberId = $("#members").val();
@@ -51,40 +51,38 @@ $("#estimate").submit(function (event) {
   if (!sizing || !selectedMemberName) {
     return;
   }
-  console.log(selectedMemberId, sizing);
-  t.get("card", "shared", "memberSizing", [])
-    .then(function (memberSizing) {
-      // memberSizing will be an empty array if it's not set yet.
-      // Now add the new member to it
-      memberSizing.push({
-        memberId: selectedMemberId,
-        memberName: selectedMemberName,
-        sizing: sizing,
-      });
+  try {
+    // Fetch the card, list, and board IDs
+    const card = await t.card("id");
+    const list = await t.list("id");
+    const board = await t.board("id");
 
-      // Now save it back and send data to backend
-      return t.set("card", "shared", "memberSizing", memberSizing).then(() => {
-        const data = {
-          memberId: selectedMemberId,
-          sizing: sizing,
-          date: new Date(), // Assuming you want to send the current date
-        };
-        return fetch("/your-endpoint", {
-          // Replace '/your-endpoint' with the actual endpoint
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        });
-      });
-    })
-    .then((response) => response.json()) // Assuming the server responds with JSON
-    .then((data) => {
-      console.log("Success:", data);
-      return t.closePopup();
-    })
-    .catch((error) => {
-      console.error("Error:", error);
+    // Send the data to the backend
+    const data = {
+      memberId: selectedMemberId,
+      sizing: sizing,
+      date: new Date(), //the current date
+      cardId: card.id,
+      listId: list.id,
+      boardId: board.id,
+    };
+
+    const response = await fetch(`${API_URL}/cards/`, {
+      // Replace '/your-endpoint' with your actual endpoint
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
     });
+
+    if (response.ok) {
+      console.log("Success:", await response.json());
+      t.closePopup();
+    } else {
+      console.error("Server responded with status", response.status);
+    }
+  } catch (error) {
+    console.error("Error:", error);
+  }
 });
