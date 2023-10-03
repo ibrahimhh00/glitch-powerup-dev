@@ -231,7 +231,7 @@ window.TrelloPowerUp.initialize({
                           return t.popup({
                             url: "input",
                             title: "Adjust Sizing",
-                            url: `../adjust-size.html?memberId=${member.memberId}&currentSizing=${member.sizing}`,
+                            url: `../adjust-size.html?cardId=${cardId}&memberId=${member.memberId.id}&memberName=${member.memberId.name}&currentSizing=${member.sizing}`,
                           });
                         },
                       },
