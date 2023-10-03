@@ -19,13 +19,15 @@ var DISRUPTEM_ICON2 =
   "https://cdn.glitch.com/bcb67d52-05a1-4b6e-a315-f5bae36b69eb%2F1.png?v=1625811412559";
 var DISRUPTEM_ICON3 =
   "https://cdn.glitch.com/bcb67d52-05a1-4b6e-a315-f5bae36b69eb%2Fdisruptem-Icon_White.png?v=1625811831046";
-var ENDPOINT_URL =
-  "http://localhost:9000/api/v1";
+var ENDPOINT_URL = "http://localhost:9000/api/v1";
 // async function fetchFeatures() {
 //   const response = await fetch(ENDPOINT_URL, { method: "GET" });
 //   return await response.json();
 // }
-
+async function fetchCards() {
+  const response = await fetch(`${ENDPOINT_URL}/cards/`,{method: "GET"})
+  return await response.json()
+}
 function onBtnClickTwo(t) {
   return t.lists("all").then(function (lists) {
     let results = []; // Array to collect all the results
@@ -200,10 +202,10 @@ window.TrelloPowerUp.initialize({
       },
     ];
   },
-  
-  "card-detail-badges": function (t, options) {
-    
-    fetch(`${ENDPOINT_URL}/cards/`).then(response => response.json()).then(data => console.log("dataaaaaaaaaa", data))
+
+  "card-detail-badges": async function (t, options) {
+    const dat= await fetchCards() 
+    console.log(dat)
     // Use t.get to retrieve the stored data
     return Promise.all([
       t.get("card", "shared", "memberSizing"),
