@@ -212,13 +212,18 @@ window.TrelloPowerUp.initialize({
           .then((data) => {
             console.log("dataDDDDDDDDDDDDD", data);
             const membersBadges = data.data.members.map((member) => {
-              return t.set('card', 'shared', 'memberSizing', member.sizing)
               return {
                 text: `${member.memberId.name} ${member.sizing}`,
                 color: "red",
               };
             });
-            return membersBadges;
+          const categoriesBadges = data.data.members.map((member) => {
+              return {
+                text: `${member.memberId.name} ${member.sizing}`,
+                color: "red",
+              };
+            });
+            return [...membersBadges, ...categoriesBadges];
           });
       }
     );
