@@ -289,7 +289,22 @@ window.TrelloPowerUp.initialize({
                 },
               };
             });
-            return membersBadges;
+            const categoriesBadges = data.data.members
+              .filter(
+                (member, index, self) =>
+                  index ===
+                  self.findIndex(
+                    (m) =>
+                      m.memberId.category.id === member.memberId.category.id
+                  )
+              )
+              .map((member) => {
+                return {
+                  text: member.memberId.category.name,
+                  color: member.memberId.category.color,
+                };
+              });
+            return [...membersBadges, ...categoriesBadges];
           });
       }
     );
