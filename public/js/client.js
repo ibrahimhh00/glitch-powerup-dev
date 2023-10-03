@@ -203,53 +203,7 @@ window.TrelloPowerUp.initialize({
     ];
   },
 
-  "card-detail-badges": async function (t, options) {
-    const dat= await fetchCards() 
-    console.log(dat)
-    // Use t.get to retrieve the stored data
-    return Promise.all([
-      t.get("card", "shared", "memberSizing"),
-      t.get("card", "shared", "account"),
-      t.get("card", "shared", "category"),
-    ]).then(function ([memberSizing, account, category]) {
-      // memberSizing is an array of member sizing objects
-      // Map each member sizing to a badge
-      const members = memberSizing
-        ? memberSizing.map(function (ms, index) {
-            return {
-              // Display the member ID and sizing as the badge text
-              title: ms.memberName,
-              text: ms.sizing,
-              color: "red",
-              callback: function (t, opts) {
-                return removeMemberBadge(t, index);
-              },
-              // You could also set color and icon properties
-            };
-          })
-        : [];
-      const result = [
-        ...members,
-        account && {
-          // Display the member ID and sizing as the badge text
-          title: "Account",
-          text: account.accountName,
-          color: "yellow",
-          callback: function (t, opts) {
-            return removeAccountBadge(t);
-          },
-        },
-        category && {
-          // Display the member ID and sizing as the badge text
-          title: "Category",
-          text: category.categoryName,
-          color: category.categoryColor,
-          callback: function (t, opts) {
-            return removeCategoryBadge(t);
-          },
-        },
-      ];
-      return result;
-    });
+  "card-detail-badges": function (t, options) {
+    
   },
 });
