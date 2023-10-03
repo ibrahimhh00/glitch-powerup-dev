@@ -220,15 +220,37 @@ window.TrelloPowerUp.initialize({
                 color: "red",
                 callback: function (t) {
                   return t.popup({
-                    title: "Adjust Size",
-                    url: "https://example.com/adjust-size.html", // replace with the actual URL of your HTML page
-                    height: 400, // you can adjust the height as needed
+                    title: "Adjust Member Sizing",
+                    items: [
+                      {
+                        text: "Member ID: " + member.memberId,
+                      },
+                      {
+                        text: "Current Sizing: " + member.sizing,
+                        callback: function (t) {
+                          return t.popup({
+                            url: "input",
+                            title: "Adjust Sizing",
+                            url: `../adjust-size.html?memberId=${member.memberId}&currentSizing=${member.sizing}`,
+                          });
+                        },
+                      },
+                      {
+                        text: "Delete Member",
+                        callback: function (t) {
+                          console.log(
+                            "Deleting member with ID: ",
+                            member.memberId
+                          );
+                          // Implement your logic here to delete the member from the card
+                        },
+                      },
+                    ],
                   });
                 },
               };
             });
-            const cardDetailBadges = [...membersBadges];
-            return cardDetailBadges;
+            return membersBadges;
           });
       });
   },
