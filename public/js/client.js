@@ -202,7 +202,27 @@ window.TrelloPowerUp.initialize({
       },
     ];
   },
-
+  "card-badges": function (t, options) {
+    return Promise.all([t.card("id"), t.list("id"), t.board("id")]).then(
+      function ([cardId, idList, idBoard]) {
+        console.log(idList, idBoard);
+        // Replace with the actual API endpoint and data fetching logic
+        return fetch(`${ENDPOINT_URL}/cards/${cardId.id}`)
+          .then((response) => response.json())
+          .then((data) => {
+            console.log("dataDDDDDDDDDDDDD", data);
+            const membersBadges = data.data.members.map((member) => {
+              return t.set('card', 'shared', 'memberSizing', member.sizing)
+              return {
+                text: `${member.memberId.name} ${member.sizing}`,
+                color: "red",
+              };
+            });
+            return membersBadges;
+          });
+      }
+    );
+  },
   "card-detail-badges": function (t, options) {
     return Promise.all([t.card("id"), t.list("id"), t.board("id")]).then(
       function ([cardId, idList, idBoard]) {
