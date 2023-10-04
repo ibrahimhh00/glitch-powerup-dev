@@ -152,54 +152,54 @@ window.TrelloPowerUp.initialize({
           });
         },
       },
-      {
-        // icon is the URL to an image to be used as the button's icon.
-        // The image should be 24x24 pixels.
-        icon: "https://icons.veryicon.com/png/o/commerce-shopping/icon-of-lvshan-valley-mobile-terminal/home-category.png",
+//       {
+//         // icon is the URL to an image to be used as the button's icon.
+//         // The image should be 24x24 pixels.
+//         icon: "https://icons.veryicon.com/png/o/commerce-shopping/icon-of-lvshan-valley-mobile-terminal/home-category.png",
 
-        // text is the name of the button.
-        text: "Category",
+//         // text is the name of the button.
+//         text: "Category",
 
-        // callback is a function that is called when the button is clicked.
-        callback: function (t) {
-          // Popup an iframe when the button is clicked.
-          // The iframe will load the URL provided and display it in a modal.
-          return t.popup({
-            // Title of the popup
-            title: "Categories",
+//         // callback is a function that is called when the button is clicked.
+//         callback: function (t) {
+//           // Popup an iframe when the button is clicked.
+//           // The iframe will load the URL provided and display it in a modal.
+//           return t.popup({
+//             // Title of the popup
+//             title: "Categories",
 
-            // URL of the page to load into the iframe
-            url: "./category.html",
+//             // URL of the page to load into the iframe
+//             url: "./category.html",
 
-            // Height of the popup in pixels
-            height: 184,
-          });
-        },
-      },
-      {
-        // icon is the URL to an image to be used as the button's icon.
-        // The image should be 24x24 pixels.
-        icon: "https://icons.veryicon.com/png/o/miscellaneous/administration/account-25.png",
+//             // Height of the popup in pixels
+//             height: 184,
+//           });
+//         },
+//       },
+//       {
+//         // icon is the URL to an image to be used as the button's icon.
+//         // The image should be 24x24 pixels.
+//         icon: "https://icons.veryicon.com/png/o/miscellaneous/administration/account-25.png",
 
-        // text is the name of the button.
-        text: "Accounts",
+//         // text is the name of the button.
+//         text: "Accounts",
 
-        // callback is a function that is called when the button is clicked.
-        callback: function (t) {
-          // Popup an iframe when the button is clicked.
-          // The iframe will load the URL provided and display it in a modal.
-          return t.popup({
-            // Title of the popup
-            title: "Account",
+//         // callback is a function that is called when the button is clicked.
+//         callback: function (t) {
+//           // Popup an iframe when the button is clicked.
+//           // The iframe will load the URL provided and display it in a modal.
+//           return t.popup({
+//             // Title of the popup
+//             title: "Account",
 
-            // URL of the page to load into the iframe
-            url: "./account.html",
+//             // URL of the page to load into the iframe
+//             url: "./account.html",
 
-            // Height of the popup in pixels
-            height: 184,
-          });
-        },
-      },
+//             // Height of the popup in pixels
+//             height: 184,
+//           });
+//         },
+//       },
     ];
   },
   "card-badges": function (t, options) {
