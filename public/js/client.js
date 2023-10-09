@@ -276,7 +276,7 @@ window.TrelloPowerUp.initialize({
                             text: "Delete Member",
                             callback: function (t) {
                               const data = {
-                                memberId: member.memberId,
+                                memberId: member.memberId._id,
                                 cardId: cardId.id
                               }
                               fetch(`${ENDPOINT_URL}/cards/delete-member`, {
