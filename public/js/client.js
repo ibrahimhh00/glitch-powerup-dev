@@ -275,9 +275,10 @@ window.TrelloPowerUp.initialize({
                           {
                             text: "Delete Member",
                             callback: function (t) {
+                              
                               console.log(
                                 "Deleting member with ID: ",
-                                member.memberId
+                                member.memberId, cardId.id
                               );
                               // Implement your logic here to delete the member from the card
                             },
