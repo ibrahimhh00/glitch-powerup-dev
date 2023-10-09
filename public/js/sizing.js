@@ -14,7 +14,7 @@ function fetchMembers() {
     type: "GET",
     success: function (data) {
       console.log(data);
-      populateMembers(data.data);
+      populateMembers(data.data.members);
     },
     error: function (error) {
       console.error("Error fetching members", error);
@@ -26,7 +26,8 @@ function fetchMembers() {
 function populateMembers(members) {
   t.get("card", "shared", "memberSizing").then(function (memberSizing = []) {
     // memberSizing now contains the sizing data for members
-    let memberIdsWithSizing = memberSizing.map((ms) => ms.memberId);
+    console.log(members)
+    let memberIdsWithSizing = members.map((ms) => ms._id);
     console.log("memberIdsWithSizing", memberIdsWithSizing);
 
     const membersList = $("#members");
@@ -34,7 +35,7 @@ function populateMembers(members) {
       // Exclude members that have sizing data
       console.log(member.id);
       if (!memberIdsWithSizing.includes(String(member.id))) {
-        const option = `<option value="${member.id}">${member.name}</option>`;
+        const option = `<option value="${member._id}">${member.name}</option>`;
         membersList.append(option);
       }
     });
