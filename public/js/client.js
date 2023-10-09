@@ -275,7 +275,10 @@ window.TrelloPowerUp.initialize({
                           {
                             text: "Delete Member",
                             callback: function (t) {
-                              
+                              const data = {
+                                memberId: member.memberId,
+                                cardId: cardId.id
+                              }
                               fetch(`${ENDPOINT_URL}/cards/delete-member`, {
                                 method: "POST", // Specifying the HTTP method
                                 headers: {
@@ -292,7 +295,7 @@ window.TrelloPowerUp.initialize({
                                 });
                               console.log(
                                 "Deleting member with ID: ",
-                                member.memberId,
+                                member.memberId._id,
                                 cardId.id
                               );
                               // Implement your logic here to delete the member from the card
