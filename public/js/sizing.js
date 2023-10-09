@@ -22,6 +22,7 @@ function fetchMembers() {
   });
 }
 
+window.TrelloPowerUp.initialize({})
 //populate the members into the UI
 function populateMembers(members) {
   t.get("card", "shared", "memberSizing").then(function (memberSizing = []) {
