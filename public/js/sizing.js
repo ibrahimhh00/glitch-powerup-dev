@@ -102,6 +102,7 @@ $("#estimate").submit(async function (event) {
 
     if (response.ok) {
       console.log("Success:", await response.json());
+      console.log("CLOSED")
       t.closePopup();
     } else {
       console.error("Server responded with status", response.status);

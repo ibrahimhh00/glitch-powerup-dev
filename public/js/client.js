@@ -256,7 +256,8 @@ window.TrelloPowerUp.initialize({
                     color: "red",
                     refresh: 10,
                     callback: function (t) {
-                      return t.popup({
+                      let outSideContext = t
+                      return outSideContext.popup({
                         title: "Adjust Member Sizing",
                         items: [
                           {
@@ -277,8 +278,8 @@ window.TrelloPowerUp.initialize({
                             callback: function (t) {
                               const data = {
                                 memberId: member.memberId._id,
-                                cardId: cardId.id
-                              }
+                                cardId: cardId.id,
+                              };
                               fetch(`${ENDPOINT_URL}/cards/delete-member`, {
                                 method: "POST", // Specifying the HTTP method
                                 headers: {
@@ -288,11 +289,16 @@ window.TrelloPowerUp.initialize({
                               })
                                 .then((response) => response.json()) // Parsing the JSON response from the server
                                 .then((data) => {
-                                  console.log("Success:", data); // Handling the successful response
+                                  console.log("Success:", data);
                                 })
                                 .catch((error) => {
                                   console.error("Error:", error); // Handling errors
+                                })
+                                .finally(() => {
+                                  console.log(outSideContext)
+                                  outSideContext.closePopup(); // Closes the menu whether the delete was successful or not
                                 });
+
                               console.log(
                                 "Deleting member with ID: ",
                                 member.memberId._id,
