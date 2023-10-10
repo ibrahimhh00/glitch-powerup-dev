@@ -249,68 +249,63 @@ window.TrelloPowerUp.initialize({
             console.log("dataDDDDDDDDDDDDD", data);
             const membersBadges = data.data.members.map((member) => {
               return {
-                dynamic: function () {
-                  return {
-                    title: member.memberId.name,
-                    text: member.sizing,
-                    color: "red",
-                    refresh: 10,
-                    callback: function (t) {
-                      let outSideContext = t
-                      return outSideContext.popup({
-                        title: "Adjust Member Sizing",
-                        items: [
-                          {
-                            text: "Member: " + member.memberId.name,
-                          },
-                          {
-                            text: "Current Sizing: " + member.sizing,
-                            callback: function (t) {
-                              return t.popup({
-                                url: "input",
-                                title: "Adjust Sizing",
-                                url: `../adjust-size.html?cardId=${cardId.id}&idList=${idList.id}&idBoard=${idBoard.id}&memberId=${member.memberId.id}&memberName=${member.memberId.name}&currentSizing=${member.sizing}`,
-                              });
+                title: member.memberId.name,
+                text: member.sizing,
+                color: "red",
+                callback: function (t) {
+                  let outSideContext = t;
+                  return outSideContext.popup({
+                    title: "Adjust Member Sizing",
+                    items: [
+                      {
+                        text: "Member: " + member.memberId.name,
+                      },
+                      {
+                        text: "Current Sizing: " + member.sizing,
+                        callback: function (t) {
+                          return t.popup({
+                            url: "input",
+                            title: "Adjust Sizing",
+                            url: `../adjust-size.html?cardId=${cardId.id}&idList=${idList.id}&idBoard=${idBoard.id}&memberId=${member.memberId.id}&memberName=${member.memberId.name}&currentSizing=${member.sizing}`,
+                          });
+                        },
+                      },
+                      {
+                        text: "Delete Member",
+                        callback: function (t) {
+                          const data = {
+                            memberId: member.memberId._id,
+                            cardId: cardId.id,
+                          };
+                          fetch(`${ENDPOINT_URL}/cards/delete-member`, {
+                            method: "POST", // Specifying the HTTP method
+                            headers: {
+                              "Content-Type": "application/json", // Setting the content type of the request
                             },
-                          },
-                          {
-                            text: "Delete Member",
-                            callback: function (t) {
-                              const data = {
-                                memberId: member.memberId._id,
-                                cardId: cardId.id,
-                              };
-                              fetch(`${ENDPOINT_URL}/cards/delete-member`, {
-                                method: "POST", // Specifying the HTTP method
-                                headers: {
-                                  "Content-Type": "application/json", // Setting the content type of the request
-                                },
-                                body: JSON.stringify(data), // Converting the data to a JSON string
-                              })
-                                .then((response) => response.json()) // Parsing the JSON response from the server
-                                .then((data) => {
-                                  console.log("Success:", data);
-                                })
-                                .catch((error) => {
-                                  console.error("Error:", error); // Handling errors
-                                })
-                                .finally(() => {
-                                  console.log(outSideContext)
-                                  outSideContext.closePopup(); // Closes the menu whether the delete was successful or not
-                                });
+                            body: JSON.stringify(data), // Converting the data to a JSON string
+                          })
+                            .then((response) => response.json()) // Parsing the JSON response from the server
+                            .then((data) => {
+                              console.log("Success:", data);
+                            })
+                            .catch((error) => {
+                              console.error("Error:", error); // Handling errors
+                            })
+                            .finally(() => {
+                              console.log(outSideContext);
+                              t.closePopup(); // Closes the menu whether the delete was successful or not
+                            });
 
-                              console.log(
-                                "Deleting member with ID: ",
-                                member.memberId._id,
-                                cardId.id
-                              );
-                              // Implement your logic here to delete the member from the card
-                            },
-                          },
-                        ],
-                      });
-                    },
-                  };
+                          console.log(
+                            "Deleting member with ID: ",
+                            member.memberId._id,
+                            cardId.id
+                          );
+                          // Implement your logic here to delete the member from the card
+                        },
+                      },
+                    ],
+                  });
                 },
               };
             });
