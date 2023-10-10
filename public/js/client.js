@@ -292,8 +292,14 @@ window.TrelloPowerUp.initialize({
                               console.error("Error:", error); // Handling errors
                             })
                             .finally(() => {
-                              console.log(outSideContext);
-                              t.closePopup(); // Closes the menu whether the delete was successful or not
+                              console.log(outSideContext); // Log the context to inspect its state
+                              if (outSideContext) {
+                                // Check if the context is defined
+                                // If there’s a method to check if a popup is open, use it here
+                                outSideContext.closePopup();
+                              } else {
+                                console.error("Context is not defined.");
+                              }
                             });
 
                           console.log(
