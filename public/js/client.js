@@ -222,6 +222,8 @@ window.TrelloPowerUp.initialize({
                 return {
                   text: `${member.memberId.name} ${member.sizing}`,
                   color: "red",
+                  memberId: member.memberId._id,
+                  cardId: cardId
                 };
               });
 
@@ -256,13 +258,14 @@ window.TrelloPowerUp.initialize({
                       icon: category.icon,
                       categoryId: category.id,
                       memberIds: [member.memberId._id],
+                      cardId: cardId
                     });
                   }
                   return acc;
                 },
                 []
               );
-            console.log("categoriesBadges", categoriesBadges)
+              console.log("categoriesBadges", categoriesBadges);
               const badges = [...membersBadges, ...categoriesBadges];
 
               // Store the badge data in pluginData for future use
@@ -322,6 +325,40 @@ window.TrelloPowerUp.initialize({
                             .then((response) => response.json()) // Parsing the JSON response from the server
                             .then((data) => {
                               console.log("Success:", data);
+                            data.
+                              return t
+                                .get("card", "shared", "badgeData")
+                                .then(function (badgeData) {
+                                  if (!badgeData) return;
+
+                                  badgeData.forEach((badge) => {
+                                    if (
+                                      badge.memberIds &&
+                                      badge.memberIds.includes(memberIdToRemove)
+                                    ) {
+                                      // Remove the member ID from the badge's memberIds array
+                                      badge.memberIds = badge.memberIds.filter(
+                                        (id) => id !== memberIdToRemove
+                                      );
+
+                                      // If the memberIds array is now empty, remove the badge
+                                      if (badge.memberIds.length === 0) {
+                                        badgeData = badgeData.filter(
+                                          (b) =>
+                                            b.categoryId !== badge.categoryId
+                                        );
+                                      }
+                                    }
+                                  });
+
+                                  // Update pluginData with the updated badge data
+                                  t.set(
+                                    "card",
+                                    "shared",
+                                    "badgeData",
+                                    badgeData
+                                  );
+                                });
                             })
                             .catch((error) => {
                               console.error("Error:", error); // Handling errors
