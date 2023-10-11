@@ -205,9 +205,9 @@ window.TrelloPowerUp.initialize({
   "card-badges": function (t, options) {
     return t.get("card", "shared", "badgeData").then(function (badgeData) {
       // If there is badge data stored in pluginData, use it
-      // if (badgeData) {
-      //   return badgeData;
-      // }
+      if (badgeData) {
+        return badgeData;
+      }
       console.log("badgeData", badgeData);
       // Otherwise, fetch the badge data from the backend and store it in pluginData
       return t
