@@ -265,7 +265,6 @@ window.TrelloPowerUp.initialize({
                 },
                 []
               );
-              console.log("categoriesBadges", categoriesBadges);
               const badges = [...membersBadges, ...categoriesBadges];
 
               // Store the badge data in pluginData for future use
@@ -277,26 +276,6 @@ window.TrelloPowerUp.initialize({
     });
   },
   "card-detail-badges": function (t, options) {
-    return t.get('card', 'shared', 'badgeData').then(function (badgeData) {
-        if (!badgeData) {
-            // Return an empty array or some default badges if there's no badgeData
-            return [];
-        }
-
-        // Use badgeData to create an array of detail badges
-        const memberBadges = badgeData.map(badge => {
-            return {
-                title: badge.memberName,
-                text: badge.sizing,
-                color: badge.memberId ? 'red' : badge.color,
-                callback: function (t) {
-                    // Handle callback, e.g., allowing the user to edit the sizing
-                }
-            };
-        });
-
-        return memberBadges;
-    });
     return Promise.all([t.card("id"), t.list("id"), t.board("id")]).then(
       function ([cardId, idList, idBoard]) {
         console.log(idList, idBoard);
@@ -304,7 +283,6 @@ window.TrelloPowerUp.initialize({
         return fetch(`${ENDPOINT_URL}/cards/${cardId.id}`)
           .then((response) => response.json())
           .then((data) => {
-            console.log("dataDDDDDDDDDDDDD", data);
             const membersBadges = data.data.members.map((member) => {
               return {
                 title: member.memberId.name,
