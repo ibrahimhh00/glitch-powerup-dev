@@ -277,6 +277,26 @@ window.TrelloPowerUp.initialize({
     });
   },
   "card-detail-badges": function (t, options) {
+    return t.get('card', 'shared', 'badgeData').then(function (badgeData) {
+        if (!badgeData) {
+            // Return an empty array or some default badges if there's no badgeData
+            return [];
+        }
+
+        // Use badgeData to create an array of detail badges
+        const memberBadges = badgeData.map(badge => {
+            return {
+                title: badge.memberName,
+                text: badge.sizing,
+                color: badge.memberId ? 'red' : badge.color,
+                callback: function (t) {
+                    // Handle callback, e.g., allowing the user to edit the sizing
+                }
+            };
+        });
+
+        return memberBadges;
+    });
     return Promise.all([t.card("id"), t.list("id"), t.board("id")]).then(
       function ([cardId, idList, idBoard]) {
         console.log(idList, idBoard);
@@ -331,10 +351,15 @@ window.TrelloPowerUp.initialize({
                                   if (!badgeData) return;
 
                                   badgeData.forEach((badge) => {
-                                    if(badge.memberId && badge.memberId === data.memberId && badge.cardId === data.cardId) {
+                                    console.log("badge.memberId", badge.memberId)
+                                    console.log(badge.memberId, badge.cardId)
+                                    console.log(badge.memberId, badge.cardId)
+                                    console.log(badge.memberId, badge.cardId)
+                                    if(badge.memberId && (badge.memberId === data.memberId) && (badge.cardId === data.cardId)) {
+                                      console.log(badge.memberId, badge.cardId)
                                       badgeData = badgeData.filter(
                                           (b) =>
-                                            b.memberId !== data.cardId && b.cardId === data.cardId
+                                            b.memberId !== data.memberId && b.cardId !== data.cardId
                                         );
                                     }
                                     if (
