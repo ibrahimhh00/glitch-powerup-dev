@@ -101,21 +101,22 @@ $("#estimate").submit(async function (event) {
 
     if (response.ok) {
       console.log("Success:", await response.json());
-      return t
+      t
         .get("card", "shared", "detailBadgeData")
         .then(function (badgeData = []) {
-          console.log("badgeData", JSON.stringify(badgeData));
+          console.log("before badgeData", JSON.stringify(badgeData));
           console.log(data.member.memberId);
           // Check if a badge with this ID already exists
           const existingBadgeIndex = badgeData.findIndex(
-            (badge) => badge.memberId === data.member.memberId
+            (badge) => badge.memberId === data.member.memberId && badge.cardId === data.cardId
           );
+        console.log("existingBadgeIndex", existingBadgeIndex)
           if (existingBadgeIndex >= 0) {
             // Update the existing badge
-            badgeData[existingBadgeIndex].sizing = data.member.sizing;
+            badgeData[existingBadgeIndex].text = data.member.sizing;
           }
-          t.set("card", "shared", "detailBadgeData", badgeData);
-          t.closePopup();
+        console.log("after badgeData", JSON.stringify(badgeData));
+          return t.set("card", "shared", "detailBadgeData", badgeData).then(() => t.closePopup());
         });
 
     } else {
