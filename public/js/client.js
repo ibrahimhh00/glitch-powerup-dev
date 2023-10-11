@@ -203,40 +203,53 @@ window.TrelloPowerUp.initialize({
     ];
   },
   "card-badges": function (t, options) {
-    return Promise.all([t.card("id"), t.list("id"), t.board("id")]).then(
-      function ([cardId, idList, idBoard]) {
-        console.log(idList, idBoard);
-        // Replace with the actual API endpoint and data fetching logic
-        return fetch(`${ENDPOINT_URL}/cards/${cardId.id}`)
-          .then((response) => response.json())
-          .then((data) => {
-            console.log("dataDDDDDDDDDDDDD", data);
-            const membersBadges = data.data.members.map((member) => {
-              return {
-                text: `${member.memberId.name} ${member.sizing}`,
-                color: "red",
-              };
-            });
-            const categoriesBadges = data.data.members
-              .filter(
-                (member, index, self) =>
-                  index ===
-                  self.findIndex(
-                    (m) =>
-                      m.memberId.category.id === member.memberId.category.id
-                  )
-              )
-              .map((member) => {
+    return t.get("card", "shared", "badgeData").then(function (badgeData) {
+      // If there is badge data stored in pluginData, use it
+      // if (badgeData) {
+      //   return badgeData;
+      // }
+      console.log("badgeData", badgeData)
+      // Otherwise, fetch the badge data from the backend and store it in pluginData
+      return t
+        .card("id")
+        .get("id")
+        .then(function (cardId) {
+          return fetch(`${ENDPOINT_URL}/cards/${cardId}`)
+            .then((response) => response.json())
+            .then((data) => {
+              const membersBadges = data.data.members.map((member) => {
                 return {
-                  text: member.memberId.category.name,
-                  color: member.memberId.category.color,
-                  icon: member.memberId.category.icon,
+                  text: `${member.memberId.name} ${member.sizing}`,
+                  color: "red",
                 };
               });
-            return [...membersBadges, ...categoriesBadges];
-          });
-      }
-    );
+
+              const categoriesBadges = data.data.members
+                .filter(
+                  (member, index, self) =>
+                    index ===
+                    self.findIndex(
+                      (m) =>
+                        m.memberId.category.id === member.memberId.category.id
+                    )
+                )
+                .map((member) => {
+                  return {
+                    text: member.memberId.category.name,
+                    color: member.memberId.category.color,
+                    icon: member.memberId.category.icon,
+                  };
+                });
+
+              const badges = [...membersBadges, ...categoriesBadges];
+
+              // Store the badge data in pluginData for future use
+              t.set("card", "shared", "badgeData", badges);
+
+              return badges;
+            });
+        });
+    });
   },
   "card-detail-badges": function (t, options) {
     return Promise.all([t.card("id"), t.list("id"), t.board("id")]).then(
