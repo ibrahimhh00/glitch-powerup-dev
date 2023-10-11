@@ -101,8 +101,22 @@ $("#estimate").submit(async function (event) {
 
     if (response.ok) {
       console.log("Success:", await response.json());
-      t.get("card", "shared")
-      console.log("CLOSED")
+      return t
+        .get("card", "shared", "detailBadgeData")
+        .then(function (badgeData = []) {
+        console.log("badgeData",badgeData)
+        console.lol(data.member.memberId)
+          // Check if a badge with this ID already exists
+          const existingBadgeIndex = badgeData.findIndex(
+            (badge) => badge.memberId === data.member.memberId
+          );
+          if (existingBadgeIndex >= 0) {
+            // Update the existing badge
+            badgeData[existingBadgeIndex].sizing = data.member.sizing;
+          }
+        });
+
+      console.log("CLOSED");
       t.closePopup();
     } else {
       console.error("Server responded with status", response.status);
