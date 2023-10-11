@@ -331,20 +331,21 @@ window.TrelloPowerUp.initialize({
                                   if (!badgeData) return;
 
                                   badgeData.forEach((badge) => {
+                                    if(badge.memberId && badge.memberId === data.memberId)
                                     if (
                                       badge.memberIds &&
-                                      badge.memberIds.includes(memberIdToRemove)
+                                      badge.memberIds.includes(data.memberId) && badge.cardId === cardId
                                     ) {
                                       // Remove the member ID from the badge's memberIds array
                                       badge.memberIds = badge.memberIds.filter(
-                                        (id) => id !== memberIdToRemove
+                                        (id) => id !== data.memberId
                                       );
 
                                       // If the memberIds array is now empty, remove the badge
                                       if (badge.memberIds.length === 0) {
                                         badgeData = badgeData.filter(
                                           (b) =>
-                                            b.categoryId !== badge.categoryId
+                                            b.categoryId !== badge.categoryId && b.cardId === cardId
                                         );
                                       }
                                     }
