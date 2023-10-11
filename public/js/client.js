@@ -208,7 +208,7 @@ window.TrelloPowerUp.initialize({
       // if (badgeData) {
       //   return badgeData;
       // }
-      console.log("badgeData", badgeData)
+      console.log("badgeData", badgeData);
       // Otherwise, fetch the badge data from the backend and store it in pluginData
       return t
         .card("id")
@@ -217,7 +217,7 @@ window.TrelloPowerUp.initialize({
           return fetch(`${ENDPOINT_URL}/cards/${cardId}`)
             .then((response) => response.json())
             .then((data) => {
-            console.log("data", data)
+              console.log("data", data);
               const membersBadges = data.data.members.map((member) => {
                 return {
                   text: `${member.memberId.name} ${member.sizing}`,
@@ -225,23 +225,44 @@ window.TrelloPowerUp.initialize({
                 };
               });
 
-              const categoriesBadges = data.data.members
-                .filter(
-                  (member, index, self) =>
-                    index ===
-                    self.findIndex(
-                      (m) =>
-                        m.memberId.category.id === member.memberId.category.id
-                    )
-                )
-                .map((member) => {
-                  return {
-                    text: member.memberId.category.name,
-                    color: member.memberId.category.color,
-                    icon: member.memberId.category.icon,
-                  };
-                });
-
+              // const categoriesBadges = data.data.members
+              //   .filter(
+              //     (member, index, self) =>
+              //       index ===
+              //       self.findIndex(
+              //         (m) =>
+              //           m.memberId.category.id === member.memberId.category.id
+              //       )
+              //   )
+              //   .map((member) => {
+              //     return {
+              //       text: member.memberId.category.name,
+              //       color: member.memberId.category.color,
+              //       icon: member.memberId.category.icon,
+              //     };
+              //   });
+              const categoriesBadges = data.data.members.reduce(
+                (acc, member) => {
+                  const category = member.memberId.category;
+                  const existingCategoryBadge = acc.find(
+                    (badge) => badge.categoryId === category.id
+                  );
+                  if (existingCategoryBadge) {
+                    existingCategoryBadge.memberIds.push(member.memberId._id);
+                  } else {
+                    acc.push({
+                      text: category.name,
+                      color: category.color,
+                      icon: category.icon,
+                      categoryId: category.id,
+                      memberIds: [member.memberId._id],
+                    });
+                  }
+                  return acc;
+                },
+                []
+              );
+            console.log("categoriesBadges", categoriesBadges)
               const badges = [...membersBadges, ...categoriesBadges];
 
               // Store the badge data in pluginData for future use
