@@ -325,7 +325,6 @@ window.TrelloPowerUp.initialize({
                             .then((response) => response.json()) // Parsing the JSON response from the server
                             .then((data) => {
                               console.log("Success:", data);
-                            data.
                               return t
                                 .get("card", "shared", "badgeData")
                                 .then(function (badgeData) {
