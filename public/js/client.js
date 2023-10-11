@@ -217,6 +217,7 @@ window.TrelloPowerUp.initialize({
           return fetch(`${ENDPOINT_URL}/cards/${cardId}`)
             .then((response) => response.json())
             .then((data) => {
+            console.log("data", data)
               const membersBadges = data.data.members.map((member) => {
                 return {
                   text: `${member.memberId.name} ${member.sizing}`,
