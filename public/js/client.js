@@ -223,7 +223,7 @@ window.TrelloPowerUp.initialize({
                   text: `${member.memberId.name} ${member.sizing}`,
                   color: "red",
                   memberId: member.memberId._id,
-                  cardId: cardId
+                  cardId: cardId,
                 };
               });
 
@@ -258,7 +258,7 @@ window.TrelloPowerUp.initialize({
                       icon: category.icon,
                       categoryId: category.id,
                       memberIds: [member.memberId._id],
-                      cardId: cardId
+                      cardId: cardId,
                     });
                   }
                   return acc;
@@ -268,9 +268,9 @@ window.TrelloPowerUp.initialize({
               const badges = [...membersBadges, ...categoriesBadges];
 
               // Store the badge data in pluginData for future use
-              t.set("card", "shared", "badgeData", badges);
-
-              return badges;
+              return t.set("card", "shared", "badgeData", badges).then(() => {
+                return badges;
+              });
             });
         });
     });
@@ -329,20 +329,29 @@ window.TrelloPowerUp.initialize({
                                   if (!badgeData) return;
 
                                   badgeData.forEach((badge) => {
-                                    console.log("badge.memberId", badge.memberId)
-                                    console.log(badge.memberId, badge.cardId)
-                                    console.log(badge.memberId, badge.cardId)
-                                    console.log(badge.memberId, badge.cardId)
-                                    if(badge.memberId && (badge.memberId === data.memberId) && (badge.cardId === data.cardId)) {
-                                      console.log(badge.memberId, badge.cardId)
+                                    console.log(
+                                      "badge.memberId",
+                                      badge.memberId
+                                    );
+                                    console.log(badge.memberId, badge.cardId);
+                                    console.log(badge.memberId, badge.cardId);
+                                    console.log(badge.memberId, badge.cardId);
+                                    if (
+                                      badge.memberId &&
+                                      badge.memberId === data.memberId &&
+                                      badge.cardId === data.cardId
+                                    ) {
+                                      console.log(badge.memberId, badge.cardId);
                                       badgeData = badgeData.filter(
-                                          (b) =>
-                                            b.memberId !== data.memberId && b.cardId !== data.cardId
-                                        );
+                                        (b) =>
+                                          b.memberId !== data.memberId &&
+                                          b.cardId !== data.cardId
+                                      );
                                     }
                                     if (
                                       badge.memberIds &&
-                                      badge.memberIds.includes(data.memberId) && badge.cardId === cardId
+                                      badge.memberIds.includes(data.memberId) &&
+                                      badge.cardId === cardId
                                     ) {
                                       // Remove the member ID from the badge's memberIds array
                                       badge.memberIds = badge.memberIds.filter(
@@ -353,12 +362,13 @@ window.TrelloPowerUp.initialize({
                                       if (badge.memberIds.length === 0) {
                                         badgeData = badgeData.filter(
                                           (b) =>
-                                            b.categoryId !== badge.categoryId && b.cardId === cardId
+                                            b.categoryId !== badge.categoryId &&
+                                            b.cardId === cardId
                                         );
                                       }
                                     }
                                   });
-                                  console.log("badgeData", badgeData)
+                                  console.log("badgeData", badgeData);
                                   // Update pluginData with the updated badge data
                                   t.set(
                                     "card",
