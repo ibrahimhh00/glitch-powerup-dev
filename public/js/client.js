@@ -331,7 +331,12 @@ window.TrelloPowerUp.initialize({
                                   if (!badgeData) return;
 
                                   badgeData.forEach((badge) => {
-                                    if(badge.memberId && badge.memberId === data.memberId)
+                                    if(badge.memberId && badge.memberId === data.memberId && badge.cardId === data.cardId) {
+                                      badgeData = badgeData.filter(
+                                          (b) =>
+                                            b.memberId !== data.cardId && b.cardId === data.cardId
+                                        );
+                                    }
                                     if (
                                       badge.memberIds &&
                                       badge.memberIds.includes(data.memberId) && badge.cardId === cardId
@@ -350,7 +355,7 @@ window.TrelloPowerUp.initialize({
                                       }
                                     }
                                   });
-
+                                  console.log("badgeData", badgeData)
                                   // Update pluginData with the updated badge data
                                   t.set(
                                     "card",
