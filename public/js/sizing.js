@@ -42,7 +42,6 @@ function fetchMembers() {
   });
 }
 
-window.TrelloPowerUp.initialize({});
 //populate the members into the UI
 function populateMembers(members) {
   t.get("card", "shared", "memberSizing").then(function (memberSizing = []) {
@@ -102,6 +101,7 @@ $("#estimate").submit(async function (event) {
 
     if (response.ok) {
       console.log("Success:", await response.json());
+      t.get("card", "shared")
       console.log("CLOSED")
       t.closePopup();
     } else {
