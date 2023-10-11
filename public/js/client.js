@@ -342,22 +342,6 @@ window.TrelloPowerUp.initialize({
                                       if (!badgeData) return;
 
                                       badgeData.forEach((badge) => {
-                                        console.log(
-                                          "badge.memberId",
-                                          badge.memberId
-                                        );
-                                        console.log(
-                                          badge.memberId,
-                                          badge.cardId
-                                        );
-                                        console.log(
-                                          badge.memberId,
-                                          badge.cardId
-                                        );
-                                        console.log(
-                                          badge.memberId,
-                                          badge.cardId
-                                        );
                                         if (
                                           badge.memberId &&
                                           badge.memberId === data.memberId &&
