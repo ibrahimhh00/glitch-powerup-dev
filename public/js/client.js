@@ -340,70 +340,70 @@ window.TrelloPowerUp.initialize({
                                     console.log("badgeDatabadgeDatabadgeData", badgeData)
                                       if (!badgeData) return;
 
-//                                       badgeData.forEach((badge) => {
-//                                         console.log(
-//                                           "badge.memberId",
-//                                           badge.memberId
-//                                         );
-//                                         console.log(
-//                                           badge.memberId,
-//                                           badge.cardId
-//                                         );
-//                                         console.log(
-//                                           badge.memberId,
-//                                           badge.cardId
-//                                         );
-//                                         console.log(
-//                                           badge.memberId,
-//                                           badge.cardId
-//                                         );
-//                                         if (
-//                                           badge.memberId &&
-//                                           badge.memberId === data.memberId &&
-//                                           badge.cardId === data.cardId
-//                                         ) {
-//                                           console.log(
-//                                             badge.memberId,
-//                                             badge.cardId
-//                                           );
-//                                           badgeData = badgeData.filter(
-//                                             (b) =>
-//                                               b.memberId !== data.memberId &&
-//                                               b.cardId !== data.cardId
-//                                           );
-//                                         }
-//                                         if (
-//                                           badge.memberIds &&
-//                                           badge.memberIds.includes(
-//                                             data.memberId
-//                                           ) &&
-//                                           badge.cardId === cardId
-//                                         ) {
-//                                           // Remove the member ID from the badge's memberIds array
-//                                           badge.memberIds =
-//                                             badge.memberIds.filter(
-//                                               (id) => id !== data.memberId
-//                                             );
+                                      badgeData.forEach((badge) => {
+                                        console.log(
+                                          "badge.memberId",
+                                          badge.memberId
+                                        );
+                                        console.log(
+                                          badge.memberId,
+                                          badge.cardId
+                                        );
+                                        console.log(
+                                          badge.memberId,
+                                          badge.cardId
+                                        );
+                                        console.log(
+                                          badge.memberId,
+                                          badge.cardId
+                                        );
+                                        if (
+                                          badge.memberId &&
+                                          badge.memberId === data.memberId &&
+                                          badge.cardId === data.cardId
+                                        ) {
+                                          console.log(
+                                            badge.memberId,
+                                            badge.cardId
+                                          );
+                                          badgeData = badgeData.filter(
+                                            (b) =>
+                                              b.memberId !== data.memberId &&
+                                              b.cardId !== data.cardId
+                                          );
+                                        }
+                                        if (
+                                          badge.memberIds &&
+                                          badge.memberIds.includes(
+                                            data.memberId
+                                          ) &&
+                                          badge.cardId === cardId
+                                        ) {
+                                          // Remove the member ID from the badge's memberIds array
+                                          badge.memberIds =
+                                            badge.memberIds.filter(
+                                              (id) => id !== data.memberId
+                                            );
 
-//                                           // If the memberIds array is now empty, remove the badge
-//                                           if (badge.memberIds.length === 0) {
-//                                             badgeData = badgeData.filter(
-//                                               (b) =>
-//                                                 b.categoryId !==
-//                                                   badge.categoryId &&
-//                                                 b.cardId === cardId
-//                                             );
-//                                           }
-//                                         }
-//                                       });
-//                                       console.log("badgeData", badgeData);
-//                                       // Update pluginData with the updated badge data
-//                                       t.set(
-//                                         "card",
-//                                         "shared",
-//                                         "badgeData",
-//                                         badgeData
-//                                       );
+                                          // If the memberIds array is now empty, remove the badge
+                                          if (badge.memberIds.length === 0) {
+                                            badgeData = badgeData.filter(
+                                              (b) =>
+                                                b.categoryId !==
+                                                  badge.categoryId &&
+                                                b.cardId === cardId
+                                            );
+                                          }
+                                        }
+                                      });
+                                      console.log("badgeData", badgeData);
+                                      // Update pluginData with the updated badge data
+                                      t.set(
+                                        "card",
+                                        "shared",
+                                        "badgeData",
+                                        badgeData
+                                      );
                                     });
                                 })
                                 .catch((error) => {
