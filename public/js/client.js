@@ -293,19 +293,19 @@ window.TrelloPowerUp.initialize({
                   return outSideContext.popup({
                     title: "Adjust Member Sizing",
                     items: [
-                      {
-                        text: "Member: " + member.memberId.name,
-                      },
-                      {
-                        text: "Current Sizing: " + member.sizing,
-                        callback: function (t) {
-                          return t.popup({
-                            url: "input",
-                            title: "Adjust Sizing",
-                            url: `../adjust-size.html?cardId=${cardId.id}&idList=${idList.id}&idBoard=${idBoard.id}&memberId=${member.memberId.id}&memberName=${member.memberId.name}&currentSizing=${member.sizing}`,
-                          });
-                        },
-                      },
+                      // {
+                      //   text: "Member: " + member.memberId.name,
+                      // },
+                      // {
+                      //   text: "Current Sizing: " + member.sizing,
+                      //   callback: function (t) {
+                      //     return t.popup({
+                      //       url: "input",
+                      //       title: "Adjust Sizing",
+                      //       url: `../adjust-size.html?cardId=${cardId.id}&idList=${idList.id}&idBoard=${idBoard.id}&memberId=${member.memberId.id}&memberName=${member.memberId.name}&currentSizing=${member.sizing}`,
+                      //     });
+                      //   },
+                      // },
                       {
                         text: "Delete Member",
                         callback: function (t) {
