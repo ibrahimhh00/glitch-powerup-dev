@@ -279,7 +279,6 @@ window.TrelloPowerUp.initialize({
     return t
       .get("card", "shared", "detailBadgeData")
       .then(function (detailBadgeData) {
-
         // if (detailBadgeData) {
         //   return detailBadgeData;
         // }
@@ -291,7 +290,6 @@ window.TrelloPowerUp.initialize({
             return fetch(`${ENDPOINT_URL}/cards/${cardId}`)
               .then((response) => response.json())
               .then((data) => {
-
                 const membersBadges = data.data.members.map((member) => {
                   const badge = {
                     title: member.memberId.name,
@@ -322,7 +320,7 @@ window.TrelloPowerUp.initialize({
                             callback: function (t) {
                               const data = {
                                 memberId: member.memberId._id,
-                                cardId: cardId.id,
+                                cardId: cardId,
                               };
                               fetch(`${ENDPOINT_URL}/cards/delete-member`, {
                                 method: "POST", // Specifying the HTTP method
@@ -334,10 +332,13 @@ window.TrelloPowerUp.initialize({
                                 .then((response) => response.json()) // Parsing the JSON response from the server
                                 .then((data) => {
                                   console.log("Success:", data);
-                                  t
+                                  return t
                                     .get("card", "shared", "detailBadgeData")
                                     .then(function (badgeData) {
-                                    console.log("badgeDatabadgeDatabadgeData", badgeData)
+                                      console.log(
+                                        "badgeDatabadgeDatabadgeData",
+                                        badgeData
+                                      );
                                       if (!badgeData) return;
 
                                       badgeData.forEach((badge) => {
@@ -377,7 +378,7 @@ window.TrelloPowerUp.initialize({
                                           badge.memberIds.includes(
                                             data.memberId
                                           ) &&
-                                          badge.cardId === cardId
+                                          badge.cardId === data.cardId
                                         ) {
                                           // Remove the member ID from the badge's memberIds array
                                           badge.memberIds =
@@ -391,7 +392,7 @@ window.TrelloPowerUp.initialize({
                                               (b) =>
                                                 b.categoryId !==
                                                   badge.categoryId &&
-                                                b.cardId === cardId
+                                                b.cardId === data.cardId
                                             );
                                           }
                                         }
@@ -408,16 +409,6 @@ window.TrelloPowerUp.initialize({
                                 })
                                 .catch((error) => {
                                   console.error("Error:", error); // Handling errors
-                                })
-                                .finally(() => {
-                                  console.log(outSideContext); // Log the context to inspect its state
-                                  if (outSideContext) {
-                                    // Check if the context is defined
-                                    // If there’s a method to check if a popup is open, use it here
-                                    outSideContext.closePopup();
-                                  } else {
-                                    console.error("Context is not defined.");
-                                  }
                                 });
 
                               console.log(
@@ -432,7 +423,7 @@ window.TrelloPowerUp.initialize({
                       });
                     },
                   };
-                  console.log("badgebadgebadgebadge", badge)
+                  console.log("badgebadgebadgebadge", badge);
                   // Add a callback if this isn’t a member sizing badge
 
                   return badge;
@@ -463,7 +454,7 @@ window.TrelloPowerUp.initialize({
                 );
 
                 const detailBadges = [...membersBadges, ...categoriesBadges];
-              console.log("detailBadges", detailBadges)
+                console.log("detailBadges", detailBadges);
 
                 // Store the badge data in pluginData for future use
                 return t
