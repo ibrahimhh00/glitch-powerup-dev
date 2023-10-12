@@ -45,7 +45,7 @@ function onBtnClickTwo(t) {
           return t
             .get(card.id, "shared", "badgeData")
             .then(function (badgeData) {
-              console.log("BBBBBBBBBBBBBBBBBB", badgeData);
+              // console.log("BBBBBBBBBBBBBBBBBB", badgeData);
               let totalSizeCard = 0; // This is the total size for this card
               if (badgeData) {
                 totalSizeCard = badgeData.reduce((acc, element) => {
@@ -56,7 +56,7 @@ function onBtnClickTwo(t) {
                   return acc;
                 }, 0);
               }
-              console.log("totalSizeCard", totalSizeCard);
+              // console.log("totalSizeCard", totalSizeCard);
               totalSizeList += totalSizeCard;
               const cat = badgeData.filter(
                 (badge) =>
@@ -90,15 +90,20 @@ function onBtnClickTwo(t) {
                     }, 0),
                   };
                 });
+              results.push({
+                listName: list.name,
+                totalPoints: totalSizeList,
+                categoryPoints: categorySize,
+              });
               console.log("categorySize", categorySize);
             });
         });
-        
       });
     });
-    return Promise.all(listPromises).then(() => {
-      showResults(t, results); // Call the showResults function once all the results have been collected
-    });
+    console.log("results", results)
+    // return Promise.all(listPromises).then(() => {
+    //   showResults(t, results); // Call the showResults function once all the results have been collected
+    // });
   });
 }
 
