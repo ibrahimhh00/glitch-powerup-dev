@@ -27,7 +27,7 @@
         font-weight: bold;
         margin-bottom: 10px;
       }
-
+      
       .card .total-size,
       .card .category {
         margin-bottom: 5px;
@@ -62,8 +62,8 @@
             `<p class="total-size">Total Size: ${item.totalPoints}</p>`;
 
           // Create div for each category
-          if (item.categoryPoints) {
-            categoryPoints.forEach(function (category) {
+          if (item.categoryPoints.length > 0) {
+            item.categoryPoints.forEach(function (category) {
               var p = document.createElement("p");
               p.className = "category";
               p.textContent = `${category.name}: ${category.sizing} Points`;
