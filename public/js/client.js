@@ -30,6 +30,7 @@ async function fetchCards() {
 }
 function onBtnClickTwo(t) {
   return t.lists("all").then(function (lists) {
+    console.log(lists)
     let results = []; // Array to collect all the results
     let listPromises = lists.map(function (list) {
       return t.cards("all").then(function (cards) {
@@ -41,6 +42,7 @@ function onBtnClickTwo(t) {
         let promises = cardList.map(function (card) {
           return;
           t.get(card.id, "shared", "badgeData").then(function (badgeData) {
+            console.log("BBBBBBBBBBBBBBBBBB", badgeData)
             let totalSize = 0; // This is the total size for this card
             if (badgeData) {
               totalSize = badgeData.reduce((acc, element) => {
@@ -52,18 +54,20 @@ function onBtnClickTwo(t) {
             }
             totalSizeAll += totalSize;
 
-            const categorySizes = badgeData.filter(badge => (badge.categoryId && badge.listId === list.id)).map(category => {
+            const categorySize = badgeData.filter(badge => (badge.categoryId && badge.listId === list.id && badge.cardId === card.id)).map(category => {
               return {
                 categoryId: category.id,
                 name: category.text,
                 color: category.color,
                 sizing: category.membersId.reduce((acc, memberId) => {
-                  if(badgeData.findIndex(badge => badge.memberId === memberId && badge.listId === list.id) >= 0) {
-                    
+                  const index = badgeData.findIndex(badge => badge.memberId === memberId && badge.listId === list.id && badge.cardId === card.id)
+                  if(index >= 0) {
+                    return acc + badgeData[index].sizing
                   }
                 }, 0)
               }
             })
+            
           });
         });
         return Promise.all(promises).then(() => {
