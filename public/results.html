@@ -27,11 +27,14 @@
         font-weight: bold;
         margin-bottom: 10px;
       }
-
+      .card .total-size {
+        font-size: 20px;
+      }
       .card .total-size,
       .card .category {
         margin-bottom: 5px;
       }
+      
     </style>
 
     <script src="https://p.trellocdn.com/power-up.min.js"></script>
@@ -59,7 +62,7 @@
           div.className = "card";
           div.innerHTML =
             `<p class="list-name">${item.listName}</p>` +
-            `<p class="total-size">Total Size: ${item.totalPoints}</p>`;
+            `<p class="total-size">Total Size <strong>${item.totalPoints}</strong></p>`;
 
           // Create div for each category
           if (item.categoryPoints.length > 0) {

@@ -30,9 +30,10 @@ async function fetchCards() {
 }
 function onBtnClickTwo(t) {
   return t.lists("all").then(function (lists) {
-    lists.sort((a, b) => a.pos - b.pos);
-    let results = [];
-    let listPromises = lists.map(function (list) {
+    console.log("lists", lists);
+    // lists.sort((a, b) => a.pos - b.pos);
+    let results = Array(lists.length);
+    let listPromises = lists.map(function (list, index) {
       return t.cards("all").then(function (cards) {
         var cardList = cards.filter((card) => card.idList === list.id);
 
@@ -86,18 +87,18 @@ function onBtnClickTwo(t) {
         });
 
         return Promise.all(cardPromises).then(() => {
-          results.push({
+          results[index] = {
             listName: list.name,
             totalPoints: totalSizeList,
             categoryPoints: categories,
-          });
+          };
         });
       });
     });
 
     return Promise.all(listPromises).then(() => {
       console.log("results", results);
-      showResults(t, results)
+      showResults(t, results);
     });
   });
 }
