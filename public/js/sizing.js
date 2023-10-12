@@ -117,6 +117,8 @@ $("#estimate").submit(async function (event) {
           console.log("UPDATEDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD");
           // Update the existing badge
           badgeData[existingBadgeIndex].text = data.member.sizing;
+          badgeData[existingBadgeIndex].sizing = data.member.sizing;
+          return t.set("card", "shared", "badgeData", badgeData).then(() => t.closePopup());
         } else {
           console.log("CREATEDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD");
           fetch(`${API_URL}/members/member/${data.member.memberId}`, {
