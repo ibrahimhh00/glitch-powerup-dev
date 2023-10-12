@@ -39,26 +39,31 @@ function onBtnClickTwo(t) {
         let totalSizeAll = 0;
         let categories = {};
         let promises = cardList.map(function (card) {
-          return Promise.all([
-            t.get(card.id, "shared", "memberSizing"),
-            t.get(card.id, "shared", "category"),
-          ]).then(function ([memberSizing, category]) {
+          return;
+          t.get(card.id, "shared", "badgeData").then(function (badgeData) {
             let totalSize = 0; // This is the total size for this card
-            if (memberSizing) {
-              totalSize = memberSizing.reduce(
-                (acc, element) => Number(acc) + Number(element.sizing),
-                0
-              );
+            if (badgeData) {
+              totalSize = badgeData.reduce((acc, element) => {
+                if (element.sizing && element.listId === list.id) {
+                  return acc + Number(element.sizing);
+                }
+                return acc;
+              }, 0);
             }
             totalSizeAll += totalSize;
 
-            if (category) {
-              if (category.categoryName in categories) {
-                categories[category.categoryName] += totalSize;
-              } else {
-                categories[category.categoryName] = totalSize;
+            const categorySizes = badgeData.filter(badge => (badge.categoryId && badge.listId === list.id)).map(category => {
+              return {
+                categoryId: category.id,
+                name: category.text,
+                color: category.color,
+                sizing: category.membersId.reduce((acc, memberId) => {
+                  if(badgeData.findIndex(badge => badge.memberId === memberId && badge.listId === list.id) >= 0) {
+                    
+                  }
+                }, 0)
               }
-            }
+            })
           });
         });
         return Promise.all(promises).then(() => {
@@ -201,7 +206,7 @@ window.TrelloPowerUp.initialize({
                   color: "red",
                   memberId: member.memberId._id,
                   cardId: cardId,
-                  listId: data.data.listId
+                  listId: data.data.listId,
                 };
               });
 
@@ -237,7 +242,7 @@ window.TrelloPowerUp.initialize({
                       categoryId: category.id,
                       memberIds: [member.memberId._id],
                       cardId: cardId,
-                      listId: data.data.listId
+                      listId: data.data.listId,
                     });
                   }
                   return acc;
@@ -410,7 +415,7 @@ window.TrelloPowerUp.initialize({
                         categoryId: category.id,
                         memberIds: [member.memberId._id],
                         cardId: cardId,
-                        listId: data.data.listId
+                        listId: data.data.listId,
                       });
                     }
                     return acc;
