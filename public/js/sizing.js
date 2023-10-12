@@ -114,17 +114,27 @@ $("#estimate").submit(async function (event) {
         );
         console.log("existingBadgeIndex", existingBadgeIndex);
         if (existingBadgeIndex >= 0) {
+          console.log("UPDATEDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD");
           // Update the existing badge
           badgeData[existingBadgeIndex].text = data.member.sizing;
         } else {
-          fetch(`${API_URL}/members/member/${data.member.memberId}`, {
-            // Replace '/your-endpoint' with your actual endpoint
+          console.log("CREATEDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD", data.member.memberId);
+          fetch(`${API_URL}/cards/${data.cardId}`, {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
             },
-          }).then(response => response.json()).then(data => console.log("MEMBER", data));
-          
+          })
+            .then((response) => {
+              console.log("Response Status:", response.status);
+              if (response.ok) {
+                return response.json();
+              } else {
+                throw new Error("Failed to fetch");
+              }
+            })
+            .then((data) => console.log("MEMBER", data))
+            .catch((error) => console.log("Error:", error));
         }
         console.log("after badgeData", JSON.stringify(badgeData));
         return t
