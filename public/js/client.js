@@ -38,7 +38,7 @@ function onBtnClickTwo(t) {
           return card.idList === list.id;
         });
 
-        let totalSizeAll = 0;
+        let totalSizeList = 0;
         let categories = {};
         let promises = cardList.map(function (card) {
           console.log("card", card)
@@ -46,16 +46,19 @@ function onBtnClickTwo(t) {
             .get(card.id, "shared", "badgeData")
             .then(function (badgeData) {
               console.log("BBBBBBBBBBBBBBBBBB", badgeData);
-              let totalSize = 0; // This is the total size for this card
+              let totalSizeCard = 0; // This is the total size for this card
               if (badgeData) {
-                totalSize = badgeData.reduce((acc, element) => {
+                totalSizeCard = badgeData.reduce((acc, element) => {
+                  console.log(element)
                   if (element.sizing && element.listId === list.id) {
+                    
                     return acc + Number(element.sizing);
                   }
                   return acc;
                 }, 0);
               }
-              totalSizeAll += totalSize;
+            console.log("totalSizeCard", totalSizeCard)
+              totalSizeList += totalSizeCard;
 
               const categorySize = badgeData
                 .filter(
@@ -222,6 +225,7 @@ window.TrelloPowerUp.initialize({
                 return {
                   text: `${member.memberId.name} ${member.sizing}`,
                   color: "red",
+                  sizing: member.sizing,
                   memberId: member.memberId._id,
                   cardId: cardId,
                   listId: data.data.listId,
@@ -296,6 +300,7 @@ window.TrelloPowerUp.initialize({
                   const badge = {
                     title: member.memberId.name,
                     text: member.sizing,
+                    sizing: member.sizing,
                     color: "red",
                     memberId: member.memberId._id,
                     cardId: cardId,
