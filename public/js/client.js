@@ -30,6 +30,7 @@ async function fetchCards() {
 }
 function onBtnClickTwo(t) {
   return t.lists("all").then(function (lists) {
+    lists.sort((a, b) => a.pos - b.pos);
     let results = [];
     let listPromises = lists.map(function (list) {
       return t.cards("all").then(function (cards) {

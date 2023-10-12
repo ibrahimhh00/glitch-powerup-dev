@@ -27,7 +27,7 @@
         font-weight: bold;
         margin-bottom: 10px;
       }
-      
+
       .card .total-size,
       .card .category {
         margin-bottom: 5px;
@@ -66,7 +66,18 @@
             item.categoryPoints.forEach(function (category) {
               var p = document.createElement("p");
               p.className = "category";
-              p.textContent = `${category.name}: ${category.sizing} Points`;
+
+              // Create a span for the category name and set its background color
+              var span = document.createElement("span");
+              span.textContent = category.name;
+              span.style.backgroundColor = category.color;
+              span.style.padding = "4px 8px"; // Add some padding to give space around the text
+              span.style.borderRadius = "4px"; // Optional: to make the edges rounded
+
+              // Append the span to the paragraph and add the sizing after it
+              p.appendChild(span);
+              p.innerHTML += `: ${category.sizing} Points`;
+
               div.appendChild(p);
             });
           }
