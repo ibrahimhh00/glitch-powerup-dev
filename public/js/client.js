@@ -84,29 +84,6 @@ function showResults(t, obj2) {
   });
 }
 
-function removeMemberBadge(t, indexToRemove) {
-  return t.get("card", "shared", "memberSizing").then(function (memberSizing) {
-    // Remove the element at indexToRemove from memberSizing
-    const updatedMemberSizing = memberSizing.filter(
-      (_, index) => index !== indexToRemove
-    );
-    // Update the memberSizing data in Trello
-    return t.set("card", "shared", "memberSizing", updatedMemberSizing);
-  });
-}
-
-function removeAccountBadge(t) {
-  return t.get("card", "shared", "account").then(function () {
-    return t.remove("card", "shared", "account");
-  });
-}
-
-function removeCategoryBadge(t) {
-  return t.get("card", "shared", "category").then(function () {
-    return t.remove("card", "shared", "category");
-  });
-}
-
 window.TrelloPowerUp.initialize({
   "board-buttons": function (t, opts) {
     console.log(opts);
