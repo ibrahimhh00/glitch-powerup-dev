@@ -224,6 +224,7 @@ window.TrelloPowerUp.initialize({
                   color: "red",
                   memberId: member.memberId._id,
                   cardId: cardId,
+                  listId: data.data.listId
                 };
               });
 
@@ -259,6 +260,7 @@ window.TrelloPowerUp.initialize({
                       categoryId: category.id,
                       memberIds: [member.memberId._id],
                       cardId: cardId,
+                      listId: data.data.listId
                     });
                   }
                   return acc;
@@ -297,6 +299,7 @@ window.TrelloPowerUp.initialize({
                     color: "red",
                     memberId: member.memberId._id,
                     cardId: cardId,
+                    listId: data.data.listId,
                     callback: function (t) {
                       let outSideContext = t;
                       return outSideContext.popup({
@@ -430,6 +433,7 @@ window.TrelloPowerUp.initialize({
                         categoryId: category.id,
                         memberIds: [member.memberId._id],
                         cardId: cardId,
+                        listId: data.data.listId
                       });
                     }
                     return acc;

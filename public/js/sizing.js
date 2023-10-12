@@ -142,6 +142,7 @@ $("#estimate").submit(async function (event) {
                 color: "red",
                 memberId: member._id,
                 cardId: data.cardId,
+                listId: data.listId,
                 callback: function (t) {
                   let outSideContext = t;
                   return outSideContext.popup({
@@ -253,6 +254,7 @@ $("#estimate").submit(async function (event) {
                   categoryId: member.category._id,
                   color: member.category.color,
                   memberIds: [member._id],
+                  listId: data.listId,
                   text: member.category.name,
                 };
                 badgeData.push(categoryBadge);
