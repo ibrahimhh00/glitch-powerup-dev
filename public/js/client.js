@@ -30,41 +30,30 @@ async function fetchCards() {
 }
 function onBtnClickTwo(t) {
   return t.lists("all").then(function (lists) {
-    console.log(lists);
-    let results = []; // Array to collect all the results
+    let results = [];
     let listPromises = lists.map(function (list) {
       return t.cards("all").then(function (cards) {
-        var cardList = cards.filter(function (card) {
-          return card.idList === list.id;
-        });
+        var cardList = cards.filter((card) => card.idList === list.id);
 
         let totalSizeList = 0;
         let categories = {};
-        let promises = cardList.map(function (card) {
-          console.log("card", card);
+
+        let cardPromises = cardList.map(function (card) {
           return t
             .get(card.id, "shared", "badgeData")
             .then(function (badgeData) {
-              // console.log("BBBBBBBBBBBBBBBBBB", badgeData);
-              let totalSizeCard = 0; // This is the total size for this card
+              let totalSizeCard = 0;
               if (badgeData) {
                 totalSizeCard = badgeData.reduce((acc, element) => {
-                  console.log(element);
                   if (element.sizing && element.listId === list.id) {
                     return acc + Number(element.sizing);
                   }
                   return acc;
                 }, 0);
               }
-              // console.log("totalSizeCard", totalSizeCard);
+
               totalSizeList += totalSizeCard;
-              const cat = badgeData.filter(
-                (badge) =>
-                  badge.categoryId &&
-                  badge.listId === list.id &&
-                  badge.cardId === card.id
-              );
-              console.log("CAT", cat);
+
               const categorySize = badgeData
                 .filter(
                   (badge) =>
@@ -84,26 +73,31 @@ function onBtnClickTwo(t) {
                           badge.listId === list.id &&
                           badge.cardId === card.id
                       );
-                      if (index >= 0) {
-                        return acc + badgeData[index].sizing;
-                      }
+                      return acc + (index >= 0 ? badgeData[index].sizing : 0);
                     }, 0),
                   };
                 });
-              results.push({
-                listName: list.name,
-                totalPoints: totalSizeList,
-                categoryPoints: categorySize,
-              });
-              console.log("categorySize", categorySize);
+
+              categories = categorySize;
+
+              return Promise.resolve();
             });
+        });
+
+        return Promise.all(cardPromises).then(() => {
+          results.push({
+            listName: list.name,
+            totalPoints: totalSizeList,
+            categoryPoints: categories,
+          });
         });
       });
     });
-    console.log("results", results)
-    // return Promise.all(listPromises).then(() => {
-    //   showResults(t, results); // Call the showResults function once all the results have been collected
-    // });
+
+    return Promise.all(listPromises).then(() => {
+      console.log("results", results);
+      showResults(t, results)
+    });
   });
 }
 
