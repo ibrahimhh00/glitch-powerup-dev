@@ -238,8 +238,25 @@ $("#estimate").submit(async function (event) {
                   });
                 },
               };
-              badgeData.push(memberBadge)
-              if(badgeData.findIndex((badge) => (badge.categoryId === member.category._id) && (badge.cardId === data.cardId)))
+              badgeData.push(memberBadge);
+              if (
+                !(
+                  badgeData.findIndex(
+                    (badge) =>
+                      badge.categoryId === member.category._id &&
+                      badge.cardId === data.cardId
+                  ) >= 0
+                )
+              ) {
+                const categoryBadge = {
+                  cardId: data.cardId,
+                  categoryId: member.category._id,
+                  color: member.category.color,
+                  memberIds: [member._id],
+                  text: member.category.name,
+                };
+                badgeData.push(categoryBadge);
+              }
               return t
                 .set("card", "shared", "detailBadgeData", badgeData)
                 .then(() => t.closePopup());
