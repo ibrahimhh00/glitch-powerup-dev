@@ -41,7 +41,7 @@ function onBtnClickTwo(t) {
         let totalSizeList = 0;
         let categories = {};
         let promises = cardList.map(function (card) {
-          console.log("card", card)
+          console.log("card", card);
           return t
             .get(card.id, "shared", "badgeData")
             .then(function (badgeData) {
@@ -49,17 +49,22 @@ function onBtnClickTwo(t) {
               let totalSizeCard = 0; // This is the total size for this card
               if (badgeData) {
                 totalSizeCard = badgeData.reduce((acc, element) => {
-                  console.log(element)
+                  console.log(element);
                   if (element.sizing && element.listId === list.id) {
-                    
                     return acc + Number(element.sizing);
                   }
                   return acc;
                 }, 0);
               }
-            console.log("totalSizeCard", totalSizeCard)
+              console.log("totalSizeCard", totalSizeCard);
               totalSizeList += totalSizeCard;
-
+              const cat = badgeData.filter(
+                (badge) =>
+                  badge.categoryId &&
+                  badge.listId === list.id &&
+                  badge.cardId === card.id
+              );
+              console.log("CAT", cat);
               const categorySize = badgeData
                 .filter(
                   (badge) =>
@@ -69,10 +74,10 @@ function onBtnClickTwo(t) {
                 )
                 .map((category) => {
                   return {
-                    categoryId: category.id,
+                    categoryId: category.categoryId,
                     name: category.text,
                     color: category.color,
-                    sizing: category.membersId.reduce((acc, memberId) => {
+                    sizing: category.memberIds.reduce((acc, memberId) => {
                       const index = badgeData.findIndex(
                         (badge) =>
                           badge.memberId === memberId &&
@@ -85,15 +90,10 @@ function onBtnClickTwo(t) {
                     }, 0),
                   };
                 });
+              console.log("categorySize", categorySize);
             });
         });
-        return Promise.all(promises).then(() => {
-          results.push({
-            listName: list.name,
-            totalPoints: totalSizeAll,
-            categoryPoints: categories,
-          });
-        });
+        
       });
     });
     return Promise.all(listPromises).then(() => {
