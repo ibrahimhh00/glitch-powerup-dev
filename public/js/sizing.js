@@ -101,24 +101,36 @@ $("#estimate").submit(async function (event) {
 
     if (response.ok) {
       console.log("Success:", await response.json());
-      t
-        .get("card", "shared", "detailBadgeData")
-        .then(function (badgeData = []) {
-          console.log("before badgeData", JSON.stringify(badgeData));
-          console.log(data.member.memberId);
-          // Check if a badge with this ID already exists
-          const existingBadgeIndex = badgeData.findIndex(
-            (badge) => badge.memberId === data.member.memberId && badge.cardId === data.cardId
-          );
-        console.log("existingBadgeIndex", existingBadgeIndex)
-          if (existingBadgeIndex >= 0) {
-            // Update the existing badge
-            badgeData[existingBadgeIndex].text = data.member.sizing;
-          }
+      t.get("card", "shared", "detailBadgeData").then(function (
+        badgeData = []
+      ) {
+        console.log("before badgeData", JSON.stringify(badgeData));
+        console.log(data.member.memberId);
+        // Check if a badge with this ID already exists
+        const existingBadgeIndex = badgeData.findIndex(
+          (badge) =>
+            badge.memberId === data.member.memberId &&
+            badge.cardId === data.cardId
+        );
+        console.log("existingBadgeIndex", existingBadgeIndex);
+        if (existingBadgeIndex >= 0) {
+          // Update the existing badge
+          badgeData[existingBadgeIndex].text = data.member.sizing;
+        } else {
+          fetch(`${API_URL}/members/member/${data.member.memberId}`, {
+            // Replace '/your-endpoint' with your actual endpoint
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }).then(response => response.json()).then(data => console.log("MEMBER", data));
+          
+        }
         console.log("after badgeData", JSON.stringify(badgeData));
-          return t.set("card", "shared", "detailBadgeData", badgeData).then(() => t.closePopup());
-        });
-
+        return t
+          .set("card", "shared", "detailBadgeData", badgeData)
+          .then(() => t.closePopup());
+      });
     } else {
       console.error("Server responded with status", response.status);
     }
