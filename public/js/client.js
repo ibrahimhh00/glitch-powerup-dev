@@ -28,60 +28,73 @@ async function fetchCards() {
   const response = await fetch(`${ENDPOINT_URL}/cards/`, { method: "GET" });
   return await response.json();
 }
-function onBtnClickTwo(t) {
-  return t.lists("all").then(function (lists) {
-    console.log(lists)
-    let results = []; // Array to collect all the results
-    let listPromises = lists.map(function (list) {
-      return t.cards("all").then(function (cards) {
-        var cardList = cards.filter(function (card) {
-          return card.idList === list.id;
-        });
-        let totalSizeAll = 0;
-        let categories = {};
-        let promises = cardList.map(function (card) {
-          return;
-          t.get(card.id, "shared", "badgeData").then(function (badgeData) {
-            console.log("BBBBBBBBBBBBBBBBBB", badgeData)
-            let totalSize = 0; // This is the total size for this card
-            if (badgeData) {
-              totalSize = badgeData.reduce((acc, element) => {
-                if (element.sizing && element.listId === list.id) {
-                  return acc + Number(element.sizing);
-                }
-                return acc;
-              }, 0);
-            }
-            totalSizeAll += totalSize;
+async function onBtnClickTwo(t) {
+  const lists = await t.lists("all");
+  console.log(lists);
+  const badgeData = await t.get("card", "shared", "badgeData");
+  console.log("BBBBBBBBBBBBBBBBBB", badgeData);
+  let results = []; // Array to collect all the results
+  let listPromises = lists.map(function (list) {
+    return t.cards("all").then(function (cards) {
+      var cardList = cards.filter(function (card) {
+        return card.idList === list.id;
+      });
 
-            const categorySize = badgeData.filter(badge => (badge.categoryId && badge.listId === list.id && badge.cardId === card.id)).map(category => {
+      let totalSizeAll = 0;
+      let categories = {};
+      let promises = cardList.map(function (card) {
+        return;
+        t.get("card", "shared", "badgeData").then(function (badgeData) {
+          console.log("BBBBBBBBBBBBBBBBBB", badgeData);
+          let totalSize = 0; // This is the total size for this card
+          if (badgeData) {
+            totalSize = badgeData.reduce((acc, element) => {
+              if (element.sizing && element.listId === list.id) {
+                return acc + Number(element.sizing);
+              }
+              return acc;
+            }, 0);
+          }
+          totalSizeAll += totalSize;
+
+          const categorySize = badgeData
+            .filter(
+              (badge) =>
+                badge.categoryId &&
+                badge.listId === list.id &&
+                badge.cardId === card.id
+            )
+            .map((category) => {
               return {
                 categoryId: category.id,
                 name: category.text,
                 color: category.color,
                 sizing: category.membersId.reduce((acc, memberId) => {
-                  const index = badgeData.findIndex(badge => badge.memberId === memberId && badge.listId === list.id && badge.cardId === card.id)
-                  if(index >= 0) {
-                    return acc + badgeData[index].sizing
+                  const index = badgeData.findIndex(
+                    (badge) =>
+                      badge.memberId === memberId &&
+                      badge.listId === list.id &&
+                      badge.cardId === card.id
+                  );
+                  if (index >= 0) {
+                    return acc + badgeData[index].sizing;
                   }
-                }, 0)
-              }
-            })
-            
-          });
+                }, 0),
+              };
+            });
         });
-        return Promise.all(promises).then(() => {
-          results.push({
-            listName: list.name,
-            totalPoints: totalSizeAll,
-            categoryPoints: categories,
-          });
+      });
+      return Promise.all(promises).then(() => {
+        results.push({
+          listName: list.name,
+          totalPoints: totalSizeAll,
+          categoryPoints: categories,
         });
       });
     });
-    return Promise.all(listPromises).then(() => {
-      showResults(t, results); // Call the showResults function once all the results have been collected
-    });
+  });
+  return Promise.all(listPromises).then(() => {
+    showResults(t, results); // Call the showResults function once all the results have been collected
   });
 }
 
