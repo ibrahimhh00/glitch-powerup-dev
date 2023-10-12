@@ -28,7 +28,7 @@
         margin-bottom: 10px;
       }
       .card .total-size {
-        font-size: 20px;
+        font-size: 18px;
       }
       .card .total-size,
       .card .category {
@@ -79,7 +79,7 @@
 
               // Append the span to the paragraph and add the sizing after it
               p.appendChild(span);
-              p.innerHTML += `: ${category.sizing} Points`;
+              p.innerHTML += ` <strong>${category.sizing}</strong> Points`;
 
               div.appendChild(p);
             });
