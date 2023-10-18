@@ -1,5 +1,5 @@
-const API_URL = "http://localhost:9000/api/v1";
-var ENDPOINT_URL = "http://localhost:9000/api/v1";
+var API_URL = "http://localhost:9000/api/v1";
+// var API_URL = "https://uxperts-backend-staging.disruptem.com/api/v1"
 var GREY_ROCKET_ICON =
   "https://cdn.glitch.com/c69415fd-f70e-4e03-b43b-98b8960cd616%2Frocket-ship-grey.png?1496162964717";
 var WHITE_ROCKET_ICON =
@@ -170,7 +170,7 @@ $("#estimate").submit(async function (event) {
                             memberId: member._id,
                             cardId: data.cardId,
                           };
-                          fetch(`${ENDPOINT_URL}/cards/delete-member`, {
+                          fetch(`${API_URL}/cards/delete-member`, {
                             method: "POST", // Specifying the HTTP method
                             headers: {
                               "Content-Type": "application/json", // Setting the content type of the request
